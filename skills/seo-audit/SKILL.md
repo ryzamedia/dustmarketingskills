@@ -2,12 +2,14 @@
 name: seo-audit
 description: When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions "SEO audit," "technical SEO," "why am I not ranking," "SEO issues," "on-page SEO," "meta tags review," "SEO health check," "my traffic dropped," "lost rankings," "not showing up in Google," "site isn't ranking," "Google update hit me," "page speed," "core web vitals," "crawl errors," or "indexing issues." Use this even if the user just says something vague like "my SEO is bad" or "help with SEO" — start with an audit. For building pages at scale to target keywords, see programmatic-seo. For adding structured data, see schema. For AI search optimization, see ai-seo.
 metadata:
-  version: 2.0.0
+  version: 3.0.0
 ---
 
 # SEO Audit
 
 You are an expert in search engine optimization. Your goal is to identify SEO issues and provide actionable recommendations to improve organic search performance.
+
+Audit the **live site**, not a description of it. **Browse** the actual pages to read titles, headings, canonicals, and copy, and use **Computer** to render a page and inspect what only appears after JavaScript runs (schema, lazy-loaded content). Where **Google Search Console** and **GA4** are connected to the agent, pull the real coverage, Core Web Vitals, query, and traffic data — an audit grounded in the site's own numbers beats one built from assumptions — and chart trends (a traffic drop, CWV over time) with **Data Visualization** so the diagnosis is visible.
 
 ## Initial Assessment
 
@@ -29,7 +31,7 @@ Before auditing, understand:
 3. **Scope**
    - Full site audit or specific pages?
    - Technical + on-page, or one focus area?
-   - Access to Search Console / analytics?
+   - Access to Search Console / analytics? If **Google Search Console** or **GA4** is connected to this agent, pull the Coverage/Indexing, Core Web Vitals, and query reports directly instead of asking the user to export them.
 
 ---
 
@@ -37,16 +39,16 @@ Before auditing, understand:
 
 ### Schema Markup Detection Limitation
 
-**`web_fetch` and `curl` cannot reliably detect structured data / schema markup.**
+**Reading a page as plain text cannot reliably detect structured data / schema markup.**
 
-Many CMS plugins (AIOSEO, Yoast, RankMath) inject JSON-LD via client-side JavaScript — it won't appear in static HTML or `web_fetch` output (which strips `<script>` tags during conversion).
+Many CMS plugins (AIOSEO, Yoast, RankMath) inject JSON-LD via client-side JavaScript — it won't appear in the static HTML, so a text-only **Browse** of the page can miss it entirely.
 
 **To accurately check for schema markup, use one of these methods:**
-1. **Browser tool** — render the page and run: `document.querySelectorAll('script[type="application/ld+json"]')`
-2. **Google Rich Results Test** — https://search.google.com/test/rich-results
+1. **Computer** — render the page and run `document.querySelectorAll('script[type="application/ld+json"]')` in the console to list the JSON-LD blocks
+2. **Google Rich Results Test** — https://search.google.com/test/rich-results (Browse the result)
 3. **Screaming Frog export** — if the client provides one, use it (SF renders JavaScript)
 
-Reporting "no schema found" based solely on `web_fetch` or `curl` leads to false audit findings — these tools can't see JS-injected schema.
+Reporting "no schema found" from a text-only read leads to false audit findings — it can't see JS-injected schema.
 
 ### Priority Order
 1. **Crawlability & Indexation** (can Google find and index it?)
@@ -420,6 +422,8 @@ Three equivalent placement methods: HTML `<link>` in `<head>`, HTTP `Link` heade
 
 ## Output Format
 
+Deliver the audit as a structured document with **Create Files** so the team can work through it. Where you pulled real GSC/GA4 data, place the charts you built with **Data Visualization** (traffic trend, CWV distribution, indexation over time) next to the findings they support.
+
 ### Audit Report Structure
 
 **Executive Summary**
@@ -465,9 +469,7 @@ Same format as above
 - Bing Webmaster Tools
 - Rich Results Test (**use this for schema validation — it renders JavaScript**)
 - Mobile-Friendly Test
-- Schema Validator
-
-> **Note on schema detection:** `web_fetch` strips `<script>` tags (including JSON-LD) and cannot detect JS-injected schema. Use the browser tool, Rich Results Test, or Screaming Frog instead — they render JavaScript and capture dynamically-injected markup. See the Schema Markup Detection Limitation section above.
+- Schema Validator (see the Schema Markup Detection Limitation section — a text-only page read misses JS-injected JSON-LD; use **Computer**, the Rich Results Test, or Screaming Frog)
 
 **Paid Tools** (if available)
 - Screaming Frog

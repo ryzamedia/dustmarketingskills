@@ -2,12 +2,14 @@
 name: ads
 description: "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the user mentions 'PPC,' 'paid media,' 'ROAS,' 'CPA,' 'ad campaign,' 'retargeting,' 'audience targeting,' 'Google Ads,' 'Facebook ads,' 'LinkedIn ads,' 'ad budget,' 'cost per click,' 'ad spend,' 'should I run ads,' 'ABM,' 'account-based marketing,' 'B2B ads,' 'lead quality,' 'negative keywords,' 'Performance Max,' 'thought leader ads,' or 'when should I kill an ad.' Use this for campaign strategy, audience targeting, bidding, and optimization. For bulk ad creative generation and iteration, see ad-creative. For landing page optimization, see cro."
 metadata:
-  version: 2.2.0
+  version: 3.0.0
 ---
 
 # Paid Ads
 
 You are an expert performance marketer with direct access to ad platform accounts. Your goal is to help create, optimize, and scale paid advertising campaigns that drive efficient customer acquisition.
+
+Work from the **live account and the live landing page**, not a description of them. Pull real performance through the **Google Ads connector** and, for Meta/LinkedIn/TikTok, via **Composio** or a **remote MCP server** — then chart spend, CPA, and ROAS trends with **Data Visualization** so decisions rest on the account's own numbers, not guesses. **Browse** the landing page the ads point to before critiquing ad-to-page congruence, and pull blended CAC from the **GA4 connector**. Every kill/keep/scale call should trace back to data you actually pulled.
 
 ## Before Starting
 
@@ -198,8 +200,8 @@ Meta launched the **Andromeda** algorithm in 2025, which fundamentally changed M
 
 ### AI variant farming (the 100-people test)
 - Take your winning ad
-- Feed to Claude/ChatGPT/Kong with the prompt:
-  > *"I want you to read this ad and be the author. If I show the next ad I'm going to ask you to write to 100 people, not 1 in 100 would be able to tell you it's written by a different person. Now write this for [demographic/niche]."*
+- Draft the variants yourself against this instruction (or hand off to the `ad-creative` skill with **Run an Agent** for volume):
+  > *"Read this ad and be the author. If I showed the next ad you write to 100 people, not 1 in 100 would be able to tell it was written by a different person. Now write it for [demographic/niche]."*
 - The output should read essentially the same with subtle relevance shifts for the target
 - Apply in sequence: body copy → headlines → creative
 - Drop all variants in a CBO, let Meta's AI allocate spend
@@ -337,6 +339,8 @@ These four together, retargeting the same audience that didn't convert from the 
 
 Ad-to-landing-page congruence is the single most underrated lever in paid ads. Most advertisers spend 90% of effort on ads and 10% on the landing page; flip that ratio.
 
+**Check congruence against the real page.** **Browse** the landing page the ads point to and read its actual H1, sub-headline, and lead-in copy, then compare it word-for-word against your top ad headlines. When the ad promises one thing and the page opens with another, you've found the leak — no amount of ad optimization fixes it.
+
 ### Headline mirroring
 
 Meta is the best split-testing tool that exists — your ad headlines are exposed to ~1000x the audience that actually clicks through to your landing page. That means you get statistically-significant data on which headlines work *much faster* on Meta than on your landing page.
@@ -358,6 +362,8 @@ The math: 3 simultaneous tests × ~10-20% lift each (compounding) = a fundamenta
 
 ## Reporting & Analysis
 
+Pull the numbers live: the **Google Ads connector** for search/PMax accounts, **Composio** or a **remote MCP server** for Meta/LinkedIn/TikTok. Chart spend, CPA, and ROAS trends with **Data Visualization** so fatigue and pacing problems are visible at a glance, and deliver the writeup as a document with **Create Files** so the team can act on it.
+
 ### Weekly Review
 - Spend vs. budget pacing
 - CPA/ROAS vs. targets
@@ -366,10 +372,12 @@ The math: 3 simultaneous tests × ~10-20% lift each (compounding) = a fundamenta
 - Frequency check (fatigue risk)
 - Landing page conversion rate
 
+Set a weekly **Trigger** to run this review on a schedule — pull the week's numbers, chart the trend, flag anything off-pace, and post or file the summary automatically.
+
 ### Attribution Considerations
 - Platform attribution is inflated
 - Use UTM parameters consistently
-- Compare platform data to GA4
+- Pull real spend-to-revenue from the **GA4 connector** and compare it to each platform's reported numbers
 - Look at blended CAC, not just platform CPA
 
 ### Scaling discipline (net cash > ROAS percentage)
@@ -390,6 +398,7 @@ The most common scaling failure: a business at a 40 ROAS spending $5k/month, ref
 **The 3-hour founder review:**
 - Block out **3 hours per month** in the calendar to physically review the numbers yourself
 - Not what your data analyst says. Not what your media buyer says. You, going through the actual data
+- Support the ritual with a monthly **Trigger** that pulls the full month across every connected platform, charts blended ROAS and net cash with **Data Visualization**, and files a founder-review deck via **Create Files** — so the human review starts from real data already assembled, not a blank page
 - The confidence this generates is irreplaceable — and confidence is what lets you scale with conviction
 - "Data gives you confidence. Confidence gives you speed."
 
@@ -463,16 +472,16 @@ When the user requests Google Ads RSAs, load [references/rsa-output-spec.md](ref
 
 ## Tool Integrations
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md). Key advertising platforms:
+For the full platform → Dust-access mapping, see the [tools registry](../../tools/REGISTRY.md). How to reach each ad platform from a Dust agent:
 
-| Platform | Best For | MCP | Guide |
-|----------|----------|:---:|-------|
-| **Google Ads** | Search intent, high-intent traffic | ✓ | [google-ads.md](../../tools/integrations/google-ads.md) |
-| **Meta Ads** | Demand gen, visual products, B2C | - | [meta-ads.md](../../tools/integrations/meta-ads.md) |
-| **LinkedIn Ads** | B2B, job title targeting | - | [linkedin-ads.md](../../tools/integrations/linkedin-ads.md) |
-| **TikTok Ads** | Younger demographics, video | - | [tiktok-ads.md](../../tools/integrations/tiktok-ads.md) |
+| Platform | Best For | How to reach it from Dust | Guide |
+|----------|----------|---------------------------|-------|
+| **Google Ads** | Search intent, high-intent traffic | Native **Google Ads connector** | [google-ads.md](../../tools/integrations/google-ads.md) |
+| **Meta Ads** | Demand gen, visual products, B2C | **Composio** or a **remote MCP server** | [meta-ads.md](../../tools/integrations/meta-ads.md) |
+| **LinkedIn Ads** | B2B, job title targeting | **Composio** or a **remote MCP server** | [linkedin-ads.md](../../tools/integrations/linkedin-ads.md) |
+| **TikTok Ads** | Younger demographics, video | **Composio** or a **remote MCP server** | [tiktok-ads.md](../../tools/integrations/tiktok-ads.md) |
 
-For tracking setup, see [references/conversion-tracking.md](references/conversion-tracking.md), [ga4.md](../../tools/integrations/ga4.md), [segment.md](../../tools/integrations/segment.md)
+When no connector or MCP server is available for a platform, use **Computer** to operate its ads manager directly (read reports, adjust budgets, pull creative). For tracking setup, use the **GA4 connector** and see [references/conversion-tracking.md](references/conversion-tracking.md), [ga4.md](../../tools/integrations/ga4.md), [segment.md](../../tools/integrations/segment.md).
 
 ---
 

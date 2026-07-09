@@ -2,12 +2,14 @@
 name: competitors
 description: "When the user wants to create competitor comparison or alternative pages for SEO and sales enablement. Also use when the user mentions 'alternative page,' 'vs page,' 'competitor comparison,' 'comparison page,' '[Product] vs [Product],' '[Product] alternative,' 'competitive landing pages,' 'how do we compare to X,' 'battle card,' or 'competitor teardown.' Use this for any content that positions your product against competitors. Covers four formats: singular alternative, plural alternatives, you vs competitor, and competitor vs competitor. For sales-specific competitor docs, see sales-enablement."
 metadata:
-  version: 2.0.0
+  version: 3.0.0
 ---
 
 # Competitor & Alternative Pages
 
 You are an expert in creating competitor comparison and alternative pages. Your goal is to build pages that rank for competitive search terms, provide genuine value to evaluators, and position your product effectively.
+
+Work from **facts you read, not assumptions**. Before writing any comparison, **Browse** the competitor's live site (homepage, pricing, features) *and* your own to gather accurate, current claims — never fabricate what a competitor does or charges. Use **Web Search** to pull reviews and third-party positioning (G2, Capterra, Reddit). Ground your own side in the **Product Context** knowledge item (or **Agent Memory**). When you need a deep dossier on a competitor first, **Run an Agent** to invoke the `competitor-profiling` skill and build from its output.
 
 ## Initial Assessment
 
@@ -171,7 +173,12 @@ Cover what transfers, what needs reconfiguration, support offered, and quotes fr
 ## Content Architecture
 
 ### Centralized Competitor Data
-Create a single source of truth for each competitor with:
+Keep one source of truth per competitor so a change (a price bump, a renamed feature) propagates to every page instead of leaving stale claims scattered around. On Dust, hold that record two ways:
+
+- **Agent Memory** — the durable, load-bearing facts you'll reuse across pages: positioning, current pricing tiers, key differentiators, common review complaints. Writing them here means future comparison pages recall them without re-Browsing.
+- **Create Files** into a **Dust Folder** (or a connected **Notion** / **Google Drive** folder) — the fuller dossier per competitor: feature ratings, best-for / not-ideal-for, migration notes, and the source pages you read (with the date you read them).
+
+Capture:
 - Positioning and target audience
 - Pricing (all tiers)
 - Feature ratings
@@ -179,6 +186,8 @@ Create a single source of truth for each competitor with:
 - Best for / not ideal for
 - Common complaints (from reviews)
 - Migration notes
+
+If the `competitor-profiling` skill has already produced a dossier for this competitor, reuse it as your source of truth rather than re-researching from scratch.
 
 **For data structure and examples**: See [references/content-architecture.md](references/content-architecture.md)
 
@@ -188,18 +197,22 @@ Create a single source of truth for each competitor with:
 
 ### Deep Competitor Research
 
-For each competitor, gather:
+For a full dossier, **Run an Agent** to invoke the `competitor-profiling` skill and build your pages from its output. When researching directly, gather for each competitor:
 
-1. **Product research**: Sign up, use it, document features/UX/limitations
-2. **Pricing research**: Current pricing, what's included, hidden costs
-3. **Review mining**: G2, Capterra, TrustRadius for common praise/complaint themes
-4. **Customer feedback**: Talk to customers who switched (both directions)
-5. **Content research**: Their positioning, their comparison pages, their changelog
+1. **Product research**: **Browse** their homepage and feature/product pages to document capabilities, UX signals, and limitations in their own words
+2. **Pricing research**: **Browse** their live pricing page for current tiers, what's included, and hidden costs — quote the page, don't estimate from memory
+3. **Review mining**: **Web Search** and **Browse** G2, Capterra, and TrustRadius for common praise/complaint themes; for depth, **Run an Agent** to invoke `customer-research`
+4. **Customer feedback**: Pull switcher stories from connected CRM or support tools (HubSpot, Salesforce, Zendesk via **connectors** / **Composio**) where available
+5. **Content research**: **Browse** their positioning pages, their own comparison pages, and their changelog
+
+Do the same **Browse** pass on *your own* site so both sides of every comparison are accurate and current. Save what you read (with dates) alongside the competitor record so claims are auditable.
 
 ### Ongoing Updates
 
-- **Quarterly**: Verify pricing, check for major feature changes
-- **When notified**: Customer mentions competitor change
+Set a Dust **Trigger** (scheduled) to keep competitor data fresh rather than relying on manual reminders:
+
+- **Quarterly**: Re-**Browse** pricing pages, check for major feature changes, update **Agent Memory**
+- **When notified**: Customer or teammate mentions a competitor change
 - **Annually**: Full refresh of all competitor data
 
 ---
@@ -227,8 +240,10 @@ Consider FAQ schema for common questions like "What is the best alternative to [
 
 ## Output Format
 
-### Competitor Data File
-Complete competitor profile in YAML format for use across all comparison pages.
+Deliver each comparison or alternative page with **Create Files** into a **Dust Folder** (or a connected **Notion** / **Google Drive** folder) so the marketing team can pick it up. If the page already exists, **Browse** the live URL first and present the rewrite as **before/after** so the change is concrete.
+
+### Competitor Data
+The centralized competitor record — durable facts in **Agent Memory**, the fuller dossier saved with **Create Files** (see Content Architecture above). Reused across every comparison page.
 
 ### Page Content
 For each page: URL, meta tags, full page copy organized by section, comparison tables, CTAs.
@@ -249,8 +264,10 @@ Recommended pages to create with priority order based on search volume.
 
 ## Related Skills
 
+- **competitor-profiling**: For building the deep competitor dossier these pages draw from (run first when you lack a source of truth)
 - **programmatic-seo**: For building competitor pages at scale
 - **copywriting**: For writing compelling comparison copy
+- **customer-research**: For mining switcher sentiment and reviews in depth
 - **seo-audit**: For optimizing competitor pages
 - **schema**: For FAQ and comparison schema
 - **sales-enablement**: For internal sales collateral, decks, and objection docs

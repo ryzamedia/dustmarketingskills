@@ -2,12 +2,14 @@
 name: analytics
 description: When the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions "set up tracking," "GA4," "Google Analytics," "conversion tracking," "event tracking," "UTM parameters," "tag manager," "GTM," "analytics implementation," "tracking plan," "how do I measure this," "track conversions," "attribution," "Mixpanel," "Segment," "are my events firing," or "analytics isn't working." Use this whenever someone asks how to know if something is working or wants to measure marketing results. For A/B test measurement, see ab-testing.
 metadata:
-  version: 2.0.0
+  version: 3.0.0
 ---
 
 # Analytics Tracking
 
 You are an expert in analytics implementation and measurement. Your goal is to help set up tracking that provides actionable insights for marketing and product decisions.
+
+Work from **connected analytics and the live site**, not just a description. Where GA4, Google Ads, Segment, Mixpanel, or Amplitude are connected to this agent (as **connectors**, via **Composio**, or a **remote MCP server**), pull the real events, conversions, and traffic directly instead of asking for exports. To confirm tracking actually fires, use **Computer** to load the live page and watch events and network requests in the browser as you click, and **Browse** the site to check which tags and pixels are present — verify events for real, don't just advise. Chart what you find with **Data Visualization** and deliver tracking plans and measurement docs with **Create Files**.
 
 ## Initial Assessment
 
@@ -19,6 +21,14 @@ Before implementing tracking, understand:
 1. **Business Context** - What decisions will this data inform? What are key conversions?
 2. **Current State** - What tracking exists? What tools are in use?
 3. **Technical Context** - What's the tech stack? Any privacy/compliance requirements?
+
+### Inspect what's live and connected first
+
+Before designing a plan from scratch, find out what's already flowing:
+
+- **Browse** the site (homepage, key conversion pages) to see which analytics and pixel tags are present in the page.
+- Use **Computer** to load a page and watch the browser's network and console while you click — confirm which events actually fire and with what payloads.
+- Where a source is connected — **GA4**, Google Ads, **Segment**, **Mixpanel**, or **Amplitude** as a **connector**, via **Composio**, or a **remote MCP server** — pull the current events, conversions, and traffic directly to see what's already tracked and where the gaps are.
 
 ---
 
@@ -151,6 +161,8 @@ gtag('event', 'signup_completed', {
 });
 ```
 
+Where **GA4** is connected to this agent, pull the actual event and conversion reports to confirm what is already flowing (and which events are misfiring or empty) before recommending new tags. Chart the numbers you pull with **Data Visualization** so gaps are visible.
+
 **For detailed GA4 implementation**: See [references/ga4-implementation.md](references/ga4-implementation.md)
 
 ---
@@ -201,7 +213,15 @@ dataLayer.push({
 
 ## Debugging and Validation
 
-### Testing Tools
+### Verify events fire on the live page (do this, don't just advise)
+
+The single highest-value step is confirming tracking actually works, for real:
+
+- Use **Computer** to load the live page and perform the tracked action (click the CTA, submit the form, complete checkout) while watching the browser's **network requests** and **console** — confirm the analytics call fires, hits the right endpoint (e.g. `collect`/`g/collect` for GA4, the Segment/Mixpanel track call), and carries the expected event name and properties.
+- **Browse** the page to check which tags, pixels, and the `dataLayer` are present before you expect any events at all.
+- Where the destination is connected — **GA4**, **Segment**, **Mixpanel**, or **Amplitude** — pull the live/recent event stream from the connector or **remote MCP server** to confirm the event landed with correct values, not just that it left the browser.
+
+### Complementary tools
 
 | Tool | Use For |
 |------|---------|
@@ -246,6 +266,8 @@ dataLayer.push({
 
 ## Output Format
 
+Deliver the tracking plan and any measurement docs as files with **Create Files** so the team can hand them to whoever implements. Where you pulled real numbers from a connected source, present them with **Data Visualization** (event volumes, conversion trend, funnel drop-off) next to the plan so the "why" is visible.
+
 ### Tracking Plan Document
 
 ```markdown
@@ -276,6 +298,16 @@ dataLayer.push({
 
 ---
 
+## Recurring Reporting
+
+Turn one-off pulls into standing reports with **Triggers**:
+
+- Schedule a **Trigger** (e.g. weekly) that pulls the latest events, conversions, and traffic from the connected sources, charts them with **Data Visualization**, and writes an updated report with **Create Files** or posts a summary to a connected channel (e.g. Slack).
+- Use a webhook **Trigger** to react to spikes or drop-offs (e.g. conversions fall to zero — a sign tracking broke) and re-run the live **Computer** check to confirm events still fire.
+- Store the agreed KPIs, naming conventions, and definitions in **Agent Memory** (or the **Product Context** knowledge item) so every report stays consistent run to run.
+
+---
+
 ## Task-Specific Questions
 
 1. What tools are you using (GA4, Mixpanel, etc.)?
@@ -287,17 +319,20 @@ dataLayer.push({
 
 ---
 
-## Tool Integrations
+## Reaching Analytics Tools from Dust
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md). Key analytics tools:
+Each source below is reachable as a Dust **connector**, via **Composio**, or a **remote MCP server** — use it to pull real events and metrics, not to ask the user for exports. Reference the integration guide for endpoints and auth.
 
-| Tool | Best For | MCP | Guide |
-|------|----------|:---:|-------|
-| **GA4** | Web analytics, Google ecosystem | ✓ | [ga4.md](../../tools/integrations/ga4.md) |
-| **Mixpanel** | Product analytics, event tracking | - | [mixpanel.md](../../tools/integrations/mixpanel.md) |
-| **Amplitude** | Product analytics, cohort analysis | - | [amplitude.md](../../tools/integrations/amplitude.md) |
-| **PostHog** | Open-source analytics, session replay | - | [posthog.md](../../tools/integrations/posthog.md) |
-| **Segment** | Customer data platform, routing | - | [segment.md](../../tools/integrations/segment.md) |
+| Tool | Best For | Reach from Dust | Guide |
+|------|----------|-----------------|-------|
+| **GA4** | Web analytics, Google ecosystem | Connector / remote MCP | [ga4.md](../../tools/integrations/ga4.md) |
+| **Google Ads** | Paid traffic + conversion data | Connector / Composio | [google-ads.md](../../tools/integrations/google-ads.md) |
+| **Segment** | Customer data platform, routing | Composio / remote MCP | [segment.md](../../tools/integrations/segment.md) |
+| **Mixpanel** | Product analytics, event tracking | Composio / remote MCP | [mixpanel.md](../../tools/integrations/mixpanel.md) |
+| **Amplitude** | Product analytics, cohort analysis | Composio / remote MCP | [amplitude.md](../../tools/integrations/amplitude.md) |
+| **PostHog** | Open-source analytics, session replay | Remote MCP / API | [posthog.md](../../tools/integrations/posthog.md) |
+
+When no connector or MCP exists for a source, use **Computer** to open its dashboard and read the reports directly.
 
 ---
 

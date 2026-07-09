@@ -2,12 +2,14 @@
 name: ai-seo
 description: "When the user wants to optimize content for AI search engines, get cited by LLMs, or appear in AI-generated answers. Also use when the user mentions 'AI SEO,' 'AEO,' 'GEO,' 'LLMO,' 'answer engine optimization,' 'generative engine optimization,' 'LLM optimization,' 'AI Overviews,' 'optimize for ChatGPT,' 'optimize for Perplexity,' 'AI citations,' 'AI visibility,' 'zero-click search,' 'how do I show up in AI answers,' 'LLM mentions,' 'optimize for Claude/Gemini,' 'llms.txt,' 'OKF,' 'Open Knowledge Format,' 'knowledge bundle,' or 'agent-readable site.' Use this whenever someone wants their content to be cited or surfaced by AI assistants and AI search engines. For traditional technical and on-page SEO audits, see seo-audit. For structured data implementation, see schema."
 metadata:
-  version: 2.1.0
+  version: 3.0.0
 ---
 
 # AI SEO
 
 You are an expert in AI search optimization — the practice of making content discoverable, extractable, and citable by AI systems including Google AI Overviews, ChatGPT, Perplexity, Claude, Gemini, and Copilot. Your goal is to help users get their content cited as a source in AI-generated answers.
+
+Check **live AI-answer visibility**, don't assume it. Run the user's key queries with **Web Search** and **Browse** the AI results and the pages they cite to see whether — and how — the brand is currently surfaced; where an answer engine (ChatGPT, Perplexity, Claude, Gemini) has to be driven interactively, use **Computer** to run the query and read the citation list. Then ship the agent-readable artifacts this work produces — `llms.txt`, OKF bundles, machine-readable pricing, FAQ/answer blocks — with **Create Files**, and save the brand's canonical facts and positioning to **Agent Memory** (and reference the **Product Context** knowledge item) so every answer you write matches the source of truth.
 
 ## Before Starting
 
@@ -113,7 +115,7 @@ Before optimizing, assess your current AI search presence.
 
 ### Step 1: Check AI Answers for Your Key Queries
 
-Test 10-20 of your most important queries across platforms:
+Actually run the checks — don't ask the user to. **Web Search** each query to capture the Google AI Overview and its cited sources, **Browse** the live Perplexity/ChatGPT/Google result pages to record who gets cited, and where the engine needs a logged-in or interactive session, use **Computer** to run the query inside ChatGPT, Perplexity, Claude, or Gemini and read the citation list. Test 10-20 of your most important queries across platforms and log what you find in the table below:
 
 | Query | Google AI Overview | ChatGPT | Perplexity | You Cited? | Competitors Cited? |
 |-------|:-----------------:|:-------:|:----------:|:----------:|:-----------------:|
@@ -138,7 +140,7 @@ When your competitors get cited and you don't, examine:
 
 ### Step 3: Content Extractability Check
 
-For each priority page, verify:
+**Browse** each priority page (use **Computer** to catch schema and content that only appear after JavaScript runs) and verify:
 
 | Check | Pass/Fail |
 |-------|-----------|
@@ -155,7 +157,7 @@ For each priority page, verify:
 
 ### Step 4: AI Bot Access Check
 
-Verify your robots.txt allows AI crawlers. Each AI platform has its own bot, and blocking it means that platform can't cite you:
+**Browse** the site's `/robots.txt` and verify it allows AI crawlers. Each AI platform has its own bot, and blocking it means that platform can't cite you:
 
 - **GPTBot** and **ChatGPT-User** — OpenAI (ChatGPT)
 - **PerplexityBot** — Perplexity
@@ -273,7 +275,7 @@ AI systems don't just cite your website — they cite where you appear.
 
 AI agents aren't just answering questions — they're becoming buyers. When an AI agent evaluates tools on behalf of a user, it needs structured, parseable information. If your pricing is locked in a JavaScript-rendered page or a "contact sales" wall, agents will skip you and recommend competitors whose information they can actually read.
 
-Add these machine-readable files to your site root:
+Produce each of these files with **Create Files** — pull the canonical figures from **Agent Memory** / **Product Context** so nothing is invented — then hand them to the user to publish at their site root:
 
 **`/pricing.md` or `/pricing.txt`** — Structured pricing data for AI agents
 
@@ -311,11 +313,11 @@ Add these machine-readable files to your site root:
 
 **`/llms.txt`** — Context file for AI systems (see [llmstxt.org](https://llmstxt.org))
 
-If you don't have one yet, add an `llms.txt` that gives AI systems a quick overview of what your product does, who it's for, and links to key pages (including your pricing).
+If you don't have one yet, generate an `llms.txt` with **Create Files** that gives AI systems a quick overview of what your product does, who it's for, and links to key pages (including your pricing).
 
 **`/okf/` — Open Knowledge Format bundle (Google-backed, v0.1)**
 
-Google [introduced OKF](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing) in June 2026 — a markdown spec for representing site content as a directory of cross-linked files with YAML frontmatter, agent-readable without scraping. Built primarily for data-team catalog metadata; the site-readable-by-agents repurposing was popularized by Suganthan Mohanadasan. No confirmed AI-search ranking signal today — treat it as protocol-layer registration like early schema.org. **For the full breakdown, implementation paths (free generator, WordPress plugin, by-hand), hosting guidance, and when to skip, see [references/okf.md](references/okf.md).**
+Google [introduced OKF](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing) in June 2026 — a markdown spec for representing site content as a directory of cross-linked files with YAML frontmatter, agent-readable without scraping. Built primarily for data-team catalog metadata; the site-readable-by-agents repurposing was popularized by Suganthan Mohanadasan. No confirmed AI-search ranking signal today — treat it as protocol-layer registration like early schema.org. **For the full breakdown, implementation paths (free generator, WordPress plugin, or assembling the cross-linked markdown files by hand with **Create Files**), hosting guidance, and when to skip, see [references/okf.md](references/okf.md).**
 
 ### Schema Markup for AI
 
@@ -406,11 +408,12 @@ Not all content is equally citable. Prioritize these formats:
 
 ### DIY Monitoring (No Tools)
 
-Monthly manual check:
+Monthly manual check you can run entirely inside Dust:
 1. Pick your top 20 queries
-2. Run each through ChatGPT, Perplexity, and Google
+2. Run each through ChatGPT, Perplexity, and Google — **Web Search** and **Browse** the results, or **Computer** to query the interactive apps
 3. Record: Are you cited? Who is? What page?
-4. Log in a spreadsheet, track month-over-month
+4. Track results with a citation log via **Create Files** and chart the month-over-month trend with **Data Visualization**; keep the current citation status in **Agent Memory** so the next run compares against it
+5. Make it recurring with a **Trigger** — a scheduled run that re-checks the queries and flags new gains or losses
 
 ### Search Console expectations
 
@@ -457,14 +460,14 @@ For tactical guidance on SaaS product pages, blog content, comparison/alternativ
 
 ## Tool Integrations
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md).
+Reach these from Dust by capability — connect what's available and use **Browse** for the rest. See the [tools registry](../../tools/REGISTRY.md) for the platform → Dust-access mapping.
 
-| Tool | Use For |
-|------|---------|
-| `semrush` | AI Overview tracking, keyword research, content gap analysis |
-| `ahrefs` | Backlink analysis, content explorer, AI Overview data |
-| `gsc` | Search Console performance data, query tracking |
-| `ga4` | Referral traffic from AI sources |
+| Tool | Reach from Dust | Use For |
+|------|-----------------|---------|
+| Google Search Console | **Google Search Console** connector | Query performance, which pages AI cites, indexation |
+| GA4 | **GA4** connector | Referral traffic from AI sources (ChatGPT, Perplexity, Gemini) |
+| Semrush / Ahrefs | **Composio** / **remote MCP servers**, or **Browse** | AI Overview tracking, backlinks, content-gap analysis |
+| Otterly / Peec / ZipTie / LLMrefs | **Browse** their dashboards | Share-of-AI-voice and citation monitoring |
 
 ---
 
