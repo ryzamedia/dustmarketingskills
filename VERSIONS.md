@@ -7,25 +7,25 @@ Current versions of all skills. Re-import a skill into Dust (or `git pull` your 
 | Skill | Version | Last Updated |
 |-------|---------|--------------|
 | ab-testing | 2.0.0 | 2026-05-05 |
-| ad-creative | 2.2.0 | 2026-07-08 |
-| ai-seo | 2.1.0 | 2026-06-15 |
-| analytics | 2.0.0 | 2026-05-05 |
+| ad-creative | 3.0.0 | 2026-07-09 |
+| ai-seo | 3.0.0 | 2026-07-09 |
+| analytics | 3.0.0 | 2026-07-09 |
 | aso | 2.0.0 | 2026-05-05 |
 | churn-prevention | 2.0.0 | 2026-05-05 |
 | co-marketing | 2.0.0 | 2026-05-05 |
 | cold-email | 2.0.0 | 2026-05-05 |
 | community-marketing | 2.0.0 | 2026-05-05 |
-| competitor-profiling | 2.0.0 | 2026-05-05 |
-| competitors | 2.0.0 | 2026-05-05 |
-| content-strategy | 2.0.0 | 2026-05-05 |
+| competitor-profiling | 3.0.0 | 2026-07-09 |
+| competitors | 3.0.0 | 2026-07-09 |
+| content-strategy | 3.0.0 | 2026-07-09 |
 | copy-editing | 2.0.0 | 2026-05-05 |
-| copywriting | 2.0.1 | 2026-06-16 |
+| copywriting | 3.0.0 | 2026-07-09 |
 | cro | 3.0.0 | 2026-07-09 |
 | customer-research | 2.0.0 | 2026-05-05 |
 | directory-submissions | 2.0.0 | 2026-05-05 |
-| emails | 2.0.0 | 2026-05-05 |
+| emails | 3.0.0 | 2026-07-09 |
 | free-tools | 2.0.0 | 2026-05-05 |
-| image | 2.0.1 | 2026-05-18 |
+| image | 3.0.0 | 2026-07-09 |
 | launch | 2.0.1 | 2026-06-16 |
 | lead-magnets | 2.0.0 | 2026-05-05 |
 | marketing-council | 1.0.0 | 2026-07-06 |
@@ -34,8 +34,8 @@ Current versions of all skills. Re-import a skill into Dust (or `git pull` your 
 | marketing-plan | 1.1.0 | 2026-05-29 |
 | marketing-psychology | 2.0.0 | 2026-05-05 |
 | offers | 1.0.0 | 2026-06-16 |
-| onboarding | 2.0.0 | 2026-05-05 |
-| ads | 2.2.0 | 2026-07-05 |
+| onboarding | 3.0.0 | 2026-07-09 |
+| ads | 3.0.0 | 2026-07-09 |
 | paywalls | 2.0.0 | 2026-05-05 |
 | popups | 2.0.0 | 2026-05-05 |
 | pricing | 2.0.1 | 2026-06-16 |
@@ -47,8 +47,8 @@ Current versions of all skills. Re-import a skill into Dust (or `git pull` your 
 | revops | 2.0.0 | 2026-05-05 |
 | sales-enablement | 2.0.1 | 2026-06-16 |
 | schema | 2.0.0 | 2026-05-05 |
-| seo-audit | 2.0.0 | 2026-05-05 |
-| signup | 2.0.0 | 2026-05-05 |
+| seo-audit | 3.0.0 | 2026-07-09 |
+| signup | 3.0.0 | 2026-07-09 |
 | site-architecture | 2.0.0 | 2026-05-05 |
 | sms | 1.0.0 | 2026-05-21 |
 | social | 3.0.0 | 2026-07-09 |
@@ -61,6 +61,7 @@ Current versions of all skills. Re-import a skill into Dust (or `git pull` your 
 - **Rebrand to Dust Marketing Skills.** Forked from Corey Haines' [Marketing Skills](https://github.com/coreyhaines31/marketingskills) and repositioned for the [Dust AI platform](https://dust.tt). The skill collection and its frameworks are Corey's original work (preserved under MIT); this fork restructures and extends them for Dust and the marketing teams who run on it.
 - **Install path is now Dust's native GitHub skill import** — paste the repo (or a single skill's subfolder) URL in Dust. Removed the Claude Code plugin marketplace (`.claude-plugin/`), the `npx skills` / SkillKit install options, and the marketplace/plugin version layer. README, AGENTS.md, CONTRIBUTING.md, and the sync workflow updated accordingly.
 - **Dust-native context pattern**: skills reference an attached **Product Context** knowledge item and **Agent Memory** instead of reading a local `.agents/product-marketing.md` file. Foundational exemplars (`product-marketing`, `cro`, `social`) rewritten to use Dust's Browse, Computer, Web Search, Create Files/Images, connectors, and Triggers. Remaining skills are being converted in follow-up passes.
+- **Dust-native conversions (follow-up pass, 2026-07-09):** `copywriting`, `seo-audit`, `competitor-profiling`, `ads`, `ad-creative`, `emails`, `analytics`, `competitors`, `signup`, `onboarding`, `image`, `content-strategy`, and `ai-seo` rewritten so the agent actively uses Dust tools — Browse/Computer for live pages and flows, Web Search, connectors/Composio/remote MCP for real account and analytics data, Data Visualization, Create Files/Images for deliverables, Agent Memory, and Triggers for recurring work. Filesystem paths, CLI commands (`firecrawl_*`, `google-ads …`, `cwebp`), and coding-agent assumptions reframed to Dust equivalents; subject-matter references (e.g. AI search engines in `ai-seo`, named generative tools) preserved. Each bumped to 3.0.0.
 - Versioning simplified to per-skill `metadata.version` (mirrored in this file) plus this changelog.
 
 ### 2.8.1 (2026-07-08)

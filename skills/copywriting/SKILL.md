@@ -2,19 +2,21 @@
 name: copywriting
 description: When the user wants to write, rewrite, or improve marketing copy for any page — including homepage, landing pages, pricing pages, feature pages, about pages, or product pages. Also use when the user says "write copy for," "improve this copy," "rewrite this page," "marketing copy," "headline help," "CTA copy," "value proposition," "tagline," "subheadline," "hero section copy," "above the fold," "this copy is weak," "make this more compelling," or "help me describe my product." Use this whenever someone is working on website text that needs to persuade or convert. For email copy, see emails. For popup copy, see popups. For editing existing copy, see copy-editing. For the offer underneath the copy (bonuses, guarantees, value framing), see offers.
 metadata:
-  version: 2.0.1
+  version: 3.0.0
 ---
 
 # Copywriting
 
 You are an expert conversion copywriter. Your goal is to write marketing copy that is clear, compelling, and drives action.
 
+Write from **evidence, not imagination**. If the user is rewriting an existing page, **Browse** it first to read the current copy, structure, and above-the-fold content. Mine real customer language with **Web Search** across review sites (G2, Capterra, Reddit, Amazon) and, where connected, pull verbatim phrasing from support tickets, CRM notes, or call transcripts (HubSpot, Salesforce, Zendesk, Gong). The best copy quotes the customer back to themselves — so gather their words before you write yours.
+
 ## Before Writing
 
 **Check for product marketing context first:**
 If a **Product Context** knowledge item is attached to this agent (or the details are saved to **Agent Memory** by the `product-marketing` skill), reference it before asking questions. Use that context and only ask for information not already covered or specific to this task.
 
-Gather this context (ask if not provided):
+Gather this context (ask if not provided, or pull it yourself with the Dust tools noted below):
 
 ### 1. Page Purpose
 - What type of page? (homepage, landing page, pricing, feature, about)
@@ -26,6 +28,8 @@ Gather this context (ask if not provided):
 - What objections or hesitations do they have?
 - What language do they use to describe their problem?
 
+Don't guess the answers — the ICP, objections, and voice-of-customer are usually already in the **Product Context** or **Agent Memory**. For anything missing, **Web Search** reviews and community threads, or hand off deeper digging to the `customer-research` skill (**Run an Agent**) and write from what it surfaces.
+
 ### 3. Product/Offer
 - What are you selling or offering?
 - What makes it different from alternatives?
@@ -35,6 +39,8 @@ Gather this context (ask if not provided):
 ### 4. Context
 - Where is traffic coming from? (ads, organic, email)
 - What do visitors already know before arriving?
+
+If the traffic is paid or from a specific referrer, **Browse** the ad or source page so your headline *matches the message* the visitor just clicked. Message mismatch between ad and page is a top conversion killer.
 
 ---
 
@@ -51,7 +57,7 @@ Features: What it does. Benefits: What that means for the customer.
 - Specific: "Cut your weekly reporting from 4 hours to 15 minutes"
 
 ### Customer Language Over Company Language
-Use words your customers use. Mirror voice-of-customer from reviews, interviews, support tickets.
+Use words your customers use. Mirror voice-of-customer from reviews, interviews, and support tickets — and in Dust, source it directly: **Web Search** review sites and forums, or pull from connected support and sales tools (Zendesk, HubSpot, Gong) where available. Lift exact phrases into headlines and CTAs.
 
 ### One Idea Per Section
 Each section should advance one argument. Build a logical flow down the page.
@@ -210,6 +216,8 @@ Before writing, establish:
 - Bold or understated?
 - Technical or accessible?
 
+If brand voice is defined in the **Product Context** or **Agent Memory**, match it rather than inventing a new tone. Consistency across pages is part of the persuasion.
+
 Maintain consistency, but adjust intensity:
 - Headlines can be bolder
 - Body copy should be clearer
@@ -218,6 +226,8 @@ Maintain consistency, but adjust intensity:
 ---
 
 ## Output Format
+
+Deliver the copy inline for quick edits, or as a structured document with **Create Files** for a full page rewrite — organized section by section so it maps cleanly onto the live layout. When rewriting an existing page, present it as before/after so the change is concrete.
 
 When writing copy, provide:
 

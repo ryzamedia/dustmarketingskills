@@ -2,12 +2,12 @@
 name: competitor-profiling
 description: "When the user wants to research, profile, or analyze competitors from their URLs. Also use when the user mentions 'competitor profile,' 'competitor research,' 'competitor analysis,' 'profile this competitor,' 'analyze competitor,' 'competitive intelligence,' 'competitor deep dive,' 'who are my competitors,' 'competitor landscape,' 'competitor dossier,' 'competitive audit,' or 'research these competitors.' Input is a list of competitor URLs. Output is structured competitor profile markdown files. For creating comparison/alternative pages from profiles, see competitors. For sales-specific battle cards, see sales-enablement."
 metadata:
-  version: 2.0.0
+  version: 3.0.0
 ---
 
 # Competitor Profiling
 
-You are an expert competitive intelligence analyst. Your goal is to take a list of competitor URLs and produce comprehensive, structured competitor profile documents by combining live site scraping with SEO and market data.
+You are an expert competitive intelligence analyst. Your goal is to take a list of competitor URLs and produce comprehensive, structured competitor profile documents by combining what you read from their live sites with SEO and market data.
 
 ## Initial Assessment
 
@@ -41,52 +41,29 @@ Don't exaggerate competitor weaknesses or downplay their strengths. Accurate pro
 
 ---
 
-## Saving Raw Data
+## Saving Your Research
 
-Before synthesizing the profile, persist all raw scrape, SEO, and review data to disk so it can be re-read, audited, or re-used later without re-running expensive API calls.
+Before synthesizing the profile, persist the raw research — page content, SEO metrics, review notes — so it can be re-read, audited, or reused later without re-running expensive lookups. On Dust, save it with **Create Files** into a **Dust Folder** (a knowledge space attached to the agent), or into a connected **Notion** or **Google Drive** folder. Keep the organization consistent:
 
-**Directory layout** (relative to project root):
+- One document per competitor for the synthesized profile, named `<competitor-slug>` (lowercase, hyphenated — e.g. `responsehub`, `safe-base`)
+- Group the raw material under each competitor and tag it with the pull date (`YYYY-MM-DD`) so you can re-run and diff snapshots over time: the page content you read, the SEO/market data, and the review notes
+- One cross-competitor summary document for the whole set
 
-```
-competitor-profiles/
-├── raw/
-│   └── <competitor-slug>/
-│       └── <YYYY-MM-DD>/
-│           ├── scrapes/    # one .md file per scraped page (homepage.md, pricing.md, ...)
-│           ├── seo/        # one .json file per DataForSEO call (backlinks-summary.json, ranked-keywords.json, ...)
-│           └── reviews/    # one .md or .json file per review source (g2.md, capterra.md, ...)
-├── <competitor-slug>.md    # final synthesized profile
-└── _summary.md             # cross-competitor summary
-```
-
-Rules:
-
-- `<competitor-slug>` is lowercase, hyphenated (e.g. `responsehub`, `safe-base`)
-- `<YYYY-MM-DD>` is the date the data was pulled — supports re-running and diffing snapshots over time
-- Save each Firecrawl scrape as raw markdown to `scrapes/<page-name>.md`
-- Save each DataForSEO response as raw JSON to `seo/<endpoint-name>.json`
-- Save each review source to `reviews/<source>.md` (cleaned text) or `.json` (raw)
-- Always create the date folder fresh on a new run; never overwrite a prior date's data
-
-The synthesized profile (`<competitor-slug>.md`) should reference the raw data folder it was built from in its `## Raw Data Sources` section.
+Never overwrite a prior date's data — add a new dated set so the history is preserved. Then write the load-bearing facts (positioning, pricing tiers, key metrics) to **Agent Memory** so future conversations recall them without reopening the docs. Each synthesized profile should list what it was built from in its `## Raw Data Sources` section.
 
 ---
 
 ## Research Process
 
-### Phase 1: Site Scraping (Firecrawl)
+### Phase 1: Site Research (Browse + Web Search)
 
-For each competitor URL, scrape key pages to extract positioning, features, pricing, and messaging.
+For each competitor URL, read the key pages to extract positioning, features, pricing, and messaging.
 
 #### Step 1: Map the site
 
-Use **Firecrawl Map** to discover the competitor's site structure and identify key pages:
+**Web Search** the competitor's brand and **Browse** their homepage and `/sitemap.xml` to discover the site structure and identify key pages. (If a site-crawling MCP server such as Firecrawl is connected to the agent, use its map endpoint for a complete URL inventory.)
 
-```
-firecrawl_map → competitor URL
-```
-
-From the map, identify and prioritize these page types:
+From that, identify and prioritize these page types:
 - Homepage
 - Pricing page
 - Features / product pages
@@ -96,15 +73,9 @@ From the map, identify and prioritize these page types:
 - Integrations page
 - Changelog / what's new (if exists)
 
-#### Step 2: Scrape key pages
+#### Step 2: Read key pages
 
-Use **Firecrawl Scrape** on each identified page:
-
-```
-firecrawl_scrape → each key page URL
-```
-
-Save each result to `competitor-profiles/raw/<competitor-slug>/<YYYY-MM-DD>/scrapes/<page-name>.md` before extracting fields.
+**Browse** each identified page. Save the captured content as a file (one per page) alongside the competitor's other research before extracting fields.
 
 Extract from each page:
 
@@ -118,21 +89,21 @@ Extract from each page:
 | **Integrations** | Integration count, key integrations, categories |
 | **Changelog** | Release velocity, recent focus areas, product direction signals |
 
-#### Step 3: Scrape competitor reviews (optional but high-value)
+#### Step 3: Read competitor reviews (optional but high-value)
 
-Use **Firecrawl Scrape** or **Firecrawl Search** to find:
+**Web Search** and **Browse** to find and read:
 - G2 reviews page for the competitor
 - Capterra reviews page
 - Product Hunt launch page
 - TrustRadius profile
 
-Save each scraped review page to `competitor-profiles/raw/<competitor-slug>/<YYYY-MM-DD>/reviews/<source>.md`. Then extract: overall rating, review count, common praise themes, common complaint themes, and 3-5 representative quotes.
+Save each review source alongside the competitor's other research. Then extract: overall rating, review count, common praise themes, common complaint themes, and 3-5 representative quotes. For deeper review mining, hand off to the `customer-research` skill (**Run an Agent**).
 
 ---
 
-### Phase 2: SEO & Market Data (DataForSEO)
+### Phase 2: SEO & Market Data (connected SEO MCP)
 
-Use DataForSEO MCP tools to gather quantitative competitive intelligence. Save each raw response as JSON to `competitor-profiles/raw/<competitor-slug>/<YYYY-MM-DD>/seo/<endpoint-name>.json` before parsing it into the profile. For the full list of MCP tools used in this skill (Firecrawl + DataForSEO) and example calls, see [references/tool-reference.md](references/tool-reference.md).
+If a SEO-data MCP server is connected to the agent — **DataForSEO**, or an Ahrefs/Semrush connector — use it to gather quantitative competitive intelligence, and save each raw response alongside the competitor's other research before parsing it into the profile. If no such connector is available, **Web Search** and **Browse** public sources for what you can (traffic estimators, the competitor's own published numbers) and label those figures as estimates. For the tool reference and example calls, see [references/tool-reference.md](references/tool-reference.md).
 
 #### Domain Authority & Backlinks
 
@@ -184,9 +155,7 @@ Combine scraped content with SEO data to build the profile. Cross-reference clai
 
 ### Profile Document Structure
 
-Generate one markdown file per competitor, saved to a `competitor-profiles/` directory in the project root.
-
-**Filename**: `competitor-profiles/[competitor-name].md`
+Generate one document per competitor with **Create Files**, saved into the Dust Folder (or connected Notion/Drive) you set up above and named for the competitor.
 
 **For the full profile and summary templates**: See [references/templates.md](references/templates.md)
 
@@ -328,9 +297,9 @@ Each profile follows this structure:
 
 ## Raw Data Sources
 
-- Homepage scraped: [date]
-- Pricing page scraped: [date]
-- SEO data pulled: [date]
+- Homepage read: [date]
+- Pricing page read: [date]
+- SEO data pulled: [date, source]
 - Review data pulled: [date, sources]
 ```
 
@@ -338,7 +307,7 @@ Each profile follows this structure:
 
 ### Summary Document
 
-After profiling all competitors, generate a `competitor-profiles/_summary.md` that includes:
+After profiling all competitors, generate a cross-competitor summary document (**Create Files**, in the same folder) that includes:
 
 1. **Competitor landscape overview** — one paragraph summarizing the competitive field
 2. **Comparison table** — key metrics side by side for all profiled competitors
@@ -370,8 +339,8 @@ Default to **quick scan** unless the user requests deep profiling or specifies a
 
 When profiling more than one competitor:
 
-1. **Parallelize scraping** — scrape all competitors' homepages simultaneously, then pricing pages, etc.
-2. **Use consistent metrics** — pull the same DataForSEO metrics for every competitor so profiles are comparable
+1. **Go breadth-first** — read every competitor's homepage first, then every pricing page, and so on, so you're always comparing like with like
+2. **Use consistent metrics** — pull the same SEO metrics for every competitor so profiles are comparable
 3. **Build the summary last** — after all individual profiles are complete
 4. **Prioritize by relevance** — if the user has 10+ competitors, suggest profiling the top 5 first based on domain overlap or market similarity
 

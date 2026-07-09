@@ -2,12 +2,14 @@
 name: ad-creative
 description: "When the user wants to generate, iterate, or scale ad creative — headlines, descriptions, primary text, or full ad variations — for any paid advertising platform. Also use when the user mentions 'ad copy variations,' 'ad creative,' 'generate headlines,' 'RSA headlines,' 'bulk ad copy,' 'ad iterations,' 'creative testing,' 'ad performance optimization,' 'write me some ads,' 'Facebook ad copy,' 'Google ad headlines,' 'LinkedIn ad text,' 'static ads,' 'static ad concepts,' 'ad templates,' 'iMessage ad,' 'chat reveal ad,' 'text message ad,' 'fake DM ad,' or 'I need more ad variations.' Use this whenever someone needs to produce ad copy at scale or iterate on existing ads. For campaign strategy and targeting, see ads. For landing page copy, see copywriting."
 metadata:
-  version: 2.2.0
+  version: 3.0.0
 ---
 
 # Ad Creative
 
 You are an expert performance creative strategist. Your goal is to generate high-performing ad creative at scale — headlines, descriptions, and primary text that drive clicks and conversions — and iterate based on real performance data.
+
+Ground every concept in the **grounded inputs** attached to this agent — winning-ad screenshots, customer reviews, and ad comments held in a **Dust Folder** (or connected **Notion**/**Google Drive**), read via knowledge search and **Browse**, plus durable patterns saved to **Agent Memory**. Deliver batches with **Create Files** (a scannable index plus one file per concept) and render ad visuals with **Create Images**. Never generate ungrounded — if no inputs are attached, ask for them first.
 
 ## Before Starting
 
@@ -61,33 +63,27 @@ Pull performance data → Identify winning patterns → Generate new variations 
 ```
 
 ### Mode 3: Scaled Static Batches (Grounded)
-For recurring static ad production at volume (e.g., 50 concepts per batch), work from a **grounded inputs corpus** and the [static ad template library](references/static-ad-templates.md). Every concept must trace to real source material — see "Grounded Inputs" below. To run this on a daily or weekly cadence, see the daily-creative-drop loop in **marketing-loops**.
+For recurring static ad production at volume (e.g., 50 concepts per batch), work from the attached **grounded inputs** knowledge item and the [static ad template library](references/static-ad-templates.md). Every concept must trace to real source material — see "Grounded Inputs" below. To run this on a recurring cadence, set up a Dust **Trigger** (schedule) — see the daily-creative-drop loop in **marketing-loops**.
 
 ---
 
 ## Grounded Inputs
 
-Most AI ad generation fails on input grounding, not output quality: ungrounded generation produces plausible-sounding ads based on training data, not on what converts for this brand. For scaled production (Mode 3), maintain a durable inputs corpus:
+Most AI ad generation fails on input grounding, not output quality: ungrounded generation produces plausible-sounding ads based on training data, not on what converts for this brand. For scaled production (Mode 3), work from a durable **grounded inputs** knowledge item attached to the agent — a **Dust Folder** (or connected **Notion**/**Google Drive** folder) holding three kinds of source material, which you read via knowledge search and **Browse**:
 
-```
-inputs/
-  winning-ads/   10-20 screenshots of the highest-performing ads from the last 90 days
-  reviews/       50-100 customer reviews (Trustpilot, G2, Amazon, App Store) as .md/.txt
-  comments/      Top comments from existing ad campaigns — objections, unprompted praise, customer-raised angles
-brand/           Brand voice doc, hex codes, logo, product/screenshot assets
-outputs/         Dated batch folders (outputs/YYYY-MM-DD/)
-```
+| Input | What to gather | Why it matters |
+|-------|----------------|----------------|
+| **Winning ads** | 10-20 screenshots of the highest-performing ads from the last 90 days | Carry the hooks, structures, and angles already proven for this brand |
+| **Reviews** | 50-100 customer reviews (Trustpilot, G2, Amazon, App Store) | Carry the exact language buyers use for pain, transformation, and unexpected benefits — pull copy verbatim rather than paraphrasing |
+| **Ad comments** | Top comments from existing campaigns — objections, unprompted praise, customer-raised angles | The most-skipped, highest-value input: objections ("but does it work for X?") become FAQ Card ads; unprompted praise surfaces angles you didn't write |
 
-**Why each input matters:**
-- **Winning ads** carry the hooks, structures, and angles already proven for this brand
-- **Reviews** carry the exact language buyers use for pain, transformation, and unexpected benefits — pull copy from them verbatim rather than paraphrasing
-- **Ad comments** are the most-skipped and highest-value input: objections ("but does it work for X?") become FAQ Card ads, and unprompted praise surfaces angles you didn't write
+Also attach a **brand knowledge item** (voice doc, hex codes, logo, product/screenshot assets), and keep durable cross-conversation patterns — proven angles, banned claims, brand voice notes — in **Agent Memory**.
 
 **Grounding rules:**
 - Every concept cites its source (which review, winning ad, or comment it traces to)
 - No invented claims, stats, or testimonials — ever
-- If `inputs/winning-ads/` or `inputs/reviews/` is empty, stop and ask the user to populate it before generating. Do not generate ungrounded concepts as a fallback.
-- Inputs decay: refresh `inputs/winning-ads/` as new ads scale; refresh `inputs/reviews/` and `inputs/comments/` monthly
+- If no winning-ad or review inputs are attached, stop and ask the user to attach them before generating. Do not generate ungrounded concepts as a fallback.
+- Inputs decay: refresh winning ads as new ones scale; refresh reviews and comments monthly. If review-mining is needed to build the corpus, hand off to the `customer-research` skill (**Run an Agent**).
 
 ---
 
@@ -152,7 +148,7 @@ For detailed specs and format variations, see [references/platform-specs.md](ref
 
 **For iMessage chat-reveal video ads** — the 9:16 format where a scripted iMessage thread unfolds bubble-by-bubble (screenshot hook → friend asks "what app is that?" → brand + promo code reveal → end card) — see [references/imessage-video-ads.md](references/imessage-video-ads.md) for the six concept angles, script and pacing rules, production routes (off-the-shelf, Playwright + ffmpeg pipeline, Remotion), craft details that sell the illusion, and the grounding/compliance rules for dramatized conversations.
 
-For image and video generation tools, see [references/generative-tools.md](references/generative-tools.md) for the complete guide covering:
+On Dust, generate static ad images directly with **Create Images** — render the visual for each concept from its image prompt, at the correct placement dimensions from the platform specs. For the menu of underlying generative models and when to reach for each (including video and voice, which run through connected tools or **remote MCP servers**), see [references/generative-tools.md](references/generative-tools.md), covering:
 
 - **Image generation** — Nano Banana Pro (Gemini), Flux, Ideogram for static ad images
 - **Video generation** — Veo, Kling, Runway, Sora, Seedance, Higgsfield for video ads
@@ -162,10 +158,10 @@ For image and video generation tools, see [references/generative-tools.md](refer
 - **Cost comparison** — Pricing for 100+ ad variations across tools
 
 **Recommended workflow for scaled production:**
-1. Generate hero creative with AI tools (exploratory, high-quality)
-2. Build Remotion templates based on winning patterns
-3. Batch produce variations with Remotion using data feeds
-4. Iterate — AI for new angles, Remotion for scale
+1. Generate hero creative with **Create Images** (exploratory, high-quality)
+2. Codify the winning patterns into a repeatable template (e.g., a Remotion template for data-driven video)
+3. Batch produce variations from a data feed
+4. Iterate — **Create Images** for new angles, the template for scale
 
 ---
 
@@ -299,7 +295,7 @@ Organize by angle, with character counts:
 
 ### Bulk CSV Output
 
-When generating at scale (10+ variations), offer CSV format for direct upload:
+When generating at scale (10+ variations), deliver a CSV for direct platform upload with **Create Files** (or write it into a connected **Google Sheet** via **Composio**):
 
 ```csv
 headline_1,headline_2,headline_3,description_1,description_2,platform
@@ -308,16 +304,13 @@ headline_1,headline_2,headline_3,description_1,description_2,platform
 
 ### Static Batch Output (Mode 3)
 
-For scaled static batches, save to a dated folder with an index:
+For scaled static batches, deliver a dated batch into a **Dust Folder** (or connected **Notion**/**Google Drive**) with **Create Files**, keeping the same scannable organization:
 
-```
-outputs/YYYY-MM-DD/
-  INDEX.md        # every concept: template type + grounding source, scannable in 2 min
-  concepts/       # one .md per concept: headline, body, visual description, image prompt, grounding
-  images/         # generated images, if an image tool is configured
-```
+- **`INDEX` file** — every concept in one place: template type + grounding source, scannable in 2 minutes
+- **One file per concept** — headline, body, visual description, image prompt, and grounding source
+- **One image per concept** — rendered with **Create Images** from the concept's image prompt
 
-Per-concept format is defined in [references/static-ad-templates.md](references/static-ad-templates.md). The human workflow this supports: open the folder, scan INDEX.md, pick the best 5-10 for testing — picking 5 winners from 50 concepts yields better creative than picking 5 from 10.
+Name the batch for its date (`YYYY-MM-DD`) so batches stay ordered and never overwrite each other. Per-concept format is defined in [references/static-ad-templates.md](references/static-ad-templates.md). The human workflow this supports: open the batch, scan the index, pick the best 5-10 for testing — picking 5 winners from 50 concepts yields better creative than picking 5 from 10.
 
 ### Iteration Report
 
@@ -380,20 +373,20 @@ For large-scale creative production (Anthropic's growth team generates 100+ vari
 
 For pulling performance data and managing campaigns, see the [tools registry](../../tools/REGISTRY.md).
 
-| Platform | Pull Performance Data | Manage Campaigns | Guide |
-|----------|:---------------------:|:----------------:|-------|
-| **Google Ads** | `google-ads campaigns list`, `google-ads reports get` | `google-ads campaigns create` | [google-ads.md](../../tools/integrations/google-ads.md) |
-| **Meta Ads** | `meta-ads insights get` | `meta-ads campaigns list` | [meta-ads.md](../../tools/integrations/meta-ads.md) |
-| **LinkedIn Ads** | `linkedin-ads analytics get` | `linkedin-ads campaigns list` | [linkedin-ads.md](../../tools/integrations/linkedin-ads.md) |
-| **TikTok Ads** | `tiktok-ads reports get` | `tiktok-ads campaigns list` | [tiktok-ads.md](../../tools/integrations/tiktok-ads.md) |
+| Platform | How to reach it from Dust | Guide |
+|----------|---------------------------|-------|
+| **Google Ads** | **Google Ads connector** (native), or a **remote MCP server** | [google-ads.md](../../tools/integrations/google-ads.md) |
+| **Meta Ads** | **Composio** (OAuth-heavy — no native server) | [meta-ads.md](../../tools/integrations/meta-ads.md) |
+| **LinkedIn Ads** | **Composio** | [linkedin-ads.md](../../tools/integrations/linkedin-ads.md) |
+| **TikTok Ads** | **Composio** | [tiktok-ads.md](../../tools/integrations/tiktok-ads.md) |
 
 ### Workflow: Pull Data, Analyze, Generate
 
-1. **Pull recent ad performance** — use the Google Ads connector (or a remote MCP / Composio tool) to get ad-level performance for the last 30 days. If you only have an export, attach the CSV to the conversation.
+1. **Pull recent ad performance** — use the **Google Ads connector** (or **Composio** for Meta, LinkedIn, TikTok) to get ad-level performance for the last 30 days, and chart the trends with **Data Visualization** to see which angles are scaling. If you only have an export, attach the CSV to the conversation.
 2. **Analyze** — identify top and bottom performers.
-3. **Feed winning patterns into this skill** to inform new copy.
-4. **Generate new variations.**
-5. **Upload to the platform** via the connector's write scope, or stage the variations as a file for human review before publishing.
+3. **Extract the winning patterns** — you are the model, so read the top performers directly and pull the recurring hooks, structures, and language.
+4. **Generate new variations** grounded in those patterns and the attached inputs.
+5. **Deliver** — write the variations to a file with **Create Files** (or a **Google Sheet** via **Composio**) for human review, then upload to the platform via the connector's write scope once approved.
 
 ---
 

@@ -2,12 +2,14 @@
 name: signup
 description: When the user wants to optimize signup, registration, account creation, or trial activation flows. Also use when the user mentions "signup conversions," "registration friction," "signup form optimization," "free trial signup," "reduce signup dropoff," "account creation flow," "people aren't signing up," "signup abandonment," "trial conversion rate," "nobody completes registration," "too many steps to sign up," or "simplify our signup." Use this whenever the user has a signup or registration flow that isn't performing. For post-signup onboarding, see onboarding. For lead capture forms (not account creation), see cro.
 metadata:
-  version: 2.0.0
+  version: 3.0.0
 ---
 
 # Signup Flow CRO
 
 You are an expert in optimizing signup and registration flows. Your goal is to reduce friction, increase completion rates, and set users up for successful activation.
+
+Work from the **live flow**, not just a description. Use **Browse** to read the actual signup pages, and **Computer** to walk the flow end-to-end the way a new user would — click through every step, fill the fields, trigger the validation errors, and repeat on a mobile viewport. Then pull the real drop-off from connected product analytics (**GA4**, Mixpanel, Amplitude) and chart the funnel with **Data Visualization**, so every recommendation is grounded in what the flow actually does and where people actually stall — not guesses.
 
 ## Initial Assessment
 
@@ -33,6 +35,15 @@ Before providing recommendations, understand:
    - What data is genuinely needed at signup?
    - Are there compliance requirements?
    - What happens immediately after signup?
+
+### Walk the live flow first
+
+Before critiquing from a description or a single screenshot:
+- **Browse** the signup URL to read the current copy, fields, and structure of each screen.
+- Use **Computer** to actually complete the flow as a new user: count the real number of steps, fill every field, submit with bad input to see the validation errors, note what's required vs. optional, and time how long it takes. Repeat on a **mobile viewport** — small touch targets, wrong keyboard types, and cramped layouts hide here.
+- Note exactly where a user would stall, get confused, or bounce (a surprise credit-card step, a CAPTCHA, an email-verification wall, an unexplained field).
+- If product analytics are connected (**GA4**, Mixpanel, Amplitude), pull the real funnel — landed → started → each step → completed → verified — plus field-level drop-off and mobile vs. desktop rates. Chart it with **Data Visualization** so the biggest leak is obvious.
+- Capture a screenshot of each current screen so any before/after recommendation is concrete.
 
 ---
 
@@ -174,7 +185,7 @@ Every field reduces conversion. For each field, ask:
 - Reduce typing (social auth, pre-fill)
 - Single column layout
 - Sticky CTA button
-- Test with actual devices
+- Walk the flow on a mobile viewport with **Computer** — confirm the right keyboard appears per field, targets are tappable, and nothing is clipped below the fold
 
 ---
 
@@ -199,6 +210,8 @@ Every field reduces conversion. For each field, ask:
 
 ## Measurement
 
+Pull these from connected product analytics (**GA4**, Mixpanel, Amplitude) and chart the funnel with **Data Visualization** so the biggest drop-off is unmistakable. Where the data isn't tracked yet, flag it as an instrumentation gap.
+
 ### Key Metrics
 - Form start rate (landed → started filling)
 - Form completion rate (started → submitted)
@@ -216,6 +229,8 @@ Every field reduces conversion. For each field, ask:
 ---
 
 ## Output Format
+
+For a full teardown, deliver it as a document with **Create Files** and attach the annotated before/after screenshots you captured while walking the flow, alongside the charted funnel from **Data Visualization**.
 
 ### Audit Findings
 For each issue found:
