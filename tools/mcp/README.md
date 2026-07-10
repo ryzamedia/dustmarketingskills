@@ -58,6 +58,245 @@ These vendors host a public MCP endpoint. Auth is OAuth unless noted. Server URL
 
 ---
 
+## Full catalog by marketing function
+
+The table above is the quick-start essentials. The sections below add **many more official-remote servers** (addable directly in Dust), grouped by what a marketing agent uses them for. All verified against vendor docs on **2026-07-10** — endpoints move fast, so confirm before wiring up. A **⚠** marks servers that are official but access-gated (paid tier, waitlist, or provisioned per-account) — real, but not always freely addable. Each section ends with a note on notable **self-host / community / marketplace** options that a Dust *cloud* agent can't add directly.
+
+### Analytics, product analytics & BI
+Serves `analytics`, `cro`, `ab-testing`, `marketing-plan`, `revops`.
+
+| Tool | Server URL | Auth | Use for |
+|------|------------|------|---------|
+| **Contentsquare** (Heap + Hotjar) | `api.contentsquare.com/mcp` | OAuth2 | Behavior/experience analytics, heatmaps, funnels — the MCP path for Hotjar/Heap users |
+| **Statsig** | `api.statsig.com/v1/mcp` | OAuth | Experiments + feature gates end-to-end — best fit for `ab-testing` |
+| **Pendo** | `app.pendo.io/mcp/visitor/shttp` (+ regional) | OAuth | Product-adoption + churn-signal analytics |
+| **Fullstory** | `api.fullstory.com/mcp/fullstory` | OAuth | Session/behavior analysis for funnel friction |
+| **Snowplow** | `console.snowplowanalytics.com/api/agent/mcp` | OAuth / key | Design + validate a tracking plan conversationally |
+| **Matomo** | per-instance (Admin → Export → MCP) | token / OAuth | Privacy-first web analytics |
+| **Airtable** | `mcp.airtable.com/mcp` | OAuth / PAT | Marketing-ops databases, editorial calendars |
+| **Google BigQuery** | `bigquery.googleapis.com/mcp` | OAuth / IAM | Query the marketing warehouse (GA4 exports, spend, revenue) |
+| **Snowflake** (Cortex) | per-account managed server | PAT / OAuth | Governed NL analytics over warehouse data |
+| **Databricks** (Genie) | `<workspace>/api/2.0/mcp/genie/{space}` | OAuth / PAT | Lakehouse conversational analytics |
+| **ClickHouse Cloud** | `mcp.clickhouse.cloud/mcp` | OAuth | Fast queries over event/clickstream data |
+| **MotherDuck** / DuckDB | `api.motherduck.com/mcp` | token / OAuth | Lightweight warehouse + ad-hoc analysis |
+| **Metabase** | `<your-metabase>/api/metabase-mcp` | user perms | Query + maintain existing dashboards |
+| **Power BI** | `api.fabric.microsoft.com/v1/mcp/powerbi` | Entra OAuth | Query semantic models (preview) |
+| **Looker** | per-instance managed | OAuth | Governed BI over the semantic model (preview) |
+| **ThoughtSpot** | per-instance | OAuth | Agentic NL analytics + forecasting |
+| **Cube** | per-deployment | OAuth | Consistent, governed KPI definitions |
+| **Sigma** | per-org | OAuth | Search + query governed workbooks |
+| **Hex** | per-workspace | OAuth | Notebook-style analyses on marketing data |
+| **Airbyte** | `mcp.airbyte.ai/mcp` | OAuth | One gateway to 600+ connected data sources |
+| **Hightouch** | vendor-hosted | OAuth | Reverse-ETL activation + agentic audience building |
+| **RudderStack** | vendor-hosted | OAuth | Keep the CDP/event pipeline healthy |
+| **Adobe CJA / Analytics** | Adobe-hosted | IMS OAuth | Enterprise cross-channel analytics |
+
+*Self-host / community: Plausible, Umami, Fathom (usefathom), Segment, Fivetran, Google Sheets — official-or-community but local/stdio.*
+
+### SEO & search data
+Serves `seo-audit`, `programmatic-seo`, `content-strategy`, `competitor-profiling`, `ai-seo`.
+
+| Tool | Server URL | Auth | Use for |
+|------|------------|------|---------|
+| **SISTRIX** | `api.sistrix.com/mcp/` | OAuth | Visibility Index + rankings + **AI-visibility** — no API key, no credit spend |
+| **SE Ranking** | `api.seranking.com/mcp` | OAuth 2.1 | 160+ tools: keywords, backlinks, audits, AI search visibility |
+| **Serpstat** | `serpstat.com/api/mcp/` | OAuth | SEO research + **AI Overview** monitoring |
+| **Mangools** | `mcp.mangools.com/mcp` | token (`x-access-token`) | Affordable keyword/rank/backlink data |
+| **SerpApi** | `mcp.serpapi.com/{API_KEY}/mcp` | API key | Raw multi-engine SERP data |
+| **Similarweb** | `mcp.similarweb.com` | API key | Competitor traffic + market intelligence |
+| **Oncrawl** | `mcp.oncrawl.com/mcp` | OAuth | Deep technical crawl audits (orphans, crawl diffs) |
+| **Diffbot** | `mcp.diffbot.com/mcp?token=…` | token | Knowledge-graph enrichment + content extraction |
+| **Google Trends** | `api.trendsmcp.ai/mcp` | Bearer | Demand/trend research (community-hosted; no official Trends API) |
+
+*Self-host / community: Serper, Bing Webmaster Tools, AlsoAsked, Moz, Perplexity Sonar, Kagi, Frase, Screaming Frog (v24 built-in), seoClarity (⚠ enterprise-provisioned).*
+
+### Advertising & ad analytics
+Serves `ads`, `ad-creative`, `marketing-plan`. (Google Ads = stdio/self-host; Meta Ads is in the essentials table.)
+
+| Tool | Server URL | Auth | Use for |
+|------|------------|------|---------|
+| **Windsor.ai** | `mcp.windsor.ai` | OAuth | Report **and write** (budgets/bids/campaigns) across Meta, Google, TikTok, LinkedIn, Microsoft Ads — one endpoint |
+| **Two Minute Reports** | `mcp.twominutereports.com/mcp` | OAuth | Low-friction cross-channel ad **reporting** (30+ connectors incl. TikTok, Snapchat, X, Pinterest, Amazon) |
+| **Polar Analytics** | `app.polaranalytics.com/mcp` | OAuth | Governed, citation-backed ecommerce cross-channel ROAS |
+| **Optmyzr** | hosted (Settings → MCP Integration) | API key | Google + Microsoft Ads reporting **and** executable Rule-Engine optimizations |
+| **Improvado** | `report.improvado.io/experimental/agent/api/mcp-customer/v1/invoke` | OAuth | Enterprise governed multi-source ad + attribution analysis |
+| **TikTok Ads** ⚠ | TikTok-hosted (Agentic Hub, zero-code) | managed OAuth | First-party TikTok campaign management |
+| **Amazon Ads** ⚠ | partner-provisioned | OAuth | First-party, write-capable Sponsored Ads (open beta, needs API partner creds) |
+| **Omneky** ⚠ | announced (REST at `api.omneky.com`) | `X-API-Key` | Autonomous ad-creative (image + video) generation → `ad-creative` |
+
+*Note: **Microsoft Advertising** and **Pinterest Ads** shipped official MCPs but both are read-only + waitlist/named-partner gated as of July 2026. **LinkedIn / Reddit / Snapchat / X Ads** have no first-party MCP — reach via Two Minute Reports, CData, or Zapier.*
+
+### CRM, sales engagement & B2B enrichment
+Serves `revops`, `prospecting`, `cold-email`, `sales-enablement`, `customer-research`. (HubSpot, Salesforce, Apollo, ZoomInfo, Outreach are in the essentials table.)
+
+| Tool | Server URL | Auth | Use for |
+|------|------------|------|---------|
+| **Attio** | `mcp.attio.com/mcp` | OAuth | Modern CRM read/write + call-transcript/meeting search |
+| **Close** | `mcp.close.com/mcp` | OAuth / key | SMB sales CRM + call-transcript mining |
+| **Pipedrive** ⚠ | `mcp.pipedrive.ai/mcp` | OAuth | Pipedrive CRM read/write (beta) |
+| **monday** | `mcp.monday.com/mcp` | OAuth | monday CRM + campaign/project boards |
+| **Zoho CRM** ⚠ | provisioned at `zoho.com/mcp` | OAuth | Zoho CRM data + automation |
+| **Amplemarket** | `mcp.amplemarket.com/mcp` | OAuth | Full outbound: prospect DB + enrich + sequences in one server |
+| **lemlist** | `app.lemlist.com/mcp` | OAuth / key | Sequences + 450M-record prospecting DB + email find/verify |
+| **Reply.io** | `mcp.reply.io` | key / OAuth | Multichannel outbound + AI-SDR ops |
+| **La Growth Machine** | `mcp.lagrowthmachine.com/mcp` | OAuth / key | LinkedIn + email multichannel outreach |
+| **Instantly** | `mcp.instantly.ai/mcp` | API key | Cold-email campaigns + deliverability + analytics |
+| **Smartlead** | `mcp.smartlead.ai/sse?user_api_key=…` | key (in URL) | Cold-email campaign monitoring + deliverability (SSE) |
+| **Lusha** | `mcp.lusha.com` | API key (`x-api-key`) | 100M+ contacts: enrichment + buyer-intent |
+| **FullEnrich** | `mcp.fullenrich.com/mcp` | OAuth | Waterfall email/phone enrichment (20+ providers) |
+| **Surfe** | `mcp.eu.surfe.com/mcp` | API key | Contact/company enrichment |
+| **Prospeo** | `mcp.prospeo.io` | OAuth / key | Work-email + mobile finding, LinkedIn enrichment |
+| **Hunter** | connect URL at `hunter.io/api-documentation#mcp` | API key | Email finding + verification + enrichment |
+| **Warmly** | `opps-api.getwarmly.com/api/mcp` | OAuth / key | Website-visitor de-anonymization + third-party intent signals |
+| **Seamless.ai** ⚠ | `mcp.seamless.ai/mcp` | OAuth / key | Sales-intelligence prospecting (MCP must be enabled on the account) |
+| **Fireflies** | `api.fireflies.ai/mcp` | OAuth / key | Mine customer-interview & sales-call transcripts |
+
+*⚠ Official but directory/enterprise-provisioned (no public paste-URL — same class as Apollo): **Gong** (per-workspace, Company Settings → Ecosystem → API), **Salesloft/Clari** (Claude connector directory). Self-host/community: RB2B, People Data Labs, Freshsales, Copper, Snov, Cognism (aggregator-only).*
+
+### Email, SMS & lifecycle messaging
+Serves `emails`, `sms`, `onboarding`, `churn-prevention`, `lead-magnets`, `launch`. (Klaviyo, Customer.io, Resend are in the essentials table.)
+
+| Tool | Server URL | Auth | Use for |
+|------|------------|------|---------|
+| **Brevo** | `mcp.brevo.com/v1/brevo/mcp` | Bearer token | All-in-one email + SMS + WhatsApp + CRM (easiest headless auth) |
+| **MoEngage** | `mcp.moengage.com` | OAuth | Enterprise cross-channel lifecycle (push/email/SMS/WhatsApp + flows) |
+| **Kit** (ConvertKit) | `app.kit.com/mcp` | OAuth | Creator/newsletter email: subscribers, sequences, broadcasts |
+| **MailerLite** | `mcp.mailerlite.com/mcp` | OAuth | SMB email marketing + automation building |
+| **Omnisend** | `mcp.omnisend.com/mcp` | OAuth | Ecommerce email + SMS with revenue attribution |
+| **Marketo** (Adobe) | `marketo-mcp.adobe.io/mcp` | client creds / IMS | Enterprise B2B automation + nurture (100+ ops) |
+| **ActiveCampaign** | per-account remote URL | OAuth | Email + automation with CRM context |
+| **beehiiv** | `mcp.beehiiv.com/mcp` | OAuth | Newsletter content, audience growth, monetization |
+| **Courier** | `mcp.courier.com` | API key | Multi-channel messaging + templates (109 tools) |
+| **Novu** | `mcp.novu.co` (EU: `eu.mcp.novu.co`) | OAuth / key | Notification/lifecycle infrastructure |
+| **Knock** | `mcp.knock.app/mcp` | OAuth | Build multi-channel notification workflows |
+| **Intercom** | `mcp.intercom.com/mcp` | OAuth | Mine support/lifecycle signals (US workspaces) |
+| **Bloomreach** ⚠ | per-account `…/mcp` | OAuth | Enterprise CDP campaigns + personalization (gated) |
+| **OneSignal** ⚠ | via Smithery bridge | App ID + key | Push/email/SMS + segments (interactive first-connect) |
+
+*Note: **Twilio**'s remote MCP (`mcp.twilio.com/docs`) is docs/search only — it can't send. **Postmark**, **Mailgun**, **Iterable**, **Braze**, **SendGrid** are transactional and/or self-host/local. Aggregator-only: Drip, Attentive, Sendlane, Constant Contact, GetResponse. **Loops** MCP is "coming soon."*
+
+### Payments, billing & subscriptions
+Serves `pricing`, `paywalls`, `churn-prevention`, `offers`, `revops`. (Stripe is in the essentials table.)
+
+| Tool | Server URL | Auth | Use for |
+|------|------------|------|---------|
+| **Paddle** | `mcp.paddle.com/mcp` (sandbox `sandbox-mcp.paddle.com/mcp`) | API key (Bearer) | Merchant-of-record billing: pricing models, revenue/refund reports, failed payments |
+| **RevenueCat** | `mcp.revenuecat.ai/mcp` | key / OAuth | **Mobile-app** subscriptions + paywalls (Stripe/Paddle don't cover in-app) |
+| **Polar.sh** | `mcp.polar.sh/mcp/polar-mcp` | token / OAuth | Developer-first MoR billing: products, subscriptions, checkouts |
+| **Square** | `mcp.squareup.com/sse` | OAuth | Commerce: orders, customers, invoices, subscriptions |
+| **PayPal** | `mcp.paypal.com` (`/sse` or `/http`) | OAuth | Invoices, transactions, orders, subscriptions, disputes |
+| **Ramp** | `mcp.ramp.com/mcp` | OAuth | Marketing-spend + finance analytics (permission-aware, audit-logged) |
+| **Mercury** | `mcp.mercury.com/mcp` | OAuth (read) | Cash/revenue-inflow lookups + reconciliation |
+| **Brex** | `api.brex.com/mcp` | OAuth 2.1 / token | Expense + card-spend analysis |
+
+*Self-host / local: Chargebee, Orb, Metronome, Lago, Stigg, ChartMogul, Baremetrics, Churnkey (best for `churn-prevention`), Recurly, Lemon Squeezy, QuickBooks, Xero. ⚠ Gated/undisclosed-endpoint: Maxio, Zuora.*
+
+### CMS, commerce & content
+Serves `programmatic-seo`, `seo-audit`, `schema`, `content-strategy`, `site-architecture`, `copywriting`, `image`.
+
+| Tool | Server URL | Auth | Use for |
+|------|------------|------|---------|
+| **WordPress.com** | `public-api.wordpress.com/wpcom/v2/mcp/v1` | OAuth 2.1 | Run a WordPress content site by prompt (posts, pages, media) |
+| **Webflow** | `mcp.webflow.com/mcp` | OAuth | CMS collections + on-page elements/styles |
+| **Wix** | `mcp.wix.com/mcp` | OAuth | Site copy + CMS collections |
+| **Contentful** | `mcp.contentful.com/mcp` | OAuth | Headless CMS content ops + AI Actions |
+| **Sanity** | `mcp.sanity.io` | OAuth / token | GROQ queries + schema-aware content edits |
+| **DatoCMS** | `mcp.datocms.com` | OAuth | Bulk content modeling + entry edits |
+| **Storyblok** | `mcp.labs.storyblok.com/mcp` | token (PAT) | Component-based CMS management |
+| **Hygraph** | `mcp-{region}.hygraph.com/{project}/{env}/mcp` | token | Query/publish GraphQL-native content |
+| **Builder.io** | `mcp.builder.io/mcp/publish` | OAuth | Visual-CMS content + landing pages |
+| **Shopify Storefront** | `{shop}.myshopify.com/api/mcp` | none (guest) | Live product/catalog + policy data for commerce copy & PDP SEO |
+| **BigCommerce** | per-store (Settings → Early Access) | guest | Product catalog for storefront copy/SEO (beta) |
+| **Saleor** | `mcp.saleor.app/mcp` | token | Read products, customers, orders |
+| **Cloudinary** | `asset-management.mcp.cloudinary.com/mcp` (+ metadata/analysis) | OAuth2 | Media DAM: generate, transform, compress (WebP/OG), organize |
+| **Frontify** | `mcp.frontify-integrations.com/mcp` | OAuth | Ground image/copy generation in approved brand assets + guidelines |
+| **Optimizely CMS** | `cms.mcp.opal.optimizely.com/mcp` | OAuth | Manage CMS content (pairs with its Experimentation server) |
+| **Adobe Experience Manager** | `mcp.adobeaemcloud.com/adobe/mcp/…` | Adobe OAuth | Enterprise content ops + DAM + brand governance |
+
+*Self-host / local: Strapi, Directus, Contentstack, Kontent.ai, Payload, commercetools, WooCommerce, Prismic, Ghost, Sitecore. No MCP: Framer, Squarespace, Bynder.*
+
+### Social, community & creative
+Serves `social`, `community-marketing`, `image`, `video`, `ad-creative`. (In Dust, native **Create Images** covers basic raster generation — the model servers below add text-in-image, brand/vector, video, and audio.)
+
+| Tool | Server URL | Auth | Use for |
+|------|------------|------|---------|
+| **Buffer** | `mcp.buffer.com/mcp` | OAuth | Cross-channel scheduling/publishing (LinkedIn, X, IG, TikTok, …) |
+| **Postiz** | `api.postiz.com/mcp/{API_KEY}` | key | Scheduling across 30+ channels incl. Reddit/Discord/Bluesky/Mastodon |
+| **Typefully** | `mcp.typefully.com/mcp?TYPEFULLY_API_KEY=…` | key | Thread/long-form drafting + scheduling |
+| **Blotato** | `mcp.blotato.com/mcp` | OAuth / key | Agent-driven posting/repurposing across platforms |
+| **Canva** | `mcp.canva.com/mcp` | OAuth | Editable, brand-consistent designs + template autofill |
+| **Runway** | `mcp.runwayml.com/mcp` | OAuth | Marketing **image + video** (proxies Kling/Veo/Nano Banana) |
+| **fal.ai** | `mcp.fal.ai/mcp` | API key | 1,000+ image/video/audio/speech models behind one key |
+| **Replicate** | `mcp.replicate.com/sse` | token | Broad model catalog (FLUX, upscalers, video, transcription) |
+| **Ideogram** | `mcp.ideogram.ai/mcp` | OAuth | Best-in-class **text-in-image** (posters, social/ad graphics) + brand training |
+| **HeyGen** | `mcp.heygen.com/mcp/v1/` | OAuth | Avatar spokesperson / explainer / UGC-style video |
+| **invideo** | `mcp.invideo.io/sse` | OAuth | Prompt → full video with script, stock, voiceover, subtitles |
+| **Figma** | `mcp.figma.com/mcp` | OAuth | Design specs/assets for landing pages + creative |
+
+*Self-host / community: Discord, Reddit, Bluesky, Mastodon, YouTube (all community); ElevenLabs (audio/voiceover), Recraft (vector/brand), Freepik, Shotstack (templated video), Pexels/Unsplash — official-or-community but local. Marketplace-only: Synthesia, Creatomate (via Zapier).*
+
+### Marketing ops — project mgmt, forms, scheduling, storage, support
+Serves delivery/planning across `marketing-plan`, `launch`, `customer-research`, `onboarding`, `content-strategy`. (Notion, Slack, Google Drive are native Dust connectors — prefer those.)
+
+| Tool | Server URL | Auth | Use for |
+|------|------------|------|---------|
+| **Asana** | `mcp.asana.com/v2/mcp` | OAuth | GTM plans + cross-functional launch checklists |
+| **Linear** | `mcp.linear.app/mcp` | OAuth | Campaign delivery + content pipeline as issues/projects |
+| **Atlassian** (Jira/Confluence) | `mcp.atlassian.com/v1/mcp` | OAuth 2.1 | Campaign tickets + marketing knowledge base/briefs |
+| **ClickUp** | `mcp.clickup.com/mcp` | OAuth | Content calendars + campaign task tracking |
+| **Smartsheet** | `mcp.smartsheet.com` (EU/AU variants) | token | Campaign/budget/rollout trackers in grids |
+| **Todoist** | `ai.todoist.net/mcp` | OAuth | Lightweight task capture for an operator |
+| **Coda** | `coda.io/apis/mcp` | token | Living marketing docs/wikis + planning tables |
+| **Box** | `mcp.box.com` | OAuth | Retrieve brand/creative assets from enterprise storage |
+| **Dropbox** | `mcp.dropbox.com/mcp` | OAuth | Pull creative files + research docs |
+| **Cal.com** | `mcp.cal.com/mcp` | OAuth 2.1 | Book demos + webinar slots |
+| **Calendly** | `mcp.calendly.com` | OAuth | Availability + booking management |
+| **Typeform** | `api.typeform.com/mcp` | OAuth | Pull survey responses for VOC; spin up research forms |
+| **Tally** | `api.tally.so/mcp` | OAuth / key | Build lead-capture + research forms (free) |
+| **Make.com** | `mcp.make.com/sse` | token / OAuth | Trigger cross-tool marketing automations |
+| **Pipedream** | `mcp.pipedream.com/{user}/{app}` | OAuth | Reach 2,800+ long-tail SaaS apps |
+| **Miro** | `mcp.miro.com` | OAuth | Campaign brainstorms + customer-journey maps |
+| **Front** | `mcp.frontapp.com/mcp` | OAuth | Analyze shared-inbox conversations for research |
+| **Help Scout** ⚠ | `mcp-beta.helpscout.net` | OAuth / PAT | Support-ticket + VOC analysis (beta) |
+
+*Self-host / community: Trello, Basecamp, n8n (per-instance), Zendesk, Discourse, SurveyMonkey, Google Workspace Docs/Sheets. **Microsoft 365 / Dataverse** = preview, per-org.*
+
+### Reviews, experimentation & events
+Serves `cro`, `ab-testing`, `referrals`, `public-relations`, `customer-research`, `launch`, webinars.
+
+| Tool | Server URL | Auth | Use for |
+|------|------------|------|---------|
+| **VWO** | `mcp.vwo.io/mcp` (EU/AS variants) | OAuth 2.0 | Read live CRO data **and create** A/B tests + heatmaps/recordings |
+| **Optimizely Experimentation** | `exp.mcp.opal.optimizely.com/mcp` | OAuth | Query + manage Web/Feature experiments |
+| **LaunchDarkly** | `mcp.launchdarkly.com/mcp/launchdarkly` | OAuth | Feature-flagged rollouts + experiment gating |
+| **Birdeye** | hosted (in-product connect URL) | OAuth 2.0 | Reviews, ratings trends, NPS/CSAT survey data |
+| **Zoom** | `mcp.zoom.us/mcp/zoom/streamable` | OAuth 2.1 | Webinar/event transcripts, recordings, recap docs |
+| **Livestorm** | `mcp.livestorm.co/mcp/livestorm-mcp` | API key header | Webinar events, sessions, registrant data |
+| **Press Ranger** ⚠ | hosted (one-click OAuth) | OAuth | Draft + distribute AI-optimized press releases (first PR-distribution MCP) |
+| **G2** ⚠ | Claude connector directory | OAuth | Review + buyer-intent intelligence (connector-gallery only) |
+
+*Self-host / community: Microsoft Clarity (free heatmaps), Yelp, Product Hunt, Sensor Tower + AppTweak (ASO), Refgrow (referrals), Everflow (⚠ private beta). No MCP found: Trustpilot, Capterra, Google Business Profile, PartnerStack, Refersion, Impact.com, Muck Rack, Prowly, Cision, Demio, AppFollow.*
+
+### Web scraping, search & browser automation
+Serves `competitor-profiling`, `customer-research`, `prospecting`, `content-strategy`, `ai-seo`. (Firecrawl, Exa, Bright Data, Apify are already cataloged above.)
+
+| Tool | Server URL | Auth | Use for |
+|------|------------|------|---------|
+| **Tavily** | `mcp.tavily.com/mcp/` | OAuth / key | Best all-round AI web research (search + extract + crawl) |
+| **Linkup** | `mcp.linkup.so/mcp` | API key | Sourced web answers with citations |
+| **Jina AI** | `mcp.jina.ai/v1` (`/sse`) | API key | URL → clean markdown + web search + rerank |
+| **ScrapingBee** | `mcp.scrapingbee.com/mcp` | API key (in URL) | Hosted proxy/CAPTCHA/JS scraping + retail extractors |
+| **ScrapeGraphAI** | `mcp.scrapegraphai.com/mcp` | API key (`X-API-Key`) | AI-prompted structured extraction |
+| **Scrapeless** | `api.scrapeless.com/mcp` | token | SERP + Google Trends + JS-heavy scraping + cloud browser |
+| **Olostep** | `mcp.olostep.com/mcp` | API key | High-volume batch scraping (2–10k URLs) + search |
+| **ZenRows** | `mcp.zenrows.com/mcp` | key / OAuth | Scrape or **drive** protected/JS-heavy sites (30+ browser tools) |
+| **Browserless** | `mcp.browserless.io/mcp` | token / OAuth | Agentic browsing + **Lighthouse audits** + crawl |
+| **Anchor Browser** | `api.anchorbrowser.io/mcp` | API key | Full cloud browser for multi-step tasks on gated sites |
+
+*Self-host / local: Oxylabs, Crawlbase, Spider.cloud, AgentQL, Hyperbrowser, Steel.dev, Notte, Dumpling AI (YouTube transcripts + Google reviews), Perplexity, Kagi. Review-site data (G2/Trustpilot/Capterra) has no native MCP — reach via Apify or a scraping server against the review URL.*
+
+---
+
 ## Prospecting & web-data MCP servers (incl. LinkedIn)
 
 **LinkedIn itself ships no official MCP.** These third-party data providers do — the practical way to pull LinkedIn people/company data (and general web/SERP data) into a Dust agent. Respect each platform's ToS and local scraping law.

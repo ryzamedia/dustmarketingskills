@@ -56,6 +56,24 @@ Current versions of all skills. Re-import a skill into Dust (or `git pull` your 
 
 ## Recent Changes
 
+### 3.1.2 (2026-07-10) — Expanded MCP catalog (~160 verified servers)
+
+Fanned out research across every marketing category and added a large, **fact-verified** catalog of official-remote MCP servers to `tools/mcp/README.md` (each confirmed against vendor docs on 2026-07-10, with the official-remote vs local/community/gated distinction). New "Full catalog by marketing function" sections:
+
+- **Analytics & BI**: Contentsquare (Heap/Hotjar), Statsig, Pendo, Fullstory, Snowplow, Matomo, Airtable, BigQuery, Snowflake, Databricks, ClickHouse, MotherDuck, Metabase, Power BI, Looker, Airbyte, Hightouch.
+- **SEO & search**: SISTRIX, SE Ranking, Serpstat, Mangools, SerpApi, Similarweb, Oncrawl, Diffbot, Google Trends; **AI-visibility**: Writesonic.
+- **Ads**: Windsor.ai, Two Minute Reports, Polar Analytics, Optmyzr, Improvado, TikTok Ads, Amazon Ads.
+- **CRM & sales**: Attio, Close, Pipedrive, monday, Zoho, Amplemarket, lemlist, Reply, La Growth Machine, Instantly, Smartlead; **enrichment/intent**: Lusha, FullEnrich, Surfe, Prospeo, Hunter, Warmly, Fireflies.
+- **Email/SMS/lifecycle**: Brevo, MoEngage, Kit, MailerLite, Omnisend, Marketo, ActiveCampaign, beehiiv, Courier, Novu, Knock, Intercom.
+- **Payments/billing**: Paddle, RevenueCat, Polar, Square, PayPal, Ramp, Mercury, Brex.
+- **CMS & commerce**: WordPress.com, Webflow, Wix, Contentful, Sanity, DatoCMS, Storyblok, Hygraph, Builder.io, Shopify Storefront, BigCommerce, Saleor, Cloudinary, Frontify, Optimizely, AEM.
+- **Social & creative**: Buffer, Postiz, Typefully, Blotato, Canva, Runway, fal.ai, Replicate, Ideogram, HeyGen, invideo, Figma.
+- **Marketing ops**: Asana, Linear, Atlassian, ClickUp, Smartsheet, Todoist, Coda, Box, Dropbox, Cal.com, Calendly, Typeform, Tally, Make, Pipedream, Miro, Front, Help Scout.
+- **Reviews/experimentation/events**: VWO, Optimizely Experimentation, LaunchDarkly, Birdeye, Zoom, Livestorm, Press Ranger, G2.
+- **Web scraping/browser**: Tavily, Linkup, Jina, ScrapingBee, ScrapeGraphAI, Scrapeless, Olostep, ZenRows, Browserless, Anchor Browser.
+
+Added 24 of the highest-value new tools to the `tools/REGISTRY.md` Tool Index and refreshed the MCP-Enabled quick-index by function. Access-gated servers flagged with **⚠** (paid tier / waitlist / per-account). Verified-negative results recorded so they aren't re-hunted (no MCP as of 2026-07-10: Trustpilot, Capterra, Google Business Profile, PartnerStack, Refersion, Impact.com, Muck Rack, Prowly, Cision, Demio, AppFollow, Framer, Squarespace, Bynder; Proxycurl defunct; Twilio's remote MCP is docs-only).
+
 ### 3.1.1 (2026-07-10) — MCP fact-check corrections
 
 Fact-checked every MCP-server claim against current vendor docs and corrected errors in `tools/mcp/README.md`, `tools/REGISTRY.md`, and the per-tool `tools/integrations/*.md` guides.

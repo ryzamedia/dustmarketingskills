@@ -175,6 +175,30 @@ The columns below show what each tool supports. **MCP** ✓ means an MCP server 
 | phantombuster | LinkedIn Automation | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
 | nimble | Web Data | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
 | quickseo | AI Visibility | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| tavily | Web Research | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| sistrix | SEO | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| se-ranking | SEO | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| contentsquare | Analytics | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| windsor-ai | Ads | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| optmyzr | Ads | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| two-minute-reports | Ads | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| attio | CRM | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| lusha | Data Enrichment | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| warmly | Visitor Identification | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| amplemarket | Sales Engagement | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| fireflies | Revenue Intelligence | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| mailerlite | Email | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| omnisend | Email/SMS | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| cloudinary | DAM | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| runway | Video | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| fal-ai | Image/Video/Audio | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| birdeye | Reviews | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| airtable | Marketing Ops | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| cal-com | Scheduling | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| make | Automation | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| wix | CMS | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| linear | Marketing Ops | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| asana | Marketing Ops | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
 
 **†** = an MCP server exists but is **not a plain remote server you can add in Dust** — it's local/stdio, self-host-only, or marketplace/connector-directory-only (e.g. **Google Ads** = stdio/self-host, read-only; **Clay** and **Introw** = Claude connector-directory). Reach these via a native connector or Composio. Rows marked **—** in the Guide column don't have a dedicated integration guide yet; reach them by the priority order above (native connector → MCP → Composio → Browse/Computer). See [tools/mcp/README.md](mcp/README.md) for the full MCP breakdown — including whether each server is official-remote (addable) vs. local/marketplace-only.
 
@@ -703,21 +727,24 @@ All CLIs follow a consistent pattern:
 
 ## MCP-Enabled Tools
 
-See **[tools/mcp/README.md](mcp/README.md)** for server URLs, auth, exposed tools, and the remote-vs-local distinction. The list below is a quick index — MCP moved fast in 2025–2026 and many vendors shipped official servers.
+The **full categorized catalog (~160 verified servers)** lives in **[tools/mcp/README.md](mcp/README.md)** — server URLs, auth, exposed tools, and the remote-vs-local distinction. Quick index of official-remote servers (addable directly in Dust) by function:
 
-**Official remote MCP servers** (add these directly in Dust):
+- **SEO & search**: semrush, ahrefs, dataforseo, sistrix, se-ranking, serpstat, mangools, serpapi, similarweb, oncrawl, diffbot, tavily, linkup, jina
+- **AI visibility / GEO**: profound, otterly, peec, quickseo, scrunch, rankscale, writesonic
+- **Analytics & BI**: ga4 *(local — use the native connector)*, posthog, mixpanel, amplitude, contentsquare *(Heap/Hotjar)*, statsig, pendo, fullstory, snowplow, matomo, airtable, bigquery, snowflake, databricks, clickhouse, motherduck, metabase, power-bi, looker, airbyte, hightouch
+- **Ads**: meta-ads, windsor-ai, two-minute-reports, polar-analytics, optmyzr, improvado, tiktok-ads ⚠, amazon-ads ⚠
+- **CRM & sales**: hubspot, salesforce, attio, close, pipedrive ⚠, monday, outreach *(Amplify)*, apollo ⚠, zoominfo, amplemarket, lemlist, reply, instantly, smartlead
+- **Enrichment / intent**: lusha, fullenrich, surfe, prospeo, hunter, warmly, truelist; **LinkedIn/web data**: bright-data, apify, horizondatawave, phantombuster, nimble
+- **Email / SMS / lifecycle**: klaviyo, customer-io, resend, brevo, moengage, kit, mailerlite, omnisend, marketo, activecampaign, beehiiv, courier, novu, knock, intercom
+- **Payments / billing**: stripe, paddle, revenuecat, polar, square, paypal, ramp, mercury, brex
+- **CMS & commerce**: wordpress-com, webflow, wix, contentful, sanity, datocms, storyblok, hygraph, builder-io, shopify-storefront, bigcommerce, saleor, cloudinary, frontify, optimizely-cms, aem
+- **Social & creative**: buffer, postiz, typefully, blotato, canva, runway, fal-ai, replicate, ideogram, heygen, invideo, figma
+- **Marketing ops**: asana, linear, atlassian, clickup, smartsheet, todoist, coda, box, dropbox, cal-com, calendly, typeform, tally, make, pipedream, miro, front; notion + slack + google-drive *(native Dust connectors)*
+- **Reviews / experimentation / events**: vwo, optimizely-experimentation, launchdarkly, birdeye, zoom, livestorm, press-ranger ⚠, g2 ⚠
+- **Web scraping / browser**: firecrawl, exa, scrapingbee, scrapegraphai, scrapeless, olostep, zenrows, browserless, anchor-browser
+- **Data / automation glue**: supermetrics, coupler, outreach *(Amplify)*, crossbeam *(Limited Availability)*, zapier, fireflies
 
-- **SEO**: semrush, ahrefs, dataforseo
-- **Analytics**: ga4 *(local server — use the native connector)*, posthog, mixpanel, amplitude
-- **CRM**: hubspot, salesforce
-- **Payments**: stripe
-- **Ads**: meta-ads *(beta; read/write)*
-- **Email/SMS**: klaviyo, customer-io, resend
-- **Prospecting/Enrichment**: apollo *(beta; plan/credit-gated — prefer REST API/Composio)*, zoominfo *(needs SalesOS/Copilot)*, truelist
-- **Web data / LinkedIn**: bright-data, apify, horizondatawave, phantombuster, nimble
-- **Docs/Messaging**: notion, slack *(both also native Dust connectors)*
-- **AI Visibility**: profound, otterly, peec, quickseo, scrunch, rankscale
-- **Data/Automation**: supermetrics, coupler, outreach *(needs Amplify)*, crossbeam *(Limited Availability)*, zapier, exa, firecrawl
+**⚠** = official but access-gated (paid tier, waitlist, or per-account provisioning) — see the catalog for details.
 
 **Community / local / marketplace-only** (no plain remote server to add in Dust — reach via native connector or Composio): **google-ads** (stdio/self-host, read-only), **clay** (Claude connector-directory), **introw** (Claude connector-directory), **mailchimp** (Marketing API community-only; the official MCP is transactional/Mandrill), **google-search-console** (community/local), **linkedin-ads** (third-party only).
 
