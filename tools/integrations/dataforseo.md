@@ -7,7 +7,7 @@ Comprehensive SEO data API for SERP results, keyword research, backlinks, and on
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | SERP, Keywords Data, Backlinks, On-Page, Labs |
-| MCP | - | Not available |
+| MCP | ✓ | Official remote MCP server — see [tools/mcp/README.md](../mcp/README.md) |
 | CLI | ✓ | [dataforseo.js](../clis/dataforseo.js) |
 | SDK | ✓ | Python, TypeScript, PHP, Java, C# |
 

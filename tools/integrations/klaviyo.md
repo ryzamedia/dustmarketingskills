@@ -7,7 +7,7 @@ E-commerce email and SMS marketing platform with profiles, flows, campaigns, seg
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | REST API with JSON:API spec, revision-versioned |
-| MCP | - | Not available |
+| MCP | ✓ | Official remote MCP server — see [tools/mcp/README.md](../mcp/README.md) |
 | CLI | ✓ | [klaviyo.js](../clis/klaviyo.js) |
 | SDK | ✓ | Python, Node.js, Ruby, PHP, Java, C# |
 

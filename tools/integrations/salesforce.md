@@ -7,7 +7,7 @@ Enterprise CRM platform for sales, service, and marketing.
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | REST API, SOAP API, Bulk API |
-| MCP | - | Not available |
+| MCP | ✓ | Official remote MCP server — see [tools/mcp/README.md](../mcp/README.md) |
 | CLI | ✓ | Salesforce CLI (`sf`) |
 | SDK | ✓ | JSforce, simple-salesforce, etc. |
 

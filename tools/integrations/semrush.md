@@ -7,7 +7,7 @@ SEO and competitive analysis platform for keyword research and site audits.
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | Analytics API, Projects API |
-| MCP | - | Not available |
+| MCP | ✓ | Official remote MCP server — see [tools/mcp/README.md](../mcp/README.md) |
 | CLI | - | Not available |
 | SDK | - | API-only |
 

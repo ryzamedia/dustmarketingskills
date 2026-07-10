@@ -7,7 +7,7 @@ Behavior-based messaging platform for email, push, SMS, and in-app.
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | Track API, App API, Journeys API |
-| MCP | - | Not available |
+| MCP | ✓ | Official remote MCP server — see [tools/mcp/README.md](../mcp/README.md) |
 | CLI | - | Not available |
 | SDK | ✓ | JavaScript, iOS, Android, Ruby, Python |
 

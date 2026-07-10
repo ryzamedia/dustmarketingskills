@@ -7,7 +7,7 @@ Advertising platform for Facebook, Instagram, Messenger, and Audience Network.
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | Marketing API for campaigns, audiences, reporting |
-| MCP | - | Not available |
+| MCP | ✓ | Official remote MCP server — see [tools/mcp/README.md](../mcp/README.md) |
 | CLI | - | Not available |
 | SDK | ✓ | Official SDKs for Python, PHP, Node.js |
 

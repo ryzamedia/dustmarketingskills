@@ -7,7 +7,7 @@ SEO toolset for backlink analysis, keyword research, and competitive research.
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | REST API for Site Explorer, Keywords Explorer |
-| MCP | - | Not available |
+| MCP | ✓ | Official remote MCP server — see [tools/mcp/README.md](../mcp/README.md) |
 | CLI | - | Not available |
 | SDK | - | API-only |
 

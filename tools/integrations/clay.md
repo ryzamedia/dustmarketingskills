@@ -7,7 +7,7 @@ Data enrichment and outbound automation platform for building lead lists with wa
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | Tables, People Enrichment, Company Enrichment |
-| MCP | ✓ | [Claude connector](https://claude.com/connectors/clay) |
+| MCP | ~ | MCP exists (`api.clay.com/v3/mcp`) but is **connector-directory only** (Claude/ChatGPT/Codex) — not confirmed addable by plain URL in Dust. Use the Clay REST API or Composio — see [tools/mcp/README.md](../mcp/README.md) |
 | CLI | ✓ | [clay.js](../clis/clay.js) |
 | SDK | - | REST API only |
 

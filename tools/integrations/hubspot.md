@@ -7,7 +7,7 @@ CRM platform for marketing, sales, and customer service.
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | REST API for CRM, Marketing, Sales |
-| MCP | - | Not available |
+| MCP | ✓ | Official remote MCP server — see [tools/mcp/README.md](../mcp/README.md) |
 | CLI | ✓ | `hs` CLI for local development |
 | SDK | ✓ | Official client libraries |
 
