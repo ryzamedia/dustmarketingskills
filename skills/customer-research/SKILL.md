@@ -2,7 +2,7 @@
 name: customer-research
 description: When the user wants to conduct, analyze, or synthesize customer research. Use when the user mentions "customer research," "ICP research," "talk to customers," "analyze transcripts," "customer interviews," "survey analysis," "support ticket analysis," "voice of customer," "VOC," "build personas," "customer personas," "jobs to be done," "JTBD," "what do customers say," "what are customers struggling with," "Reddit mining," "G2 reviews," "review mining," "digital watering holes," "community research," "forum research," "competitor reviews," "customer sentiment," or "find out why customers churn/convert/buy." Use for both analyzing existing research assets AND gathering new research from online sources. For writing copy informed by research, see copywriting. For acting on research to improve pages, see cro.
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Customer Research
@@ -254,6 +254,31 @@ If context is unclear:
 5. **What do you want delivered?** (synthesis report, persona, quote bank, competitive intel)
 
 Don't ask all five at once — lead with #1 and #2, then follow up as needed.
+
+---
+
+## Data & Connectors
+
+Pull and analyze real VOC corpora — transcripts, tickets, reviews, surveys — from whatever's connected, don't just name where to look. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Exa** | official MCP | Neural search across forums/Reddit/communities for VOC language + theme discovery at scale |
+| **Firecrawl** | official MCP | Scrape G2/Capterra/Reddit threads into structured, taggable quote records |
+| **Browserbase** | official MCP | JS-rendered review/community pages Firecrawl can't render |
+| **Gong** | Composio / API / Browse | Mine sales-call & interview transcripts for pains, triggers, objections, verbatim language |
+| **HubSpot / Salesforce** | official MCP / Composio | Win/loss notes, closed-lost reasons, churn segments |
+| **Intercom / Zendesk** | Composio / Browse | Support-conversation mining |
+| **G2 / Trustpilot** | Browse | Review ratings + complaint themes, competitor reviews |
+| **SparkToro** | Browse / Computer | Digital watering holes — where your ICP actually spends time |
+| **Typeform** | Composio / Browse | Raw survey / open-ended responses |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Transcripts / calls** — If **Gong** (or a CRM with call notes) is connected → pull and analyze real transcripts; else ask the user to paste them.
+- **Reviews** — If a scraping MCP (**Firecrawl** / **Browserbase**) is connected → extract G2/Capterra/Trustpilot pages into structured records; else **Web Search** + **Browse** them manually.
+- **Support** — If **Intercom** / **Zendesk** or a CRM (**HubSpot** / **Salesforce**) is connected → mine tickets and closed-lost reasons.
+- **Audience discovery** — If **SparkToro** is available → watering holes; else infer from Reddit/LinkedIn via **Browse**.
+- **Broad VOC** — If **Exa** is connected → fan out neural searches across communities. Always fall back to **Web Search** + **Browse** when no connector exists, and label such data as unverified.
 
 ---
 

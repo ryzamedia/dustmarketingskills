@@ -2,7 +2,7 @@
 name: cold-email
 description: Write B2B cold emails and follow-up sequences that get replies. Use when the user wants to write cold outreach emails, prospecting emails, cold email campaigns, sales development emails, or SDR emails. Also use when the user mentions "cold outreach," "prospecting email," "outbound email," "email to leads," "reach out to prospects," "sales email," "follow-up email sequence," "nobody's replying to my emails," or "how do I write a cold email." Covers subject lines, opening lines, body copy, CTAs, personalization, and multi-touch follow-up sequences. For warm/lifecycle email sequences, see emails. For sales collateral beyond emails, see sales-enablement.
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Cold Email Writing
@@ -146,6 +146,29 @@ The references contain performance data if you need to make informed choices:
 - [frameworks.md](references/frameworks.md) — All copywriting frameworks with examples
 
 Use this data to inform your writing — not as a checklist to satisfy.
+
+---
+
+## Data & Connectors
+
+Writing is the craft; connectors are the layer that actually ships the email, verifies the address, and mines the signal that makes the opener land. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Apollo** | official MCP | Emailer campaigns/sequences + enrich the prospect for signals |
+| **Outreach** | official MCP | Enterprise multi-touch sequence load |
+| **Truelist** | official MCP | Verify each address before send |
+| **HubSpot / Salesforce** | official MCP / Composio | Prior touches, record owner, account context |
+| **Instantly** | API / Browse | Campaigns at scale + built-in warmup |
+| **Lemlist** | API / Browse | Personalized cold campaigns |
+| **Smartlead** | API | Sending + warmup |
+| **RB2B** | Browse | Warm-intent trigger from de-anonymized visitors |
+| **Web Search / Browse / Computer** | built-in | Research the prospect for the personalized opener |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Send & sequence** — If **Instantly** is connected → create the campaign + add leads. Elif **Lemlist** → load the sequence. Elif **Apollo** MCP → build the emailer campaign/sequence. Elif **Outreach** → load the sequence. Else deliver the copy as files for the user to paste into their sender.
+- **Verify** — If **Truelist** is connected → validate every address before send. Else warn the user to verify deliverability first — bounces wreck sender reputation.
+- **Personalize** — If **Apollo / Clay / RB2B** is connected → pull the signal (role, funding, tech stack, visit intent) that anchors the opener. Else **Web Search** + **Browse** the prospect's LinkedIn profile and site.
 
 ---
 

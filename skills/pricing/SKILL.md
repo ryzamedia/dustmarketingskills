@@ -2,7 +2,7 @@
 name: pricing
 description: "When the user wants help with pricing decisions, packaging, or monetization strategy. Also use when the user mentions 'pricing,' 'pricing tiers,' 'freemium,' 'free trial,' 'packaging,' 'price increase,' 'value metric,' 'Van Westendorp,' 'willingness to pay,' 'monetization,' 'how much should I charge,' 'my pricing is wrong,' 'pricing page,' 'annual vs monthly,' 'per seat pricing,' or 'should I offer a free plan.' Use this whenever someone is figuring out what to charge or how to structure their plans. For in-app upgrade screens, see paywalls. For offer construction (bonuses, guarantees, value framing, naming) on services/courses/coaching/high-ticket B2B, see offers."
 metadata:
-  version: 2.0.1
+  version: 2.1.0
 ---
 
 # Pricing Strategy
@@ -28,6 +28,7 @@ Gather this context (ask if not provided):
 - How do competitors price?
 
 ### 3. Current Performance
+**Pull these from a connected billing tool before asking** — if **Stripe** (or **Paddle** via Composio) is wired up, read ARPU, conversion, churn, and tier mix directly and only ask the user for what no connected source can answer (see **Data & Connectors** below).
 - What's your current conversion rate?
 - What's your ARPU and churn rate?
 - Any feedback on pricing from customers/prospects?
@@ -206,6 +207,28 @@ Identifies which features customers value most:
 - [ ] Set price points based on research
 - [ ] Created annual discount strategy
 - [ ] Planned enterprise/custom tier
+
+---
+
+## Data & Connectors
+
+Ground every pricing call in the account's real revenue data, not user-supplied estimates: Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Stripe** | native connector / official MCP | ARPU, MRR, tier mix, conversion, churn, annual/monthly split, discount usage — the authoritative revenue baseline |
+| **Paddle** | Composio / API | Same metrics for Paddle-billed SaaS, plus tax handling |
+| **GA4** | native connector | Pricing-page traffic, funnel, and monthly/annual toggle behavior |
+| **Amplitude / Mixpanel / PostHog** | official MCP | Feature usage by tier to validate the value metric and packaging |
+| **Typeform** | Composio / API / Browse | Field Van Westendorp / MaxDiff willingness-to-pay surveys |
+| **ProfitWell / Baremetrics** | API | Price-sensitivity and expansion metrics beyond raw billing |
+
+**Adaptive data pull** — pull, don't ask, when a source is connected; degrade gracefully:
+- **Revenue metrics** — If **Stripe** is connected → pull ARPU, tier mix, conversion, churn, and discount usage directly rather than asking. Elif **Paddle** (via Composio) → pull the same for Paddle-billed revenue. Else fall back to the intake questions.
+- **Pricing-page behavior** — If **GA4** is connected → read the pricing-page funnel and monthly/annual toggle behavior. Else Browse the page and ask for the numbers.
+- **Value metric validation** — If **Amplitude / Mixpanel / PostHog** is connected → pull per-tier feature usage to confirm the value metric scales with value delivered. Else infer from intake and label it an assumption.
+- **Willingness to pay** — When no WTP data exists → run Van Westendorp / MaxDiff via a **Typeform** connector. Layer **ProfitWell / Baremetrics** for price-sensitivity and expansion metrics when connected.
+- **Fall back to intake questions only for what no connected tool can answer** — and mark any modeled figure as an estimate, not a measurement.
 
 ---
 

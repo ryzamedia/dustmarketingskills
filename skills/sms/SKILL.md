@@ -2,12 +2,14 @@
 name: sms
 description: When the user wants to plan, build, or optimize SMS or MMS marketing — including welcome flows, abandoned cart texts, post-purchase, win-back, promotional sends, or transactional/auth SMS. Also use when the user mentions "SMS marketing," "text message campaigns," "SMS sequence," "SMS automation," "abandoned cart text," "post-purchase SMS," "Klaviyo SMS," "Postscript," "Attentive," "Twilio," "A2P 10DLC," "TCPA," "SMS compliance," "short code," "toll-free SMS," "MMS campaign," "should I do SMS," or "SMS vs email." For email sequences, see emails. For SMS copy framing, see copywriting. For opt-in popups that capture phone numbers, see popups.
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # SMS Marketing
 
 You are an expert in SMS and MMS marketing for direct-to-consumer brands, mobile apps, and SaaS products with high-engagement use cases. Your goal is to help plan, build, and optimize SMS programs that drive measurable revenue or activation while staying fully compliant with TCPA and carrier rules.
+
+When an SMS platform is connected, pull the account's real numbers — list size, opt-in/opt-out rates, flow performance, revenue per send — before advising; see **Data & Connectors** below for the detect-and-pull cascade.
 
 ## Before Starting
 
@@ -221,9 +223,9 @@ Optional Send 2 (24h later): Reminder + best-seller showcase
 | **Postscript** | DTC Shopify ecom, deep integration | - | $$ |
 | **Attentive** | Mid-market+ ecom, full-service | - | $$$ |
 | **Twilio** | Custom builds, transactional, devs | - | $ (raw API) |
-| **Brevo SMS** | EU-focused, email + SMS combo | ✓ | $ |
+| **Brevo SMS** | EU-focused, email + SMS combo | - | $ |
 | **SimpleTexting** | SMB, simple needs, ease of use | - | $ |
-| **Customer.io** | Behavior-based automation + SMS | - | $$ |
+| **Customer.io** | Behavior-based automation + SMS | ✓ | $$ |
 
 **Quick picks**:
 - Already on Klaviyo for email + DTC/ecom → **Klaviyo SMS** (no second platform to learn)
@@ -309,20 +311,33 @@ Keep recommendations specific. Don't say "send an SMS at the right time" — say
 
 ---
 
-## Tool Integrations
+## Data & Connectors
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md). Key SMS tools:
+If an SMS platform is connected, pull the account's real numbers before advising — never quote a benchmark as if it were this account's data. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
 
-| Tool | Best For | MCP | Guide |
-|------|----------|:---:|-------|
-| **Klaviyo** | E-commerce email + SMS combined | ✓ | [klaviyo.md](../../tools/integrations/klaviyo.md) |
-| **Postscript** | Shopify DTC SMS, deepest Shopify integration | - | [postscript.md](../../tools/integrations/postscript.md) |
-| **Attentive** | Mid-market+ DTC SMS, full-service | - | [attentive.md](../../tools/integrations/attentive.md) |
-| **Twilio** | Raw API for custom builds, transactional, dev-first | - | [twilio.md](../../tools/integrations/twilio.md) |
-| **Plivo** | Twilio alternative, lower per-send cost | - | [plivo.md](../../tools/integrations/plivo.md) |
-| **AudienceTap** | AI-forward DTC, on-pack QR opt-in | - | [audiencetap.md](../../tools/integrations/audiencetap.md) |
-| **Brevo** | EU email + SMS, SMB-friendly | ✓ | [brevo.md](../../tools/integrations/brevo.md) |
-| **Customer.io** | Behavior-based SMS automation | - | [customer-io.md](../../tools/integrations/customer-io.md) |
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Klaviyo** | official MCP | SMS list size, opt-in/opt-out %, flow performance, RPS |
+| **Postscript** | API / Browse | Shopify flow + list + revenue |
+| **Attentive** | API / Browse | Flow + list performance |
+| **Twilio** | API / Browse | Delivery + 10DLC registration status |
+| **Plivo** | API | Send / delivery data |
+| **Customer.io** | official MCP | Behavioral SMS automation |
+| **Brevo** | Composio / API | EU email + SMS |
+| **GA4** | native connector | SMS attribution, revenue per send |
+
+**Postscript**, **Attentive**, and **AudienceTap** are API-only — no remote MCP or Composio server.
+
+**Adaptive data pull** — pull the connected platform's real numbers before advising:
+- If **Klaviyo** is connected → pull list size, opt-in/opt-out %, flow performance, and RPS.
+- Elif **Postscript** → pull Shopify flow + revenue.
+- Elif **Attentive** → pull list + campaign performance.
+- Elif **Twilio / Plivo** → pull delivery/error logs + 10DLC registration status.
+- Elif **Customer.io / Brevo** → pull automation metrics.
+- Else → advise from the benchmark ranges in this skill, labeled as benchmarks, not measurements.
+- **Attribution** — If **GA4** is connected → pull SMS-tagged attribution (`utm_medium=sms`) for real revenue per send, and chart it with **Data Visualization**.
+
+When no connector or MCP exists for a platform, use **Browse / Computer** to read reports in its web app. Behavioral entry and scheduled sends are orchestrated with Dust **Triggers** (webhooks and schedules).
 
 ---
 

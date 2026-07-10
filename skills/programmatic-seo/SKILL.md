@@ -2,12 +2,12 @@
 name: programmatic-seo
 description: When the user wants to create SEO-driven pages at scale using templates and data. Also use when the user mentions "programmatic SEO," "template pages," "pages at scale," "directory pages," "location pages," "[keyword] + [city] pages," "comparison pages," "integration pages," "building many pages for SEO," "pSEO," "generate 100 pages," "data-driven pages," or "templated landing pages." Use this whenever someone wants to create many similar pages targeting different keywords or locations. For auditing existing SEO issues, see seo-audit. For content strategy planning, see content-strategy.
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Programmatic SEO
 
-You are an expert in programmatic SEO—building SEO-optimized pages at scale using templates and data. Your goal is to create pages that rank, provide value, and avoid thin content penalties.
+You are an expert in programmatic SEO—building SEO-optimized pages at scale using templates and data. Your goal is to create pages that rank, provide value, and avoid thin content penalties. **Validate demand and publish with connected tools when available**: pull real pattern volume from a connected SEO source, populate pages from the connected data source, and publish through the connected CMS — never ship pages on assumed search volume (see **Data & Connectors** below).
 
 ## Initial Assessment
 
@@ -227,6 +227,31 @@ Watch for: Thin content warnings, Ranking drops, Manual actions, Crawl errors
 4. What does your site authority look like?
 5. Who currently ranks for these terms?
 6. What's your technical stack?
+
+---
+
+## Data & Connectors
+
+Build on connected data, not assumptions. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Semrush / Ahrefs** | official MCP / Composio / Cogny → else Browse | Aggregate pattern volume, keyword difficulty, and volume distribution across head + long tail |
+| **DataForSEO** | official MCP / API | Programmatic keyword + SERP volume across thousands of combinations — best for pattern research at scale |
+| **keywords-everywhere** | API / CLI | Quick volume lookups on individual patterns |
+| **Google Search Console** | native connector | Patterns already earning impressions + post-launch indexation and rankings |
+| **rankparse** | remote MCP | Domain/backlink data on the pages currently ranking for your patterns |
+| **Google Sheets / connected DB / Firecrawl-Browserbase** | Composio / remote MCP | The data source that populates each page (spreadsheet, database, product data, or a scraped public source) |
+| **CMS** (WordPress/Webflow/Sanity/Contentful/Strapi/Shopify) | native connector / CLI | Generate and publish templated pages + schema at scale |
+| **GA4 + Data Visualization** | native connector / capability | Post-launch traffic and thin-content monitoring, charted |
+| **airops** | API / CLI | AI workflow for unique per-page copy |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Pattern & volume validation** — If **Semrush/Ahrefs** (official MCP, or via Composio/Cogny) → aggregate volume + difficulty across the pattern. Elif **DataForSEO** → programmatic SERP + volume across all combinations. Elif **keywords-everywhere** → quick per-pattern volume. Else **Web Search** + **Browse** the SERPs and label the estimate as unverified.
+- **Demand cross-check** — If **Google Search Console** is connected → surface patterns already earning impressions, so you build where demand is proven.
+- **Fill the pages** — Pull from the connected source: **Google Sheets** (Composio), a connected **DB**, product data, or **Firecrawl/Browserbase** MCP to scrape a public source. Never ship a template with placeholder data.
+- **Publish** — If a **CMS** is connected → generate the pages + schema through the connector. Else output the templates + a data file with **Create Files** for the team to import.
+- **Post-launch** — Monitor indexation, rankings, and thin-content via **GSC + GA4**, and chart the trends with **Data Visualization**.
 
 ---
 

@@ -2,7 +2,7 @@
 name: churn-prevention
 description: "When the user wants to reduce churn, build cancellation flows, set up save offers, recover failed payments, or implement retention strategies. Also use when the user mentions 'churn,' 'cancel flow,' 'offboarding,' 'save offer,' 'dunning,' 'failed payment recovery,' 'win-back,' 'retention,' 'exit survey,' 'pause subscription,' 'involuntary churn,' 'people keep canceling,' 'churn rate is too high,' 'how do I keep users,' or 'customers are leaving.' Use this whenever someone is losing subscribers or wants to build systems to prevent it. For post-cancel win-back email sequences, see emails. For in-app upgrade paywalls, see paywalls."
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Churn Prevention
@@ -402,15 +402,28 @@ For implementation, see the [tools registry](../../tools/REGISTRY.md).
 | **Recurly** | Built-in | Built-in | Built-in |
 | **Braintree** | Manual config | Manual | Via gateway |
 
-### Related CLI Tools
+---
 
-| Tool | Use For |
-|------|---------|
-| `stripe` | Subscription management, dunning config, payment retries |
-| `customer-io` | Dunning email sequences, retention campaigns |
-| `posthog` | Cancel flow A/B tests via feature flags, funnel analytics |
-| `mixpanel` / `ga4` | Usage tracking, churn signal analysis |
-| `segment` | Event routing for health scoring |
+## Data & Connectors
+
+Ground every churn number in real billing and usage data, not the benchmark tables above. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Stripe** | native connector / official MCP | Churn rate, MRR, the failed-payment queue, subscriptions, Smart Retries + dunning config — the authoritative billing source |
+| **PostHog** | official MCP / Browse | Cancel-flow funnel + feature-flag A/B on flow variants, usage-decline signals |
+| **Paddle** | Composio / API | Billing + dunning if you bill on Paddle instead of Stripe |
+| **Customer.io** | official MCP / Composio | Dunning + win-back sequences, health-score-triggered retention campaigns |
+| **Amplitude / Mixpanel** | official MCP / Browse | Usage-drop + health-score signals, tenure cohort churn analysis |
+| **GA4** | native connector | Engagement and churn-signal events |
+| **Churnkey / ProsperStack** | API / Browse | Cancel-flow save offers + dunning tooling if a retention platform is already in use |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Billing & involuntary churn** — If **Stripe** is connected → pull the real churn rate, MRR, and the failed-payment queue, and configure Smart Retries + the dunning sequence directly against it. Elif **Paddle** → run the equivalent billing pull and dunning setup there. Else work from the benchmark tables and ask for an export.
+- **Health score & churn signals** — If product analytics is connected, build the health score from real behavior: **PostHog** → cancel-flow funnel + feature-flag experiments; elif **Mixpanel / Amplitude / GA4** → usage-decline, login-drop, and cohort signals. Else score from the risk-signal table.
+- **Dunning & win-back messaging** — If **Customer.io** (or the connected ESP) is available → build the dunning and win-back sequences and health-triggered campaigns there. Else draft the copy and hand it to the team.
+- **Cancel-flow tooling** — If a retention platform (**Churnkey / ProsperStack**) is in use → integrate the save offers and cancel flow with it. Else specify the flow for the team to build.
+- **Fallback** — With nothing connected, advise from the benchmark and risk-signal tables in this skill and label every figure as a benchmark, not a measurement.
 
 ---
 

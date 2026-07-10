@@ -2,7 +2,7 @@
 name: marketing-ideas
 description: "When the user needs marketing ideas, inspiration, or strategies for their SaaS or software product. Also use when the user asks for 'marketing ideas,' 'growth ideas,' 'how to market,' 'marketing strategies,' 'marketing tactics,' 'ways to promote,' 'ideas to grow,' 'what else can I try,' 'I don't know how to market this,' 'brainstorm marketing,' or 'what marketing should I do.' Use this as a starting point whenever someone is stuck or looking for inspiration on how to grow. For specific channel execution, see the relevant skill (ads, social, emails, etc.)."
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Marketing Ideas for SaaS
@@ -155,6 +155,15 @@ When recommending ideas, provide for each:
 2. What's your marketing budget and team size?
 3. What have you already tried that worked or didn't?
 4. What competitor tactics do you admire?
+
+---
+
+## Data & Connectors
+
+Idea selection is **judgment** — the right shortlist depends on stage, budget, and what's already been tried, which live in the **Product Context / Agent Memory**. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+- **Tailor the shortlist** — read the **Product Context / Agent Memory** for stage, budget, and prior attempts first. Optionally, if **GA4** (native connector) or **Stripe** (official MCP) is connected → read the current channel mix and stage signal to bias recommendations toward the gaps. Else ask.
+- Execution data lives in the per-channel skills each idea hands off to (see **Related Skills** and the idea references).
 
 ---
 

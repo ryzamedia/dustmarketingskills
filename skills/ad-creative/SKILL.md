@@ -2,7 +2,7 @@
 name: ad-creative
 description: "When the user wants to generate, iterate, or scale ad creative — headlines, descriptions, primary text, or full ad variations — for any paid advertising platform. Also use when the user mentions 'ad copy variations,' 'ad creative,' 'generate headlines,' 'RSA headlines,' 'bulk ad copy,' 'ad iterations,' 'creative testing,' 'ad performance optimization,' 'write me some ads,' 'Facebook ad copy,' 'Google ad headlines,' 'LinkedIn ad text,' 'static ads,' 'static ad concepts,' 'ad templates,' 'iMessage ad,' 'chat reveal ad,' 'text message ad,' 'fake DM ad,' or 'I need more ad variations.' Use this whenever someone needs to produce ad copy at scale or iterate on existing ads. For campaign strategy and targeting, see ads. For landing page copy, see copywriting."
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Ad Creative
@@ -369,16 +369,18 @@ For large-scale creative production (Anthropic's growth team generates 100+ vari
 
 ---
 
-## Tool Integrations
+## Data & Connectors
 
-For pulling performance data and managing campaigns, see the [tools registry](../../tools/REGISTRY.md).
+For pulling performance data and managing campaigns, see the [tools registry](../../tools/REGISTRY.md). Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
 
-| Platform | How to reach it from Dust | Guide |
-|----------|---------------------------|-------|
-| **Google Ads** | **Google Ads connector** (native), or a **remote MCP server** | [google-ads.md](../../tools/integrations/google-ads.md) |
-| **Meta Ads** | **Composio** (OAuth-heavy — no native server) | [meta-ads.md](../../tools/integrations/meta-ads.md) |
+| Platform | Reach from Dust | Guide |
+|----------|-----------------|-------|
+| **Google Ads** | official MCP (read-only) / native connector | [google-ads.md](../../tools/integrations/google-ads.md) |
+| **Meta Ads** | official MCP (Composio for write ops) | [meta-ads.md](../../tools/integrations/meta-ads.md) |
 | **LinkedIn Ads** | **Composio** | [linkedin-ads.md](../../tools/integrations/linkedin-ads.md) |
 | **TikTok Ads** | **Composio** | [tiktok-ads.md](../../tools/integrations/tiktok-ads.md) |
+
+**Adaptive data pull** — If the ad platform is connected (Google Ads/Meta official MCP, LinkedIn/TikTok via Composio) → pull ad-level performance for the last 30 days and chart with **Data Visualization**. Elif the account is reachable → use **Computer** to read the ads manager. Else ask the user to attach a CSV export.
 
 ### Workflow: Pull Data, Analyze, Generate
 

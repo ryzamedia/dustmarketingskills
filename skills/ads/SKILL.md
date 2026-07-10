@@ -2,7 +2,7 @@
 name: ads
 description: "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the user mentions 'PPC,' 'paid media,' 'ROAS,' 'CPA,' 'ad campaign,' 'retargeting,' 'audience targeting,' 'Google Ads,' 'Facebook ads,' 'LinkedIn ads,' 'ad budget,' 'cost per click,' 'ad spend,' 'should I run ads,' 'ABM,' 'account-based marketing,' 'B2B ads,' 'lead quality,' 'negative keywords,' 'Performance Max,' 'thought leader ads,' or 'when should I kill an ad.' Use this for campaign strategy, audience targeting, bidding, and optimization. For bulk ad creative generation and iteration, see ad-creative. For landing page optimization, see cro."
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Paid Ads
@@ -470,18 +470,19 @@ When the user requests Google Ads RSAs, load [references/rsa-output-spec.md](ref
 
 ---
 
-## Tool Integrations
+## Data & Connectors
 
-For the full platform → Dust-access mapping, see the [tools registry](../../tools/REGISTRY.md). How to reach each ad platform from a Dust agent:
+For the full platform → Dust-access mapping, see the [tools registry](../../tools/REGISTRY.md). Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
 
-| Platform | Best For | How to reach it from Dust | Guide |
-|----------|----------|---------------------------|-------|
-| **Google Ads** | Search intent, high-intent traffic | Native **Google Ads connector** | [google-ads.md](../../tools/integrations/google-ads.md) |
-| **Meta Ads** | Demand gen, visual products, B2C | **Composio** or a **remote MCP server** | [meta-ads.md](../../tools/integrations/meta-ads.md) |
-| **LinkedIn Ads** | B2B, job title targeting | **Composio** or a **remote MCP server** | [linkedin-ads.md](../../tools/integrations/linkedin-ads.md) |
-| **TikTok Ads** | Younger demographics, video | **Composio** or a **remote MCP server** | [tiktok-ads.md](../../tools/integrations/tiktok-ads.md) |
+| Platform | Best For | Reach from Dust | Guide |
+|----------|----------|-----------------|-------|
+| **Google Ads** | Search intent, high-intent traffic | official MCP (read-only) / native connector | [google-ads.md](../../tools/integrations/google-ads.md) |
+| **Meta Ads** | Demand gen, visual products, B2C | official MCP (Composio for write ops) | [meta-ads.md](../../tools/integrations/meta-ads.md) |
+| **LinkedIn Ads** | B2B, job title targeting | **Composio** | [linkedin-ads.md](../../tools/integrations/linkedin-ads.md) |
+| **TikTok Ads** | Younger demographics, video | **Composio** | [tiktok-ads.md](../../tools/integrations/tiktok-ads.md) |
+| **Twitter/X Ads** | Tech audiences, thought leadership | **Browse / Computer** (no API) | — |
 
-When no connector or MCP server is available for a platform, use **Computer** to operate its ads manager directly (read reports, adjust budgets, pull creative). For tracking setup, use the **GA4 connector** and see [references/conversion-tracking.md](references/conversion-tracking.md), [ga4.md](../../tools/integrations/ga4.md), [segment.md](../../tools/integrations/segment.md).
+**Adaptive data pull** — If a platform is connected (Google Ads/Meta official MCP, LinkedIn/TikTok via Composio) → pull ad-level spend, CPA, and ROAS directly and chart with **Data Visualization**. Elif no connector but the account is accessible → use **Computer** to operate the ads manager (read reports, adjust budgets, pull creative). Else advise generically and ask the user for a CSV export. For tracking setup, use the **GA4 connector** and see [references/conversion-tracking.md](references/conversion-tracking.md), [ga4.md](../../tools/integrations/ga4.md), [segment.md](../../tools/integrations/segment.md).
 
 ---
 

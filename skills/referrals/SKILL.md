@@ -2,12 +2,14 @@
 name: referrals
 description: "When the user wants to create, optimize, or analyze a referral program, affiliate program, or word-of-mouth strategy. Also use when the user mentions 'referral,' 'affiliate,' 'ambassador,' 'word of mouth,' 'viral loop,' 'refer a friend,' 'partner program,' 'referral incentive,' 'how to get referrals,' 'customers referring customers,' or 'affiliate payout.' Use this whenever someone wants existing users or partners to bring in new customers. For launch-specific virality, see launch."
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Referral & Affiliate Programs
 
 You are an expert in viral growth and referral marketing. Your goal is to help design and optimize programs that turn customers into growth engines.
+
+When analyzing or optimizing an existing program, pull the real numbers from whatever referral, affiliate, or payment tool is connected before advising — a diagnosis grounded in the program's own conversion, commission, and referred-customer data beats one built from benchmarks.
 
 ## Before Starting
 
@@ -233,19 +235,26 @@ They get [their reward] too.
 
 ---
 
-## Tool Integrations
+## Data & Connectors
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md). Key tools for referral programs:
+Pull real program numbers before advising, not benchmarks. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement. Per-tool guides live in `tools/integrations/` (see the [tools registry](../../tools/REGISTRY.md)).
 
-| Tool | Best For | Guide |
-|------|----------|-------|
-| **Rewardful** | Stripe-native affiliate programs | [rewardful.md](../../tools/integrations/rewardful.md) |
-| **Tolt** | SaaS affiliate programs | [tolt.md](../../tools/integrations/tolt.md) |
-| **Mention Me** | Enterprise referral programs | [mention-me.md](../../tools/integrations/mention-me.md) |
-| **Dub.co** | Link tracking and attribution | [dub-co.md](../../tools/integrations/dub-co.md) |
-| **Stripe** | Payment processing (for commission tracking) | [stripe.md](../../tools/integrations/stripe.md) |
-| **Introw** | Channel partner programs with tiers, deal registration, QBRs | [introw.md](../../tools/integrations/introw.md) |
-| **PartnerStack** | Enterprise partner and affiliate programs | [partnerstack.md](../../tools/integrations/partnerstack.md) |
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Stripe** | native connector / official MCP | Commission reconciliation, referred-customer LTV/churn |
+| **Introw** | official MCP | Partner pipeline, tiers, deal registration |
+| **Dub.co** | API / Browse | Link-level referral attribution |
+| **Rewardful** | API / Browse (no MCP) | Referrers, conversions, commissions |
+| **Tolt** | API / Browse | Affiliate metrics |
+| **PartnerStack** | API / Composio | Enterprise partner metrics |
+| **Mention Me** | API / Browse | Enterprise referral metrics |
+| **GA4** | native connector | Referral-source traffic |
+
+**Adaptive data pull** — for the analyze/optimize path, reconcile the real program before recommending changes, degrade gracefully:
+- **Program performance** — If **Rewardful** is connected → referrers, conversions, commissions. Elif **Tolt** → affiliate metrics. Elif **PartnerStack** → partner performance. Elif **Mention Me** → referral metrics (API, or Browse the dashboard).
+- **Commissions & referred-customer value** — If **Stripe** is connected → reconcile commissions and measure referred-customer LTV/churn vs. other channels.
+- **Attribution** — If **Dub.co** is connected → link-level referral attribution. If **GA4** is connected → referral-source traffic.
+- **Else** — advise from the benchmarks in [references/program-examples.md](references/program-examples.md) and set up tracking first.
 
 ---
 

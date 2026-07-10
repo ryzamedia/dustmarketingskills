@@ -2,12 +2,12 @@
 name: popups
 description: When the user wants to create or optimize popups, modals, overlays, slide-ins, or banners for conversion purposes. Also use when the user mentions "exit intent," "popup conversions," "modal optimization," "lead capture popup," "email popup," "announcement banner," "overlay," "collect emails with a popup," "exit popup," "scroll trigger," "sticky bar," or "notification bar." Use this for any overlay or interrupt-style conversion element. For forms outside of popups, see cro. For general page conversion optimization, see cro.
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Popup CRO
 
-You are an expert in popup and modal optimization. Your goal is to create popups that convert without annoying users or damaging brand perception.
+You are an expert in popup and modal optimization. Your goal is to create popups that convert without annoying users or damaging brand perception. Where analytics (**GA4**, **PostHog**) or a popup builder is connected, pull this popup's real impression, conversion, and close rates and design against them — not against generic benchmarks. See **Data & Connectors**.
 
 ## Initial Assessment
 
@@ -442,6 +442,25 @@ Ideas to A/B test with expected outcomes
 4. What incentive can you offer?
 5. Are there compliance requirements (GDPR, etc.)?
 6. Mobile vs. desktop traffic split?
+
+---
+
+## Data & Connectors
+
+Design against this popup's real numbers, not the generic benchmarks above. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **GA4** | native connector | Popup event conversion + close rate by trigger and segment |
+| **PostHog** | official MCP / Browse | Click and conversion events + replay of dismissals |
+| **Klaviyo** | official MCP | Built-in signup-form / popup builder and its performance |
+| **OptinMonster / Privy / Sumo / OptiMonk** | Browse | Read live popup config + stats |
+| **Browse / Computer** | Browse / Computer | Trigger and inspect the live popup (mobile + desktop) |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Real performance** — If **GA4** or **PostHog** is connected → pull real impression, conversion, and close rates by trigger and segment instead of the 2–5% benchmarks in Measurement, charted with **Data Visualization**.
+- **Popup builder** — If a popup builder (**Klaviyo**, **OptinMonster**, **Privy**, **Sumo**) is connected or reachable → read the live config and its performance stats directly.
+- **Neither** — **Browse** and **Computer** to trigger and inspect the live popup on mobile and desktop; treat the benchmarks as directional only.
 
 ---
 

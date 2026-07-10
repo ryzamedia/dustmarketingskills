@@ -2,12 +2,12 @@
 name: competitor-profiling
 description: "When the user wants to research, profile, or analyze competitors from their URLs. Also use when the user mentions 'competitor profile,' 'competitor research,' 'competitor analysis,' 'profile this competitor,' 'analyze competitor,' 'competitive intelligence,' 'competitor deep dive,' 'who are my competitors,' 'competitor landscape,' 'competitor dossier,' 'competitive audit,' or 'research these competitors.' Input is a list of competitor URLs. Output is structured competitor profile markdown files. For creating comparison/alternative pages from profiles, see competitors. For sales-specific battle cards, see sales-enablement."
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Competitor Profiling
 
-You are an expert competitive intelligence analyst. Your goal is to take a list of competitor URLs and produce comprehensive, structured competitor profile documents by combining what you read from their live sites with SEO and market data.
+You are an expert competitive intelligence analyst. Your goal is to take a list of competitor URLs and produce comprehensive, structured competitor profile documents by combining what you read from their live sites with SEO and market data. Pull from whatever is connected — a SEO-data MCP, Similarweb, a scraping MCP, a CRM — before falling back to public estimates, and label anything you couldn't measure. See **Data & Connectors** below for the reach map.
 
 ## Initial Assessment
 
@@ -355,6 +355,30 @@ Profiles are snapshots. When updating:
 - Scan changelog for product changes
 - Update the "Generated" date
 - Note what changed since last profile in a `## Change Log` section at the bottom
+
+---
+
+## Data & Connectors
+
+Build profiles from **real data**, not assumptions. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **DataForSEO / Ahrefs / Semrush** | official MCP / Composio → else Browse | Backlinks, domain authority, ranked keywords, organic traffic, competitor discovery |
+| **Firecrawl** | official MCP | Map the site + pull clean page content (homepage, pricing, features) |
+| **Browserbase** | official MCP | JS-rendered pricing/feature pages Firecrawl can't parse (renders + interacts) |
+| **Similarweb** | Browse (API, no MCP) | Traffic estimates, traffic sources, top pages — fills the template's traffic fields |
+| **Exa** | official MCP | `findSimilar` to surface competitors the user hasn't named |
+| **G2 / Trustpilot** | Browse | Review ratings + praise/complaint themes |
+| **HubSpot / Salesforce** | native connector / Composio | Internal win/loss notes — deals lost to or won from this competitor |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **SEO & market metrics** — If a SEO-data MCP is connected (**DataForSEO**, or an **Ahrefs/Semrush** connector via official MCP or Composio) → pull backlinks, ranked keywords, traffic, and competitor overlap. Else **Web Search** and **Browse** public sources and label the figures as estimates.
+- **Traffic & audience** — If **Similarweb** is connected → pull traffic estimates, sources, and top pages for the template's traffic fields. Else use public estimators via **Browse** and label them as estimates.
+- **Page extraction** — Prefer **Firecrawl** for the site map + clean content. Escalate to **Browserbase** when a page needs JS rendering or interaction (dynamic pricing, gated features) that Firecrawl can't parse. Fall back to **Browse** page-by-page.
+- **Competitor discovery** — If **Exa** is connected → `findSimilar` on the user's and rivals' domains to surface adjacent competitors they haven't named. Else lean on **DataForSEO** competitor-domain data.
+- **Reviews** — **Browse** G2, Capterra, Trustpilot, and Product Hunt for ratings and complaint themes.
+- **Internal intel** — If **HubSpot/Salesforce** is connected → pull win/loss reasons and deals involving this competitor to ground the Competitive Implications section.
 
 ---
 

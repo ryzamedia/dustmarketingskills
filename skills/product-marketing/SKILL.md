@@ -2,7 +2,7 @@
 name: product-marketing
 description: "When the user wants to create or update their product marketing context document. Also use when the user mentions 'product context,' 'marketing context,' 'set up context,' 'positioning,' 'who is my target audience,' 'describe my product,' 'ICP,' 'ideal customer profile,' or wants to avoid repeating foundational information across marketing tasks. Use this at the start of any new project before using other marketing skills — it produces a **Product Context** knowledge item (and stores the essentials in Agent Memory) that all other marketing skills reference for product, audience, and positioning."
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Product Marketing Context
@@ -12,6 +12,8 @@ You help users create and maintain a **Product Context** — the foundational po
 On Dust, the Product Context lives in two places:
 - As a **knowledge item** attached to your marketing agents — a document in a Dust Space, a connected Notion/Google Doc, or an uploaded file — that any skill can search.
 - In **Agent Memory**, for the load-bearing essentials (one-liner, category, ICP, top differentiators, brand voice, primary conversion action), so an agent recalls them automatically in every conversation.
+
+The Product Context also records a **Connected Data Sources** inventory (Section 13) — which analytics, CRM, billing, SEO, and other tools are actually wired up to your marketing agents, and how each is reached (native connector, MCP, Composio, or Browse). This is the load-bearing input for every other skill: instead of re-asking "do you have Search Console?" or guessing, a skill reads this inventory and adapts — pulling real data where a tool is connected, falling back to Browse/Web Search where it isn't. Keep it current as you connect or remove tools.
 
 ## Workflow
 
@@ -27,6 +29,7 @@ First, check whether a Product Context already exists: look for a **Product Cont
 **If it doesn't exist, offer two options:**
 
 1. **Auto-draft from what Dust can already see** (recommended): Use **Browse** to read the product's website (home, product, pricing, about pages), **Web Search** for how the market and competitors describe the category, and any connected knowledge (Notion, Google Drive, past campaigns). Draft a V1 of the context document. The user then reviews, corrects, and fills gaps. This is faster than starting from scratch.
+   - **Pull from connected data sources where they exist.** If a **CRM** (HubSpot/Salesforce) is connected, pull the real ICP, closed-won segments, and recurring objections. If **GA4** or **Stripe** is connected, fill the primary conversion action and current metrics with real numbers instead of "if known." If **reviews or call transcripts** are reachable (G2/Trustpilot via Browse, Gong via connector), harvest verbatim customer language. If **SparkToro** is available, populate channels. Note every source you touch — it seeds Section 13.
 
 2. **Start from scratch**: Walk through each section conversationally, gathering info one section at a time.
 
@@ -126,6 +129,24 @@ The JTBD Four Forces:
 - Key conversion action (what you want people to do)
 - Current metrics (if known)
 
+### 13. Connected Data Sources
+
+An inventory of which marketing tools are actually wired up to the agent, so every other skill can pull real data instead of guessing. For each category, record the connected tool (or "none") and **how it's reached** (native connector / MCP / Composio / Browse). Determine this by checking which connectors and MCP servers are attached to the agent, and confirm with the user.
+
+Capture, at minimum:
+- **Analytics**: GA4 / Mixpanel / Amplitude / PostHog / Plausible — for funnels, conversion, retention
+- **SEO**: Google Search Console / Semrush / Ahrefs / DataForSEO — for rankings, keywords, backlinks
+- **CRM**: HubSpot / Salesforce / Close — for pipeline, closed-won, objections
+- **Billing**: Stripe / Paddle / Chargebee / RevenueCat — for MRR, churn, ARPU
+- **Email / lifecycle**: Customer.io / Klaviyo / Mailchimp / HubSpot — for lists, flows, campaign performance
+- **Ads**: Google Ads / Meta Ads / LinkedIn Ads / TikTok Ads — for spend, ROAS, CPA
+- **Reviews / VOC**: G2 / Trustpilot / Gong / Intercom / Zendesk — for verbatim customer language
+- **AI visibility**: Otterly / Profound / Peec — for AI-citation share of voice
+- **CMS**: WordPress / Webflow / Sanity / Contentful / Shopify — for reading and publishing pages
+- **Social**: Buffer / native connectors — for scheduling and analytics
+
+See [tools/REGISTRY.md](../../tools/REGISTRY.md) and [tools/mcp/README.md](../../tools/mcp/README.md) for how each tool is reached from Dust.
+
 ---
 
 ## Step 3: Create the Document
@@ -221,6 +242,21 @@ After gathering information, produce the Product Context document (use **Create 
 **Business goal:**
 **Conversion action:**
 **Current metrics:**
+
+## Connected Data Sources
+*What's wired up to the marketing agents — skills read this to pull real data or fall back gracefully.*
+| Category | Connected tool(s) | Reach from Dust |
+|----------|-------------------|-----------------|
+| Analytics | | |
+| SEO | | |
+| CRM | | |
+| Billing | | |
+| Email / lifecycle | | |
+| Ads | | |
+| Reviews / VOC | | |
+| AI visibility | | |
+| CMS | | |
+| Social | | |
 ```
 
 ---
@@ -229,8 +265,8 @@ After gathering information, produce the Product Context document (use **Create 
 
 - Show the completed document and ask if anything needs adjustment.
 - **Save it as a knowledge item**: add the document to a Dust Space (as a Dust Folder file, or a connected Notion/Google Doc), then attach that knowledge to your marketing agent(s) so every skill can reference it.
-- **Write the essentials to Agent Memory** — one-liner, category, ICP, top differentiators, brand voice, and the primary conversion action — so agents recall them without opening the doc.
-- Tell them: "Your marketing agents will now use this context automatically. Ask me to update the Product Context whenever your positioning changes."
+- **Write the essentials to Agent Memory** — one-liner, category, ICP, top differentiators, brand voice, the primary conversion action, and the **Connected Data Sources** inventory — so agents recall them without opening the doc. The connector inventory is what lets other skills self-configure (pull real data where a tool is connected, fall back to Browse/Web Search where it isn't) without re-probing every conversation.
+- Tell them: "Your marketing agents will now use this context automatically. Ask me to update the Product Context whenever your positioning changes — or when you connect or remove a tool, so the Connected Data Sources stay accurate."
 
 ---
 

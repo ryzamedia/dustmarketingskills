@@ -2,7 +2,7 @@
 name: ab-testing
 description: When the user wants to plan, design, or implement an A/B test or experiment, or build a growth experimentation program. Also use when the user mentions "A/B test," "split test," "experiment," "test this change," "variant copy," "multivariate test," "hypothesis," "should I test this," "which version is better," "test two versions," "statistical significance," "how long should I run this test," "growth experiments," "experiment velocity," "experiment backlog," "ICE score," "experimentation program," or "experiment playbook." Use this whenever someone is comparing two approaches and wants to measure which performs better, or when they want to build a systematic experimentation practice. For tracking implementation, see analytics. For page-level conversion optimization, see cro.
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # A/B Test Setup
@@ -160,6 +160,8 @@ We'll know this is true when [metrics].
 - Variant determined before render
 - No flicker, requires dev work
 - Tools: PostHog, LaunchDarkly, Split
+
+**Reaching these from Dust**: see the **Data & Connectors** section below for how to connect PostHog, Optimizely, VWO, and flag platforms to read live results instead of static tables.
 
 ---
 
@@ -343,6 +345,25 @@ Over time, your playbook becomes a library of proven growth patterns specific to
 4. What's the smallest improvement worth detecting?
 5. What tools do you have for testing?
 6. Have you tested this area before?
+
+---
+
+## Data & Connectors
+
+When an experimentation or analytics platform is connected, read live results and real baseline rates rather than working purely from the reference tables. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **PostHog** | official MCP / Browse | Experiment results, feature-flag variants, funnels |
+| **Optimizely** | MCP / Browse | Running-experiment results + significance by variant |
+| **GA4** | native connector | Real baseline conversion rate + traffic volume for sample-size / duration math |
+| **Mixpanel / Amplitude** | official MCP / Browse | Baseline rates, segment / cohort readouts |
+| **VWO / LaunchDarkly / Statsig** | API / Browse | Read variant results / manage feature flags |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Live experiment results** — If an experimentation platform is connected (**PostHog**, **Optimizely**, **VWO**) → read the live experiment: variants, sample reached, conversion + significance by variant, and call the test from real data.
+- **Baseline & sample size** — Elif **GA4** / **Mixpanel** / **Amplitude** is connected → pull the true baseline conversion rate and traffic volume for this page and compute sample size + duration from those numbers instead of the reference tables.
+- **Nothing connected** — Else use the tables in this skill and ask the user to export results; treat the readout as manual.
 
 ---
 

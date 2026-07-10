@@ -6,55 +6,64 @@ Current versions of all skills. Re-import a skill into Dust (or `git pull` your 
 
 | Skill | Version | Last Updated |
 |-------|---------|--------------|
-| ab-testing | 2.0.0 | 2026-05-05 |
-| ad-creative | 3.0.0 | 2026-07-09 |
-| ai-seo | 3.0.0 | 2026-07-09 |
-| analytics | 3.0.0 | 2026-07-09 |
-| aso | 2.0.0 | 2026-05-05 |
-| churn-prevention | 2.0.0 | 2026-05-05 |
-| co-marketing | 2.0.0 | 2026-05-05 |
-| cold-email | 2.0.0 | 2026-05-05 |
-| community-marketing | 2.0.0 | 2026-05-05 |
-| competitor-profiling | 3.0.0 | 2026-07-09 |
-| competitors | 3.0.0 | 2026-07-09 |
-| content-strategy | 3.0.0 | 2026-07-09 |
-| copy-editing | 2.0.0 | 2026-05-05 |
-| copywriting | 3.0.0 | 2026-07-09 |
-| cro | 3.0.0 | 2026-07-09 |
-| customer-research | 2.0.0 | 2026-05-05 |
-| directory-submissions | 2.0.0 | 2026-05-05 |
-| emails | 3.0.0 | 2026-07-09 |
-| free-tools | 2.0.0 | 2026-05-05 |
-| image | 3.0.0 | 2026-07-09 |
-| launch | 2.0.1 | 2026-06-16 |
-| lead-magnets | 2.0.0 | 2026-05-05 |
-| marketing-council | 1.0.0 | 2026-07-06 |
-| marketing-ideas | 2.0.0 | 2026-05-05 |
-| marketing-loops | 1.1.0 | 2026-07-05 |
-| marketing-plan | 1.1.0 | 2026-05-29 |
-| marketing-psychology | 2.0.0 | 2026-05-05 |
-| offers | 1.0.0 | 2026-06-16 |
-| onboarding | 3.0.0 | 2026-07-09 |
-| ads | 3.0.0 | 2026-07-09 |
-| paywalls | 2.0.0 | 2026-05-05 |
-| popups | 2.0.0 | 2026-05-05 |
-| pricing | 2.0.1 | 2026-06-16 |
-| product-marketing | 3.0.0 | 2026-07-09 |
-| programmatic-seo | 2.0.0 | 2026-05-05 |
-| prospecting | 1.0.0 | 2026-05-26 |
-| public-relations | 1.0.0 | 2026-06-10 |
-| referrals | 2.0.0 | 2026-05-05 |
-| revops | 2.0.0 | 2026-05-05 |
-| sales-enablement | 2.0.1 | 2026-06-16 |
-| schema | 2.0.0 | 2026-05-05 |
-| seo-audit | 3.0.0 | 2026-07-09 |
-| signup | 3.0.0 | 2026-07-09 |
-| site-architecture | 2.0.0 | 2026-05-05 |
-| sms | 1.0.0 | 2026-05-21 |
-| social | 3.0.0 | 2026-07-09 |
-| video | 2.0.1 | 2026-05-18 |
+| ab-testing | 2.1.0 | 2026-07-09 |
+| ad-creative | 3.1.0 | 2026-07-10 |
+| ai-seo | 3.1.0 | 2026-07-10 |
+| analytics | 3.1.0 | 2026-07-10 |
+| aso | 2.1.0 | 2026-07-10 |
+| churn-prevention | 2.1.0 | 2026-07-09 |
+| co-marketing | 2.1.0 | 2026-07-10 |
+| cold-email | 2.1.0 | 2026-07-10 |
+| community-marketing | 2.1.0 | 2026-07-09 |
+| competitor-profiling | 3.1.0 | 2026-07-10 |
+| competitors | 3.1.0 | 2026-07-10 |
+| content-strategy | 3.1.0 | 2026-07-10 |
+| copy-editing | 2.1.0 | 2026-07-10 |
+| copywriting | 3.1.0 | 2026-07-10 |
+| cro | 3.1.0 | 2026-07-10 |
+| customer-research | 2.1.0 | 2026-07-09 |
+| directory-submissions | 2.1.0 | 2026-07-10 |
+| emails | 3.1.0 | 2026-07-10 |
+| free-tools | 2.1.0 | 2026-07-10 |
+| image | 3.1.0 | 2026-07-10 |
+| launch | 2.1.0 | 2026-07-10 |
+| lead-magnets | 2.1.0 | 2026-07-10 |
+| marketing-council | 1.1.0 | 2026-07-10 |
+| marketing-ideas | 2.1.0 | 2026-07-10 |
+| marketing-loops | 1.2.0 | 2026-07-10 |
+| marketing-plan | 1.2.0 | 2026-07-10 |
+| marketing-psychology | 2.1.0 | 2026-07-10 |
+| offers | 1.1.0 | 2026-07-10 |
+| onboarding | 3.1.0 | 2026-07-10 |
+| ads | 3.1.0 | 2026-07-10 |
+| paywalls | 2.1.0 | 2026-07-09 |
+| popups | 2.1.0 | 2026-07-10 |
+| pricing | 2.1.0 | 2026-07-09 |
+| product-marketing | 3.1.0 | 2026-07-09 |
+| programmatic-seo | 2.1.0 | 2026-07-09 |
+| prospecting | 1.1.0 | 2026-07-10 |
+| public-relations | 1.1.0 | 2026-07-10 |
+| referrals | 2.1.0 | 2026-07-10 |
+| revops | 2.1.0 | 2026-07-09 |
+| sales-enablement | 2.1.0 | 2026-07-10 |
+| schema | 2.1.0 | 2026-07-10 |
+| seo-audit | 3.1.0 | 2026-07-09 |
+| signup | 3.1.0 | 2026-07-10 |
+| site-architecture | 2.1.0 | 2026-07-10 |
+| sms | 1.1.0 | 2026-07-10 |
+| social | 3.1.0 | 2026-07-10 |
+| video | 2.1.0 | 2026-07-10 |
 
 ## Recent Changes
+
+### 3.1.0 (2026-07-09) — Connector-aware skills + MCP layer
+
+Makes skills adapt to whatever data connectors are wired up, so a Dust agent pulls real data instead of giving generic advice ("if Semrush is connected, use it; else fall back to Web Search").
+
+- **New MCP connection registry** — `tools/mcp/README.md`: a single hub listing the official remote MCP servers a Dust workspace can add (server URL, auth, exposed tools), the AI-visibility/GEO MCP servers, and the community/local/Composio-only tools — with the remote-vs-local distinction that determines whether a Dust cloud agent can reach a server at all.
+- **`tools/REGISTRY.md` MCP data corrected + expanded.** Marked the now-official remote MCP servers that were previously listed as "–"/Composio-only: **Semrush, Ahrefs, DataForSEO, HubSpot, Salesforce, Meta Ads, Klaviyo, Customer.io, Apollo, PostHog, Mixpanel, Amplitude** (plus Notion/Slack reframed as official MCP + native connector; Mailchimp downgraded to community/Composio via a new `†` marker). Added high-value categories and ~45 tool rows: **AI Visibility / GEO** (Profound, Otterly, Peec, Scrunch, Rankscale, LLMrefs), **Image Generation & Design** (Ideogram, Flux, Recraft, GPT Image, Gemini, Canva, Figma), **Community Platforms** (Discord, Circle, Discourse, Reddit, Common Room), **ASO** (AppTweak, Sensor Tower, AppFollow, App Store Connect, Play Console), **Subscription/Retention/Billing** (ProfitWell, Baremetrics, Churnkey, ProsperStack, Chargebee, Recurly, RevenueCat, Superwall), plus popup builders, experimentation/flags, support, PR, technographics, marketing automation, and social-listening tools.
+- **product-marketing** (3.0.0 → 3.1.0): the **Product Context** now records a **Connected Data Sources** inventory (which analytics, SEO, CRM, billing, ESP, ads, review, AI-visibility, CMS, and social tools are wired up, and how each is reached), mirrored to **Agent Memory**. Every other skill reads this inventory to self-configure instead of re-probing — the load-bearing change that makes the whole pass work. Auto-drafting also now pulls from connected CRM/analytics/review sources where available.
+- **Canonical "Data & Connectors" adaptive block rolled out across the entire skill library** — a standardized `Tool | Reach from Dust | Use for` table plus an explicit "if X connected → use it; elif Y; else Browse/Web Search" cascade, so every skill degrades gracefully from real connected data to Browse/Web Search. Three tiers: a **full block** for data-hungry skills (seo-audit — the exemplar — programmatic-seo, pricing, ab-testing, paywalls, churn-prevention, customer-research, revops, community-marketing, cro, popups, signup, emails, sms, onboarding, referrals, competitor-profiling, competitors, prospecting, cold-email, sales-enablement, copywriting, social, video, co-marketing, schema, site-architecture, lead-magnets, free-tools, launch, marketing-loops, marketing-plan, aso); **light normalization** for already-connector-aware skills (ai-seo, image, analytics, ads, ad-creative, content-strategy — retitled + inventory pointer + explicit cascade); and a **short craft note** for advisory skills (offers, copy-editing, marketing-psychology, marketing-ideas, marketing-council, directory-submissions, public-relations). Every skill bumped a minor version. Two coding-agent leftovers also cleaned up: `churn-prevention` dropped a "Related CLI Tools" section, and `marketing-plan` replaced its `~/marketing-plans/{slug}/` filesystem output paths and `/marketing-plan slug` slash-command idioms with Dust-native Create Files + Notion/Drive + description triggering.
 
 ### 3.0.0 (2026-07-09) — Dust fork
 

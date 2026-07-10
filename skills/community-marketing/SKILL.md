@@ -2,7 +2,7 @@
 name: community-marketing
 description: "Build and leverage online communities to drive product growth and brand loyalty. Use when the user wants to create a community strategy, grow a Discord or Slack community, manage a forum or subreddit, build brand advocates, increase word-of-mouth, drive community-led growth, engage users post-signup, or turn customers into evangelists. Trigger phrases: \"build a community,\" \"community strategy,\" \"Discord community,\" \"Slack community,\" \"community-led growth,\" \"brand advocates,\" \"user community,\" \"forum strategy,\" \"community engagement,\" \"grow our community,\" \"ambassador program,\" \"community flywheel.\""
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Community Marketing
@@ -152,6 +152,28 @@ Always be specific. Generic advice ("be consistent," "provide value") is not use
 4. Who is the ideal community member and what motivates them?
 5. Do you have existing users or customers to seed from?
 6. How much time can you dedicate to community management weekly?
+
+---
+
+## Data & Connectors
+
+Every health metric here (DAU/MAU, post and reply rates, lurker ratio, sentiment) and every ambassador figure is real platform data — pull it from the connected community platform rather than describing it abstractly. See `tools/REGISTRY.md` (Community Platforms) and `tools/mcp/README.md` for how each platform wires up. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Slack** | native connector / official MCP / Composio | Read channel activity, post, pull engagement (B2B communities) |
+| **Discord** | remote MCP / Browse + Computer | Member post rates, activity metrics, seed and welcome members |
+| **Reddit** | Browse / Web Search | Subreddit monitoring and sentiment |
+| **Circle / Discourse / Facebook Groups** | Browse + Computer | Health metrics where no connector exists |
+| **Common Room** | API | Cross-platform community analytics and member scoring |
+| **Rewardful / Tolt / PartnerStack** | API / CLI / Composio | Ambassador/advocate referral tracking |
+| **GA4** | native connector | Referral traffic attributed from the community |
+| **Agent Memory + Triggers** | native Dust | Track posted content + monthly metrics; run the weekly audit on schedule |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Health metrics & sentiment** — Pull activity from whichever platform is connected: **Slack** (native connector, else Composio) → active members, post/reply rates. Elif **Discord** (remote MCP, else Browse + Computer) → member post rates + activity metrics. Elif **Reddit** (Browse / Web Search) → subreddit volume + sentiment. Elif **Circle / Discourse / Facebook Groups** (Browse + Computer) → the same health metrics. If none is connected → ask the user to export platform analytics and label figures as user-supplied.
+- **Ambassador / advocate tracking** — If a referral tool (**Rewardful / Tolt / PartnerStack**) is connected → pull referral signups and revenue driven by advocates, plus **GA4** (native connector) for referral-traffic attribution from the community. Else ask the user for the numbers.
+- **Persistence & cadence** — Save posted content and monthly metrics to **Agent Memory**, and run the weekly health/sentiment audit via a **Trigger**.
 
 ---
 

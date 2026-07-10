@@ -2,7 +2,7 @@
 name: seo-audit
 description: When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions "SEO audit," "technical SEO," "why am I not ranking," "SEO issues," "on-page SEO," "meta tags review," "SEO health check," "my traffic dropped," "lost rankings," "not showing up in Google," "site isn't ranking," "Google update hit me," "page speed," "core web vitals," "crawl errors," or "indexing issues." Use this even if the user just says something vague like "my SEO is bad" or "help with SEO" — start with an audit. For building pages at scale to target keywords, see programmatic-seo. For adding structured data, see schema. For AI search optimization, see ai-seo.
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # SEO Audit
@@ -123,12 +123,6 @@ Reporting "no schema found" from a text-only read leads to false audit findings 
 - Caching headers
 - CDN usage
 - Font loading
-
-**Tools**
-- PageSpeed Insights
-- WebPageTest
-- Chrome DevTools
-- Search Console Core Web Vitals report
 
 ### Mobile-Friendliness
 
@@ -461,21 +455,27 @@ Same format as above
 
 ---
 
-## Tools Referenced
+## Data & Connectors
 
-**Free Tools**
-- Google Search Console (essential)
-- Google PageSpeed Insights
-- Bing Webmaster Tools
-- Rich Results Test (**use this for schema validation — it renders JavaScript**)
-- Mobile-Friendly Test
-- Schema Validator (see the Schema Markup Detection Limitation section — a text-only page read misses JS-injected JSON-LD; use **Computer**, the Rich Results Test, or Screaming Frog)
+Audit against the site's real numbers, not assumptions. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the finding accordingly — never present a guess as a measurement.
 
-**Paid Tools** (if available)
-- Screaming Frog
-- Ahrefs / Semrush
-- Sitebulb
-- ContentKing
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Google Search Console** | native connector (or Cogny) | Coverage/indexation, Core Web Vitals, query + position data, which pages rank — the authoritative, free baseline |
+| **GA4** | native connector / MCP | Organic-traffic trend, landing-page performance, traffic-drop diagnosis |
+| **Semrush / Ahrefs** | official MCP / Composio / Cogny → else Browse | Rankings, backlink profile, site audit, competitor gap |
+| **DataForSEO** | official MCP / API | Programmatic SERP positions and on-page audits at scale |
+| **rankparse** | remote MCP | Cheap backlinks, domain authority, tech stack |
+| **Firecrawl / Browserbase** | remote MCP | Crawl the site for titles/headings/canonicals/schema (Browserbase renders JS) |
+| **PageSpeed Insights / Rich Results Test** | Browse / Web Search | CWV lab data + JS-rendered schema validation |
+| **CMS** (WordPress/Webflow/Sanity/Contentful) | native connector / CLI | Read and fix meta, titles, canonicals directly |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Search & indexation** — If **Google Search Console** is connected → pull Coverage, CWV, and query/position reports directly. Else `site:` checks + Browse the SERP, and ask for a GSC export.
+- **Traffic diagnosis** — If **GA4** is connected → organic-traffic trend + landing-page performance, charted with **Data Visualization**. Else ask for the numbers.
+- **Backlinks & authority** — If **rankparse** MCP is connected → backlinks + domain rating. Elif **Semrush/Ahrefs** (official MCP, or via Composio/Cogny) → backlinks + rankings + site audit. Elif **DataForSEO** → programmatic SERP + backlinks. Else Browse the SERP and note authority data is unavailable.
+- **Crawl** — If **Firecrawl/Browserbase** MCP is connected → crawl for titles/headings/canonicals/schema (Browserbase renders JS for orphan/inventory reports). Else Browse page-by-page, and use **Computer** to catch JS-injected schema (see the Schema Markup Detection Limitation section).
+- **CWV & schema validation** — Browse **PageSpeed Insights** for lab CWV and the **Rich Results Test** (it renders JavaScript) for schema. Screaming Frog / Sitebulb exports are welcome if the client supplies one.
 
 ---
 

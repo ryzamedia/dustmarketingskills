@@ -2,7 +2,7 @@
 name: directory-submissions
 description: When the user wants to submit their product to startup, SaaS, AI, agent, MCP, no-code, or review directories for backlinks, domain rating, and discovery. Also use when the user mentions "directory submissions," "submit to directories," "backlinks from directories," "list my product," "submit to Product Hunt," "BetaList," "TAAFT," "Futurepedia," "G2 listing," "Capterra listing," "AlternativeTo," "SaaSHub," "AI directories," "MCP registry," "agent directory," "dofollow backlinks," "launch directories," or "directory tracker." Use this whenever someone is planning the directory layer of a product launch or an ongoing backlink campaign. For the broader launch moment, see launch. For programmatic SEO pages that should live behind these backlinks, see programmatic-seo. For AI citation optimization, see ai-seo.
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Directory Submissions
@@ -128,7 +128,7 @@ Per submission:
 3. Upload assets.
 4. Submit.
 5. Log: date, URL, status, moderator notes.
-6. Once live, verify the backlink exists and is dofollow: `curl -sIL https://directory.com/your-listing | grep -i rel=`. If absent, the link is dofollow.
+6. Once live, **Browse** the listing page and inspect your backlink — if the link to your site carries no `rel="nofollow"` attribute, it's dofollow.
 
 ---
 
@@ -366,6 +366,29 @@ When the user asks for a directory plan, return:
 9. **Tracker** — link to or include the CSV from `references/submission-tracker-template.csv`
 
 Keep the plan actionable. Every item should be something the user can do today.
+
+---
+
+## Data & Connectors
+
+Submitting is manual **Browse/Computer** form-filling — no API exists for most directories. Connected data sources power the **measurement** layer instead: proving the backlinks landed, moved DR, and produced signups. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Browse / Computer** | native | Fill and submit directory forms, upload assets, verify each dofollow backlink went live |
+| **Create Files** | native | Positioning variants per tier + the submission tracker |
+| **Google Search Console** | native connector | Indexed-page count + query performance for the destination pages the backlinks point at |
+| **GA4** | native connector | Signups + referral traffic attributed to directory listings |
+| **rankparse** | remote MCP | DR + referring-domain tracking as listings go live |
+| **Ahrefs / Semrush** | official MCP / Composio → else Browse | DR, referring domains, backlink verification |
+| **G2** | Browse | Review counts + Grid-appearance status |
+| **Otterly** (Peec / LLMrefs) | official MCP (Otterly) / Browse (Peec, LLMrefs) | AI-citation monitoring — where the product surfaces in ChatGPT/Perplexity/Claude answers |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Submission** — Always **Browse/Computer**: fill the form, upload assets, submit, then Browse the live listing to confirm the backlink is present and dofollow. No API path for most directories.
+- **Backlink & DR** — If **rankparse** MCP is connected → track DR + referring domains as listings land. Elif **Ahrefs/Semrush** (official MCP, or via Composio) → DR + referring domains + backlink verification. Else check manually via Browse.
+- **Destination-page performance** — If **GSC + GA4** are connected → auto-populate the KPI table (indexed pages, referral signups, organic clicks). Else fill it manually from exports.
+- **AI citations** — If an AI-visibility tool is reachable (**Otterly** MCP; **Peec/LLMrefs** dashboards via Browse) → log where the product is cited. Else run a manual ChatGPT/Perplexity/Claude check via **Web Search / Computer** and log it.
 
 ---
 

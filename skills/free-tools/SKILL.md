@@ -2,12 +2,12 @@
 name: free-tools
 description: When the user wants to plan, evaluate, or build a free tool for marketing purposes — lead generation, SEO value, or brand awareness. Also use when the user mentions "engineering as marketing," "free tool," "marketing tool," "calculator," "generator," "interactive tool," "lead gen tool," "build a tool for leads," "free resource," "ROI calculator," "grader tool," "audit tool," "should I build a free tool," or "tools for lead gen." Use this whenever someone wants to build something useful and give it away to attract leads or earn links. For downloadable content lead magnets (ebooks, checklists, templates), see lead-magnets.
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Free Tool Strategy (Engineering as Marketing)
 
-You are an expert in engineering-as-marketing strategy. Your goal is to help plan and evaluate free tools that generate leads, attract organic traffic, and build brand awareness.
+You are an expert in engineering-as-marketing strategy. Your goal is to help plan and evaluate free tools that generate leads, attract organic traffic, and build brand awareness. When an SEO or analytics connector is attached, ground the evaluation in real data — pull search volume, referring-domain, and usage numbers rather than scoring from intuition (see **Data & Connectors**).
 
 ## Initial Assessment
 
@@ -159,6 +159,8 @@ Rate each factor 1-5:
 
 **25+**: Strong candidate | **15-24**: Promising | **<15**: Reconsider
 
+Don't score **Search demand exists** or **Link-building potential** from intuition — pull real volume and referring-domain data from a connected SEO tool (see **Data & Connectors**).
+
 ---
 
 ## Task-Specific Questions
@@ -167,6 +169,25 @@ Rate each factor 1-5:
 2. How do you currently generate leads?
 3. What technical resources are available?
 4. What's the timeline and budget?
+
+---
+
+## Data & Connectors
+
+Score and measure the tool against real data, not intuition. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Semrush / Ahrefs / Keywords Everywhere / DataForSEO** | official MCP / Composio / Cogny / Browse | Validate "search demand exists" for "[thing] calculator/generator" queries + score "link-building potential" (referring domains) |
+| **Google Search Console** | native connector | Post-launch rankings + impressions for the tool page |
+| **GA4** | native connector | Tool usage, traffic, tool-to-lead conversion |
+| **Typeform / Tally / Outgrow / Involve.me** | Composio / API / Browse | Build the MVP tool + capture leads |
+| **Email platform** | native / MCP / API | Nurture captured leads |
+
+**Adaptive data pull** — score and measure with what's connected, degrade gracefully:
+- **Search demand & link potential** — Don't score "search demand exists" or "link-building potential" by guessing. If an **SEO connector** (Semrush / Ahrefs / Keywords Everywhere via official MCP / Composio, or **DataForSEO**) is connected → pull real search volume and referring-domain data for the tool concept. Else **Web Search** / Google Trends via **Browse** and flag the estimate.
+- **Post-launch performance** — If **Google Search Console** is connected → read rankings and impressions for the tool page. If **GA4** is connected → tool usage, traffic, and tool-to-lead conversion, charted with **Data Visualization**. Else ask for the numbers.
+- **Build & capture** — Build the MVP and capture leads via a **Typeform / Tally / Outgrow / Involve.me** connector (Composio / API / Browse); nurture through the connected **email platform**.
 
 ---
 

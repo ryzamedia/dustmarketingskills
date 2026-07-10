@@ -2,14 +2,16 @@
 name: aso
 description: "When the user wants to audit or optimize an App Store or Google Play listing. Also use when the user mentions 'ASO audit,' 'app store optimization,' 'optimize my app listing,' 'improve app visibility,' 'app store ranking,' 'audit my listing,' 'why aren't people downloading my app,' 'improve my app conversion,' 'keyword optimization for app,' or 'compare my app to competitors.' Use when the user shares an App Store or Google Play URL and wants to improve it."
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # ASO Audit
 
 Analyze App Store and Google Play listings against ASO best practices. Fetches
 live listing data, scores metadata, visuals, and ratings, then produces a
-prioritized action plan.
+prioritized action plan. When an ASO data source (AppTweak, Sensor Tower,
+AppFollow) or a store-console export is connected, ground keyword volume and
+rank in real numbers instead of qualitative inference.
 
 ## When to Use
 
@@ -301,6 +303,27 @@ the app's brand maturity tier — they may be deliberate choices for Dominant ap
 4. Do you have competitor URLs to compare against?
 5. Are you focused on search visibility, conversion rate, or both?
 6. Do you have access to App Store Connect or Google Play Console data?
+
+---
+
+## Data & Connectors
+
+The live listing is the core input, but keyword volume and exact rank live behind ASO tools and store consoles. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **WebFetch / Browse** | native | Fetch every listing field — title, subtitle, description, ratings, reviews, category, what's-new (core to the audit) |
+| **Computer** (screenshot) | native | Visual-asset assessment — icon quality, screenshot order + captions, preview video, feature graphic |
+| **Web Search** | native | Locate the listing from an app name + find category competitors |
+| **App Store Connect / Google Play Console** | Browse / Computer, or user export | Authenticated conversion, impression, and keyword data the public page never shows |
+| **AppTweak / Sensor Tower / AppFollow** | Browse (API where connected) | Keyword search-volume, difficulty, and live keyword rankings |
+| **GA4 / Firebase** | native connector / Browse | Install attribution + in-app event tracking |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Keyword volume & rankings** — If an ASO tool is connected or Browsable (**AppTweak / Sensor Tower / AppFollow**) → pull real search volume, keyword difficulty, and rank. Elif the user supplies an **App Store Connect / Play Console** export → use its keyword, impression, and conversion data. Else run the qualitative audit from the live listing and **explicitly flag that search volume and exact rank are unavailable**.
+- **Listing data** — Always **WebFetch/Browse** every field; if the store renders client-side and fields are missing, **Computer**-screenshot the page and ask the user to paste the gaps.
+- **Visual assets** — **Computer**-screenshot the listing to judge icon, screenshots, captions, and video — WebFetch cannot see images.
+- **Install attribution** — If **GA4 / Firebase** is connected → pull install sources and in-app events; else note attribution data is unavailable.
 
 ---
 

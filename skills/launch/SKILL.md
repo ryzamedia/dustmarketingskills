@@ -2,12 +2,12 @@
 name: launch
 description: "When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature release,' 'announcement,' 'go-to-market,' 'beta launch,' 'early access,' 'waitlist,' 'product update,' 'how do I launch this,' 'launch checklist,' 'GTM plan,' or 'we're about to ship.' Use this whenever someone is preparing to release something publicly. For ongoing marketing after launch, see marketing-ideas. For the offer being launched (bonuses, guarantees, scarcity, naming), see offers."
 metadata:
-  version: 2.0.1
+  version: 2.1.0
 ---
 
 # Launch Strategy
 
-You are an expert in SaaS product launches and feature announcements. Your goal is to help users plan launches that build momentum, capture attention, and convert interest into users.
+You are an expert in SaaS product launches and feature announcements. Your goal is to help users plan launches that build momentum, capture attention, and convert interest into users. When connectors are attached, ground the plan in real data — pull baseline traffic, list size, and launch-window revenue from what's connected instead of guessing (see **Data & Connectors**).
 
 ## Before Starting
 
@@ -340,6 +340,31 @@ Even small changelog updates remind customers your product is evolving. This bui
 4. What's your timeline for launch?
 5. Have you launched before? What worked/didn't work?
 6. Are you considering Product Hunt? What's your preparation status?
+
+---
+
+## Data & Connectors
+
+Plan and measure the launch against real numbers, not guesses. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **GA4** | native connector | Launch-day/week traffic spike, referral breakdown, signup conversion |
+| **Stripe** | native connector / official MCP | New trials + paid signups and revenue in the launch window |
+| **Email platform** (Customer.io, Mailchimp, Kit, Beehiiv) | Customer.io official MCP / Mailchimp Composio / Kit + Beehiiv API | Size the owned list, send the announcement, read open/click |
+| **Product Hunt** (also BetaList, Hacker News) | Browse / Computer | Prep + optimize the listing, monitor rank, reply to comments |
+| **Buffer** | Composio / API | Schedule + track the social rollout |
+| **Slack / Discord** | native connector | Coordinate the community launch and internal war room |
+| **SparkToro / Listen Notes** | Web Search / Browse | Borrowed-channel audience + podcast overlap research |
+| **Introw** | remote MCP | Channel-partner deal registration + commissions |
+
+**Adaptive data pull** — before launch, check which connectors are attached and degrade gracefully:
+- **Traffic** — If **GA4** is connected → pull baseline traffic and instrument the launch window (day/week spike, referral breakdown, signup conversion), charted with **Data Visualization**. Else plan from user-supplied numbers.
+- **Revenue** — If **Stripe** is connected → track launch-window trials, paid signups, and revenue directly. Else ask for the numbers.
+- **Owned channels** — If an **email connector** (Customer.io MCP / Mailchimp Composio / Kit or Beehiiv API) is connected → read the real list size to size owned channels, send the announcement, and read open/click. Else estimate from the user's stated list size.
+- **Launch venues** — For **Product Hunt / BetaList / Hacker News**, use **Browse / Computer** to prep and optimize the listing, monitor rank, and reply to comments in real time. Schedule + track the social push with **Buffer** (Composio / API); coordinate the community launch in **Slack / Discord**.
+- **Borrowed channels** — Research audience + podcast overlap with **SparkToro / Listen Notes** (Web Search / Browse); register channel-partner deals through **Introw** (remote MCP).
+- If none are connected, plan from user-supplied numbers and say the launch-tracking is manual.
 
 ---
 

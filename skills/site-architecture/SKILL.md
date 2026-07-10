@@ -2,12 +2,12 @@
 name: site-architecture
 description: When the user wants to plan, map, or restructure their website's page hierarchy, navigation, URL structure, or internal linking. Also use when the user mentions "sitemap," "site map," "visual sitemap," "site structure," "page hierarchy," "information architecture," "IA," "navigation design," "URL structure," "breadcrumbs," "internal linking strategy," "website planning," "what pages do I need," "how should I organize my site," or "site navigation." Use this whenever someone is planning what pages a website should have and how they connect. NOT for XML sitemaps (that's technical SEO — see seo-audit). For SEO audits, see seo-audit. For structured data, see schema.
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Site Architecture
 
-You are an information architecture expert. Your goal is to help plan website structure — page hierarchy, navigation, URL patterns, and internal linking — so the site is intuitive for users and optimized for search engines.
+You are an information architecture expert. Your goal is to help plan website structure — page hierarchy, navigation, URL patterns, and internal linking — so the site is intuitive for users and optimized for search engines. Net-new IA is a craft judgment grounded in the **Product Context**; when you're **restructuring an existing site**, work from its real data — where **Google Search Console**, **GA4**, or the **CMS** is connected, use the site's actual pages, traffic, and rankings rather than assumptions.
 
 ## Before Planning
 
@@ -344,6 +344,31 @@ Mermaid diagram showing page relationships and navigation zones. Use `graph TD` 
 4. What are the 5 most important pages on the site?
 5. Are there existing URLs that need to be preserved or redirected?
 6. Who are the primary audiences, and what are they trying to accomplish on the site?
+
+---
+
+## Data & Connectors
+
+Net-new IA is craft; **restructuring an existing site is a data problem** — pull the site's real pages, traffic, and rankings. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Google Search Console** | native connector | Top pages by clicks/impressions (nav priority) + indexed-URL inventory for redirects |
+| **GA4** | native connector | Page traffic, user-flow/navigation paths, high-bounce dead-ends, entry pages |
+| **Firecrawl / Browserbase** | official MCP | Crawl the existing site for the real page inventory, nav, internal links, orphans |
+| **Browse** | native | Read current nav, `sitemap.xml`, and the existing hierarchy |
+| **CMS** (WordPress/Webflow/Sanity/Contentful) | native connector / CLI | Pull the URL inventory; implement URL changes + 301 redirects |
+| **rankparse / Ahrefs** | remote MCP / Composio | Inbound-link data to inform hub-and-spoke and nav priority |
+| **Create Files / Data Visualization** | native | Render the URL map table + Mermaid sitemap deliverables |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Restructuring an existing site** — **Browse** it (or **Firecrawl/Browserbase** MCP to crawl at scale) for the real page inventory, nav, internal links, and orphans.
+- **Nav priority + redirects** — If **Google Search Console** is connected → rank pages by clicks/impressions to set nav priority + pull the indexed-URL list so every old URL gets a 301.
+- **Navigation shaping** — If **GA4** is connected → use user-flow and entry-page data to shape navigation + spot high-bounce dead-ends. Chart the flow with **Data Visualization**.
+- **Inbound links** — If **rankparse/Ahrefs** (MCP or Composio) is connected → use inbound-link data to decide which pages anchor hub-and-spoke clusters.
+- **Implementation** — If the **CMS** is connected → pull the URL inventory + implement the URL changes and 301s directly.
+- **Net-new site with no data** — proceed from craft + the **Product Context**; there's no site to measure yet.
+- **Deliverables** — Render the Mermaid sitemap and URL map with **Create Files**.
 
 ---
 

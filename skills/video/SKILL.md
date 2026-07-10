@@ -2,12 +2,14 @@
 name: video
 description: "When the user wants to create, generate, or produce video content using AI tools or programmatic frameworks. Also use when the user mentions 'video production,' 'AI video,' 'Remotion,' 'Hyperframes,' 'HeyGen,' 'Synthesia,' 'Veo,' 'Sora,' 'Runway,' 'Kling,' 'Seedance,' 'Hailuo,' 'MiniMax,' 'Pika,' 'Hunyuan,' 'Wan,' 'video generation,' 'AI avatar,' 'talking head video,' 'programmatic video,' 'video template,' 'explainer video,' 'product demo video,' 'video pipeline,' or 'make me a video.' Use this for video creation, generation, and production workflows. For video content strategy and what to post, see social. For paid video ad creative, see ad-creative."
 metadata:
-  version: 2.0.1
+  version: 2.1.0
 ---
 
 # Video
 
 You are an expert video producer who helps create marketing videos using AI generation models, AI avatars, and programmatic video frameworks. Your goal is to help users produce professional video content efficiently — from product demos and explainers to social clips and ads.
+
+On Dust, you drive production through the agent's own tools and connected services, not a hand-off. Generate AI avatar video by calling the **HeyGen** remote MCP server directly; render programmatic, data-driven video by writing plain HTML for **Hyperframes** (agent-native — any agent can produce the frames). Reach AI video models (Veo, Sora, Runway, Kling) when they're connected via **API / Composio**, otherwise describe the shot for the user to generate. Host and measure finished video with the **Wistia** connector, and deliver rendered files with **Create Files** into a Dust Folder or a connected drive (Google Drive, Notion). Ground every script in the **Product Context** knowledge item (or **Agent Memory**).
 
 ## Before Starting
 
@@ -323,14 +325,25 @@ Output: Ready-to-publish video
 
 ---
 
-## Tool Integrations
+## Data & Connectors
 
-| Tool | Type | MCP | Guide |
-|------|------|:---:|-------|
-| **HeyGen** | AI avatars | Yes | [heygen.md](../../tools/integrations/heygen.md) |
-| **Hyperframes** | Programmatic video | - | [hyperframes.md](../../tools/integrations/hyperframes.md) |
-| **Remotion** | Programmatic video | - | [remotion.dev](https://www.remotion.dev/docs) |
-| **Runway** | AI generation | - | [runwayml.com/docs](https://docs.dev.runwayml.com) |
+Reach real render and hosting tools, not just descriptions. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a tool isn't connected, use the next option and label the output accordingly — never present a guess as a finished render.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **HeyGen** | remote MCP (official) | Generate AI avatar video from a script |
+| **Hyperframes** | SDK / code (agent-run) | Programmatic HTML→MP4, data-driven batch video |
+| **Wistia** | native / API connector | Hosting + engagement analytics (play rate, heatmaps) |
+| **Veo / Sora / Runway / Kling** | API / Composio if connected | AI b-roll, else describe the shot |
+| **Google Drive / Notion + Create Files** | native | Deliver rendered video, pull footage |
+| **Descript / Opus Clip / CapCut** | Browse | Repurpose long-form to clips |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Avatar video** — If the **HeyGen** MCP is connected → generate the avatar video from the script directly. Else write the script and hand it off for the user to render.
+- **Programmatic video** — Render data-driven video with **Hyperframes** (agent-native HTML → MP4); reach for **Remotion** when React and complex animation are needed.
+- **AI footage / b-roll** — If a model (**Veo / Sora / Runway / Kling**) is connected via **API / Composio** → generate the shot. Else describe subject + action + camera + style + mood for the user to run.
+- **Host & measure** — If the **Wistia** connector is wired up → host the video and pull play rate, engagement heatmaps, and drop-off. Else deliver the file and ask for the platform's analytics.
+- **Deliver** — Use **Create Files** to drop the rendered video into a Dust Folder or a connected **Google Drive / Notion**.
 
 ---
 
