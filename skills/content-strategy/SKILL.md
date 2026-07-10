@@ -2,7 +2,7 @@
 name: content-strategy
 description: When the user wants to plan a content strategy, decide what content to create, or figure out what topics to cover. Also use when the user mentions "content strategy," "what should I write about," "content ideas," "blog strategy," "topic clusters," "content planning," "editorial calendar," "content marketing," "content roadmap," "what content should I create," "blog topics," "content pillars," or "I don't know what to write." Use this whenever someone needs help deciding what content to produce, not just writing it. For writing individual pieces, see copywriting. For SEO-specific audits, see seo-audit. For social media content specifically, see social.
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Content Strategy
@@ -358,6 +358,27 @@ Once the plan is set, move pieces into production with **Run an Agent**: `seo-au
 3. Where are competitors' content efforts falling short?
 4. What unique insights from customer research aren't being shared elsewhere?
 5. Which existing content drives the most conversions, and why?
+
+---
+
+## Data & Connectors
+
+Ground topic decisions in connected data, not guesswork. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Google Search Console** | native connector | Existing rankings, decaying pages, content gaps |
+| **GA4** | native connector | Which topics actually convert |
+| **Ahrefs / Semrush** | official MCP / Composio / Cogny → else Browse | Volume, difficulty, competitor gap |
+| **DataForSEO / keywords-everywhere** | official MCP / API | Programmatic keyword volume at scale |
+| **Exa** | official MCP | Neural search for demand signals + cited sources |
+| **Gong / HubSpot / Salesforce** | official MCP / connector | Customer voice from calls and CRM notes |
+| **Typeform / Google Sheets / Zendesk / Intercom / Slack** | Composio / connector | Survey, support, and team-thread inputs |
+| **SparkToro** | Browse | Audience research — where your ICP pays attention |
+
+**Adaptive data pull** — degrade gracefully:
+- **Keyword & demand** — If **GSC** is connected → existing rankings, decaying pages, and gaps. If **GA4** → converting topics. If **Ahrefs/Semrush** is reachable (official MCP, or Composio/Cogny) → volume + difficulty + competitor gap. Elif **DataForSEO/keywords-everywhere** → programmatic volume. Else **Web Search** + **Browse** the SERPs.
+- **Customer voice** — Pull from whatever's connected: **Gong** (calls), **HubSpot/Salesforce** (CRM), **Typeform/Google Sheets** (surveys), **Zendesk/Intercom** (support), **Slack** (threads). Else use what the user provides.
 
 ---
 

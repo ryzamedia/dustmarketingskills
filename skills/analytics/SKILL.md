@@ -2,7 +2,7 @@
 name: analytics
 description: When the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions "set up tracking," "GA4," "Google Analytics," "conversion tracking," "event tracking," "UTM parameters," "tag manager," "GTM," "analytics implementation," "tracking plan," "how do I measure this," "track conversions," "attribution," "Mixpanel," "Segment," "are my events firing," or "analytics isn't working." Use this whenever someone asks how to know if something is working or wants to measure marketing results. For A/B test measurement, see ab-testing.
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Analytics Tracking
@@ -319,20 +319,20 @@ Turn one-off pulls into standing reports with **Triggers**:
 
 ---
 
-## Reaching Analytics Tools from Dust
+## Data & Connectors
 
-Each source below is reachable as a Dust **connector**, via **Composio**, or a **remote MCP server** — use it to pull real events and metrics, not to ask the user for exports. Reference the integration guide for endpoints and auth.
+Each source below is reachable as a Dust **connector**, via **Composio**, or a **remote MCP server** — use it to pull real events and metrics, not to ask the user for exports. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
 
 | Tool | Best For | Reach from Dust | Guide |
 |------|----------|-----------------|-------|
-| **GA4** | Web analytics, Google ecosystem | Connector / remote MCP | [ga4.md](../../tools/integrations/ga4.md) |
-| **Google Ads** | Paid traffic + conversion data | Connector / Composio | [google-ads.md](../../tools/integrations/google-ads.md) |
+| **GA4** | Web analytics, Google ecosystem | native connector | [ga4.md](../../tools/integrations/ga4.md) |
+| **Google Ads** | Paid traffic + conversion data | official MCP (read-only) / Composio | [google-ads.md](../../tools/integrations/google-ads.md) |
 | **Segment** | Customer data platform, routing | Composio / remote MCP | [segment.md](../../tools/integrations/segment.md) |
-| **Mixpanel** | Product analytics, event tracking | Composio / remote MCP | [mixpanel.md](../../tools/integrations/mixpanel.md) |
-| **Amplitude** | Product analytics, cohort analysis | Composio / remote MCP | [amplitude.md](../../tools/integrations/amplitude.md) |
-| **PostHog** | Open-source analytics, session replay | Remote MCP / API | [posthog.md](../../tools/integrations/posthog.md) |
+| **Mixpanel** | Product analytics, event tracking | official MCP | [mixpanel.md](../../tools/integrations/mixpanel.md) |
+| **Amplitude** | Product analytics, cohort analysis | official MCP | [amplitude.md](../../tools/integrations/amplitude.md) |
+| **PostHog** | Open-source analytics, session replay | official MCP | [posthog.md](../../tools/integrations/posthog.md) |
 
-When no connector or MCP exists for a source, use **Computer** to open its dashboard and read the reports directly.
+**Adaptive data pull** — first detect which analytics sources are connected, then pull from each in parallel; only ask the user for exports if none are connected. Where a source has no connector or MCP, use **Computer** to open its dashboard and read the reports directly.
 
 ---
 

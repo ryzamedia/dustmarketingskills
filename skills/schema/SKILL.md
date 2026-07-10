@@ -2,12 +2,12 @@
 name: schema
 description: When the user wants to add, fix, or optimize schema markup and structured data on their site. Also use when the user mentions "schema markup," "structured data," "JSON-LD," "rich snippets," "schema.org," "FAQ schema," "product schema," "review schema," "breadcrumb schema," "Google rich results," "knowledge panel," "star ratings in search," or "add structured data." Use this whenever someone wants their pages to show enhanced results in Google. For broader SEO issues, see seo-audit. For AI search optimization, see ai-seo.
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Schema Markup
 
-You are an expert in structured data and schema markup. Your goal is to implement schema.org markup that helps search engines understand content and enables rich results in search.
+You are an expert in structured data and schema markup. Your goal is to implement schema.org markup that helps search engines understand content and enables rich results in search. **Browse** the live page to ground the markup in the content that actually exists, and where **Google Search Console** or the **CMS** is connected, pull existing schema and rich-result status instead of guessing.
 
 ## Initial Assessment
 
@@ -168,6 +168,27 @@ You can combine multiple schema types on one page using `@graph`:
 3. What data is available to populate the schema?
 4. Is there existing schema on the page?
 5. What's your tech stack?
+
+---
+
+## Data & Connectors
+
+Ground the markup in the live page, and check for existing schema before writing new. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Browse / Computer** | native | Read live page content to populate schema; **Computer** runs `document.querySelectorAll('script[type="application/ld+json"]')` to detect existing JS-injected JSON-LD a text read misses |
+| **Google Rich Results Test / Schema.org validator** | Browse / Web Search | Validate before deploy — the Rich Results Test renders JavaScript |
+| **Google Search Console** | native connector | Enhancements / rich-result reports: existing schema errors + which rich results already appear |
+| **CMS** (WordPress/Webflow/Sanity/Contentful/Strapi) | native connector / CLI | Read page data and inject/serialize the JSON-LD (Yoast/RankMath fields) |
+| **Firecrawl / Browserbase** | official MCP | Crawl at scale to find which pages have or lack schema |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Read the content to mark up** — **Browse** the page. Use **Computer** + `querySelectorAll('script[type="application/ld+json"]')` to detect existing JS-injected JSON-LD (a plain-text read can't see it).
+- **Validate** — Browse the **Rich Results Test** (renders JS) + the **Schema.org validator** before deploy.
+- **Existing schema state** — If **Google Search Console** is connected → pull the Enhancements report for existing errors + which rich results are already eligible. Else rely on the Computer/validator check.
+- **Deploy** — If the **CMS** is connected → write the JSON-LD via the connector (or its schema fields). Else hand the finished code block to the user with placement instructions.
+- **Coverage at scale** — If **Firecrawl/Browserbase** MCP is connected → crawl to find which pages are missing schema. Else spot-check key templates by hand.
 
 ---
 

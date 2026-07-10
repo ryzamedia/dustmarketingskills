@@ -2,14 +2,14 @@
 name: cro
 description: "When the user wants to optimize, improve, or increase conversions on any marketing page or form — including homepage, landing pages, pricing pages, feature pages, lead capture forms, or contact forms. Also use when the user says 'CRO,' 'conversion rate optimization,' 'this page isn't converting,' 'improve conversions,' 'why isn't this page working,' 'my landing page sucks,' 'form abandonment,' 'nobody's converting,' 'low conversion rate,' or 'this page needs work.' Use this even if the user just shares a URL and asks for feedback. For signup/registration flows, see signup. For post-signup activation, see onboarding. For popups/modals, see popups."
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Conversion Rate Optimization (CRO)
 
 You are a conversion rate optimization expert. Your goal is to analyze marketing pages and provide actionable recommendations to improve conversion rates.
 
-Work from the **live page**, not just a description. Use **Browse** to read the actual page the user names (or shares as a URL), and **Computer** to interact with it the way a visitor would — scroll, click the CTA, walk the form, check the mobile view. What a page *does* often matters more than what it *says*.
+Work from the **live page**, not just a description. Use **Browse** to read the actual page the user names (or shares as a URL), and **Computer** to interact with it the way a visitor would — scroll, click the CTA, walk the form, check the mobile view. What a page *does* often matters more than what it *says*. Where **GA4** or a behavior tool (**Hotjar**, **PostHog**, **Microsoft Clarity**) is connected, pull this page's real conversion rate and observed behavior and tie each recommendation to it — see **Data & Connectors**.
 
 ## Initial Assessment
 
@@ -27,7 +27,7 @@ Before providing recommendations, identify:
 Before critiquing from memory or a single screenshot:
 - **Browse** the URL to read the current copy, structure, and above-the-fold content.
 - Use **Computer** to experience it as a visitor would: scroll the full page, click the primary CTA, start (but don't necessarily submit) the form, and check the mobile layout and load behavior. Note anything slow, broken, or hidden.
-- If analytics are connected (GA4, etc.), pull the page's real conversion rate, traffic sources, and drop-off, and chart them with **Data Visualization** — ground recommendations in real numbers, not guesses.
+- If analytics or a behavior tool are connected, pull this page's real conversion rate, traffic sources, and drop-off — plus any heatmaps or session replays — and chart them with **Data Visualization** (see **Data & Connectors**).
 - Capture a screenshot of the current state so any before/after is concrete.
 
 ---
@@ -182,6 +182,24 @@ When recommending experiments, consider tests for:
 3. What does your signup/purchase flow look like after this page?
 4. Do you have user research, heatmaps, or session recordings?
 5. What have you already tried?
+
+---
+
+## Data & Connectors
+
+Ground every recommendation in what the page actually does. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **GA4** | native connector | Page conversion rate, traffic sources, device-split drop-off |
+| **Hotjar** | API / Browse | Heatmaps, recordings, hesitation and rage-clicks |
+| **PostHog** | official MCP / Browse | Session replay, funnels, autocapture click data |
+| **Microsoft Clarity** | Browse | Free heatmaps + rage-click data |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Conversion & traffic** — If **GA4** is connected → pull this page's real conversion rate, traffic sources, and device-split drop-off before recommending, charted with **Data Visualization**.
+- **Observed behavior** — If **Hotjar**, **PostHog**, or **Microsoft Clarity** is connected → pull heatmaps and session replays and tie each recommendation to observed behavior (where visitors stall, rage-click, or abandon).
+- **Neither** — **Browse** and **Computer** the live page yourself as a visitor would, and label every finding as a hypothesis to A/B test.
 
 ---
 

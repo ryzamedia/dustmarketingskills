@@ -2,7 +2,7 @@
 name: paywalls
 description: When the user wants to create or optimize in-app paywalls, upgrade screens, upsell modals, or feature gates. Also use when the user mentions "paywall," "upgrade screen," "upgrade modal," "upsell," "feature gate," "convert free to paid," "freemium conversion," "trial expiration screen," "limit reached screen," "plan upgrade prompt," "in-app pricing," "free users won't upgrade," "trial to paid conversion," or "how do I get users to pay." Use this for any in-product moment where you're asking users to upgrade. Distinct from public pricing pages (see cro) — this focuses on in-product upgrade moments where the user has already experienced value. For pricing decisions, see pricing.
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Paywall and Upgrade Screen CRO
@@ -216,6 +216,27 @@ What you've accomplished:
 4. What's your "aha moment" for users?
 5. What pricing model? (per seat, usage, flat)
 6. Mobile app, web app, or both?
+
+---
+
+## Data & Connectors
+
+Optimize against the real paywall and its real numbers, not benchmarks. **Browse** or **Computer** the live in-product paywall to trigger and inspect it, and pull real free→paid conversion, revenue per user, and funnel data from connected billing and product-analytics tools — **Stripe** and **Paddle** cover **web** billing only, so mobile in-app purchases need **RevenueCat**. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Stripe** | native connector / official MCP | Free→paid conversion, revenue per user, MRR, post-upgrade churn |
+| **Paddle** | Composio / API | Same conversion, revenue, and churn for Paddle-billed products |
+| **Amplitude / Mixpanel** | official MCP / Browse | Paywall impression→upgrade funnel, feature-gate events, aha-moment cohort mapping |
+| **PostHog** | official MCP / Browse | Event funnel + session replay of paywall interactions |
+| **RevenueCat** | API / SDK | Mobile-app paywall + subscription analytics (in-app purchases) |
+| **Browse / Computer** | built-in | Trigger the live in-product paywall to inspect it |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Conversion & revenue** — If **Stripe** or **Paddle** is connected → pull real free→paid conversion, revenue per user, and post-upgrade churn. Else treat these figures as unknown.
+- **Paywall funnel** — If **Amplitude/Mixpanel/PostHog** is connected → pull the paywall impression→upgrade funnel + feature-gate events, and map upgrades to the aha-moment cohort.
+- **Mobile** — For mobile apps, if **RevenueCat** is reachable → pull subscription/paywall analytics (**Stripe/Paddle don't cover in-app purchases**).
+- **Nothing connected** — Browse/Computer the live in-product paywall to inspect it, treat conversion figures as unknown, and ask the user for them.
 
 ---
 

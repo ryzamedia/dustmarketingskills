@@ -2,7 +2,7 @@
 name: competitors
 description: "When the user wants to create competitor comparison or alternative pages for SEO and sales enablement. Also use when the user mentions 'alternative page,' 'vs page,' 'competitor comparison,' 'comparison page,' '[Product] vs [Product],' '[Product] alternative,' 'competitive landing pages,' 'how do we compare to X,' 'battle card,' or 'competitor teardown.' Use this for any content that positions your product against competitors. Covers four formats: singular alternative, plural alternatives, you vs competitor, and competitor vs competitor. For sales-specific competitor docs, see sales-enablement."
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Competitor & Alternative Pages
@@ -250,6 +250,28 @@ For each page: URL, meta tags, full page copy organized by section, comparison t
 
 ### Page Set Plan
 Recommended pages to create with priority order based on search volume.
+
+---
+
+## Data & Connectors
+
+Every comparison claim must trace to something you read **live** — never assert a competitor's price or feature from memory. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **competitor-profiling** | Run an Agent (native Dust) | The deep dossier / source-of-truth this skill builds pages from |
+| **Firecrawl / Browserbase** | official MCP | Structured pricing/feature extraction — an upgrade over plain Browse (Browserbase renders JS) |
+| **HubSpot / Salesforce** | native connector / Composio | Switcher and closed-won-from-competitor quotes |
+| **G2 / Trustpilot** | Browse | Review complaint themes for the "why people switch" section |
+| **Exa** | official MCP | The competitor's own comparison pages + third-party positioning |
+| **Intercom / Zendesk** | Composio / Browse | Support-sourced switching pain and objections |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Source of truth** — If no dossier exists yet, **Run an Agent** to invoke **competitor-profiling** first, then build pages from its output.
+- **Current competitor facts** — If a scraping MCP is connected (**Firecrawl/Browserbase**) → structured pricing/feature extraction (Browserbase for JS-rendered pages). Else **Browse** the live pages. Never assert a competitor price/feature you haven't read live.
+- **Switcher quotes** — If a CRM (**HubSpot/Salesforce**) or support tool (**Zendesk/Intercom**) is connected → pull real closed-won and switching notes. Else use published testimonials and reviews.
+- **Review complaints** — **Browse** G2, Capterra, and Trustpilot for common complaint themes that feed the "why people switch" narrative.
+- **Positioning** — If **Exa** is connected → surface the competitor's own comparison pages and third-party positioning to see how the market frames them.
 
 ---
 

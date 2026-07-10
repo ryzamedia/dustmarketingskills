@@ -2,12 +2,12 @@
 name: sales-enablement
 description: "When the user wants to create sales collateral, pitch decks, one-pagers, objection handling docs, or demo scripts. Also use when the user mentions 'sales deck,' 'pitch deck,' 'one-pager,' 'leave-behind,' 'objection handling,' 'deal-specific ROI analysis,' 'demo script,' 'talk track,' 'sales playbook,' 'proposal template,' 'buyer persona card,' 'help my sales team,' 'sales materials,' or 'what should I give my sales reps.' Use this for any document or asset that helps a sales team close deals. For competitor comparison pages and battle cards, see competitors. For marketing website copy, see copywriting. For cold outreach emails, see cold-email. For the offer being sold (bonuses, guarantees, pricing structure), see offers."
 metadata:
-  version: 2.0.1
+  version: 2.1.0
 ---
 
 # Sales Enablement
 
-You are an expert in B2B sales enablement. Your goal is to create sales collateral that reps actually use — decks, one-pagers, objection docs, demo scripts, and playbooks that help close deals.
+You are an expert in B2B sales enablement. Your goal is to create sales collateral that reps actually use — decks, one-pagers, objection docs, demo scripts, and playbooks that help close deals. When a CRM, call-recording, or review source is connected, pull the real win rates, deal metrics, objections, and quotes from it rather than inventing proof (see **Data & Connectors**).
 
 ## Before Starting
 
@@ -339,13 +339,23 @@ If context is missing, ask:
 
 ---
 
-## Tool Integrations
+## Data & Connectors
 
-For partner sales enablement, see the [tools registry](../../tools/REGISTRY.md):
+Ground proof points, ROI defaults, and objection handling in real numbers, not placeholders. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
 
-| Tool | What It Does | Guide |
-|------|-------------|-------|
-| **Introw** | Partner engagement tracking, deal registration, mutual action plans | [introw.md](../../tools/integrations/introw.md) |
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **HubSpot / Salesforce** | official MCP / Composio | Closed-won metrics, logos, deal sizes, loss reasons — proof points + ROI-calculator inputs |
+| **Introw** | official MCP | Partner deal registration, mutual action plans |
+| **Crossbeam** | remote MCP | Partner account overlaps for co-sell collateral |
+| **G2 / Trustpilot** | Browse | Verbatim review quotes + ratings for proof slides |
+| **Gong** | Composio / API / Browse | Call transcripts for the *real* objections, competitor mentions, win/loss language |
+| **Web Search / Browse** | Web Search / Browse | Competitor claims for battle-card accuracy |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Proof & metrics** — If **HubSpot/Salesforce** is connected → pull real win rates, logos, and deal metrics for proof slides and ROI-calculator defaults. Else use the numbers the user provides and label them as such.
+- **Objections & competitive** — If **Gong** is connected → extract the actual objections and competitor mentions from recent calls. Elif the CRM has **loss-reason** data → use it. Else fall back to the objection library plus user input.
+- **Proof quotes** — If **G2/Trustpilot** is reachable via Browse → pull verbatim customer quotes and ratings. Else request quotes from the user.
 
 ---
 

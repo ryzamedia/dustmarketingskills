@@ -2,7 +2,7 @@
 name: emails
 description: When the user wants to create or optimize an email sequence, drip campaign, automated email flow, or lifecycle email program. Also use when the user mentions "email sequence," "drip campaign," "nurture sequence," "onboarding emails," "welcome sequence," "re-engagement emails," "email automation," "lifecycle emails," "trigger-based emails," "email funnel," "email workflow," "what emails should I send," "welcome series," or "email cadence." Use this for any multi-email automated flow. For cold outreach emails, see cold-email. For in-app onboarding, see onboarding.
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Email Sequence Design
@@ -10,7 +10,7 @@ metadata:
 You are an expert in email marketing and automation. Your goal is to create email sequences that nurture relationships, drive action, and move people toward conversion.
 
 **Working in Dust**, build from real data and ship the sequence — don't just describe it:
-- **Pull real lists, segments, and performance** from the connected email service provider — Customer.io, Klaviyo, Mailchimp, or HubSpot via **connectors** or **Composio**, Resend or other developer-focused senders via a **remote MCP server** (see Tool Integrations below). Ground timing, segmentation, and copy in the account's actual data, not assumptions.
+- **Detect the connected email service provider and pull its real lists, segments, and performance** before drafting — see the detect-and-pull cascade in **Data & Connectors** below. Ground timing, segmentation, and copy in the account's actual data, not assumptions.
 - **Voice-of-customer and brand voice** come from the **Product Context** knowledge item and **Agent Memory** — mirror how customers and the brand actually speak. Pull subject-line and campaign inspiration with **Web Search** and **Browse** (competitor emails, swipe files, "really good emails" galleries).
 - **Deliver the drafted sequence with Create Files** as a structured document the user can review and load into the ESP.
 - **Schedule and automate with Triggers** — behavioral drips, delays between emails, and time-based sends map to Dust **Triggers** (schedules and webhooks), not a manual cron or coding loop.
@@ -298,22 +298,31 @@ What to measure and benchmarks
 
 ---
 
-## Tool Integrations
+## Data & Connectors
 
-Reach the account's email service provider from Dust to pull real lists, segments, and performance and to load finished sequences. See the [tools registry](../../tools/REGISTRY.md) for the full platform → Dust-access mapping. Key email providers:
+Build from the connected email service provider's real assets, not assumptions. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
 
-| Provider | Best For | Dust access | Guide |
-|----------|----------|-------------|-------|
-| **Customer.io** | Behavior-based automation | Composio / remote MCP | [customer-io.md](../../tools/integrations/customer-io.md) |
-| **Klaviyo** | Ecommerce lifecycle + segmentation | Composio / remote MCP | [klaviyo.md](../../tools/integrations/klaviyo.md) |
-| **HubSpot** | CRM-driven nurture, B2B | **HubSpot connector** / Composio | [hubspot.md](../../tools/integrations/hubspot.md) |
-| **Mailchimp** | SMB email marketing | Composio / remote MCP | [mailchimp.md](../../tools/integrations/mailchimp.md) |
-| **Nitrosend** | AI-native email (sequences via prompts) | Remote MCP | [nitrosend.md](../../tools/integrations/nitrosend.md) |
-| **Resend** | Developer-friendly transactional | Remote MCP | [resend.md](../../tools/integrations/resend.md) |
-| **SendGrid** | Transactional email at scale | Composio / remote MCP | [sendgrid.md](../../tools/integrations/sendgrid.md) |
-| **Kit** | Creator/newsletter focused | Composio / API MCP | [kit.md](../../tools/integrations/kit.md) |
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **HubSpot** | native connector / official MCP / Composio | CRM workflows, lists, contact properties, B2B nurture |
+| **Customer.io** | official MCP / Composio | Behavioral flows, segments, broadcast performance |
+| **Klaviyo** | official MCP | Ecommerce flows, segmentation, past subject-line performance |
+| **Mailchimp** | Composio | Journeys, audiences, campaign performance |
+| **Resend** | official MCP | Transactional sends and send logs |
+| **Sequenzy / Nitrosend** | remote MCP | AI-native sequence build from prompts |
+| **SendGrid** | Composio | Transactional email at scale |
+| **Kit / Brevo / ActiveCampaign / Postmark / Beehiiv** | Composio / API | Creator / EU / CRM / deliverability / newsletter senders |
 
-If a provider has no connector or MCP server available, use **Browse** and **Computer** to read reports and set up sends directly in its web app. Behavioral entry and scheduled sends are orchestrated with Dust **Triggers** (webhooks and schedules).
+**Adaptive data pull** — detect the connected ESP and pull its real assets before drafting:
+- If **HubSpot** is connected → pull workflows + lists + contact properties, and ground segmentation in CRM lifecycle stages.
+- Elif **Customer.io** → pull behavioral campaigns, segments, and broadcast metrics.
+- Elif **Klaviyo** → pull flows + segments + past subject-line performance to see which patterns already win with this audience.
+- Elif **Mailchimp** → pull journeys + audiences.
+- Elif **Resend / Sequenzy / Nitrosend** → pull send logs.
+- Else (no ESP connected) → advise from the benchmarks in this skill and deliver the sequence with **Create Files** for the user to load into their ESP manually.
+- **Performance analysis** — pull open/click/conversion/unsubscribe rates via the ESP connector and chart them with **Data Visualization**. If a provider has no connector or MCP, use **Browse / Computer** to read reports in its web app.
+
+Behavioral entry and scheduled sends are orchestrated with Dust **Triggers** (webhooks and schedules).
 
 ---
 

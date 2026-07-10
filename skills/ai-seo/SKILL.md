@@ -2,7 +2,7 @@
 name: ai-seo
 description: "When the user wants to optimize content for AI search engines, get cited by LLMs, or appear in AI-generated answers. Also use when the user mentions 'AI SEO,' 'AEO,' 'GEO,' 'LLMO,' 'answer engine optimization,' 'generative engine optimization,' 'LLM optimization,' 'AI Overviews,' 'optimize for ChatGPT,' 'optimize for Perplexity,' 'AI citations,' 'AI visibility,' 'zero-click search,' 'how do I show up in AI answers,' 'LLM mentions,' 'optimize for Claude/Gemini,' 'llms.txt,' 'OKF,' 'Open Knowledge Format,' 'knowledge bundle,' or 'agent-readable site.' Use this whenever someone wants their content to be cited or surfaced by AI assistants and AI search engines. For traditional technical and on-page SEO audits, see seo-audit. For structured data implementation, see schema."
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # AI SEO
@@ -458,16 +458,22 @@ For tactical guidance on SaaS product pages, blog content, comparison/alternativ
 
 ---
 
-## Tool Integrations
+## Data & Connectors
 
-Reach these from Dust by capability — connect what's available and use **Browse** for the rest. See the [tools registry](../../tools/REGISTRY.md) for the platform → Dust-access mapping.
+Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
 
-| Tool | Reach from Dust | Use For |
+| Tool | Reach from Dust | Use for |
 |------|-----------------|---------|
-| Google Search Console | **Google Search Console** connector | Query performance, which pages AI cites, indexation |
-| GA4 | **GA4** connector | Referral traffic from AI sources (ChatGPT, Perplexity, Gemini) |
-| Semrush / Ahrefs | **Composio** / **remote MCP servers**, or **Browse** | AI Overview tracking, backlinks, content-gap analysis |
-| Otterly / Peec / ZipTie / LLMrefs | **Browse** their dashboards | Share-of-AI-voice and citation monitoring |
+| **Google Search Console** | native connector | Query performance, which pages AI cites, indexation |
+| **GA4** | native connector | Referral traffic from AI sources (ChatGPT, Perplexity, Gemini) |
+| **Semrush / Ahrefs** | official MCP / Composio / Cogny → else Browse | AI Overview tracking, backlinks, content-gap |
+| **Exa** | official MCP | Neural search for who's cited + your third-party presence (Reddit, Wikipedia, review sites) |
+| **Otterly / Profound** | official MCP | Share-of-voice + sentiment, agent-readable |
+| **Peec / ZipTie / LLMrefs** | Browse (dashboard only) | Citation + share-of-voice monitoring, read manually |
+
+**Adaptive data pull:**
+- **AI-visibility monitoring** — If a tracker with an agent surface is connected (**Otterly/Profound**, official MCP) → pull share-of-voice + sentiment directly. Elif a dashboard-only tracker (**Peec/ZipTie/LLMrefs**) → **Browse** it and read the numbers manually. Else DIY: **Web Search** + **Browse** (Computer for logged-in engines) across ChatGPT/Perplexity/Gemini, log with **Create Files**, and schedule the re-check with a **Trigger**.
+- **Citations & third-party presence** — If **Exa** MCP is connected → neural-search who's cited for your queries and where you appear (Reddit, Wikipedia, review sites). Else **Web Search** + **Browse** the SERPs and cited pages.
 
 ---
 

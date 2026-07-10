@@ -2,7 +2,7 @@
 name: social
 description: "When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms, or wants to do social listening and engagement triage. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' 'viral content,' 'what should I post,' 'repurpose this content,' 'tweet ideas,' 'LinkedIn carousel,' 'social media strategy,' 'grow my following,' 'TikTok video,' 'Reels,' 'Shorts,' 'video script,' 'video hook,' 'short-form video,' 'create a reel,' 'social listening,' 'brand mentions,' 'competitor monitoring,' 'top posts to comment on,' or 'find people asking for.' Use this for social media content creation, repurposing, scheduling, short-form video scripting, and social listening. For broader content strategy, see content-strategy. For paid ads, see ad-creative. For earned media, see public-relations."
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Social Content
@@ -407,6 +407,26 @@ Tools: CapCut (free), Descript, Captions.ai, Premiere Pro
 4. What content has performed well in the past?
 5. How much time can you dedicate weekly?
 6. Are you building personal brand, company brand, or both?
+
+---
+
+## Data & Connectors
+
+Post and measure against real accounts, not assumptions. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Create Images** | Dust native | Carousels, quote graphics, Reel/thumbnail frames |
+| **Buffer** | scheduler MCP if configured / Browse + Computer | Schedule/queue, post analytics, best-time data |
+| **GA4** | native connector | Link clicks, profile visits, leads attributed from social |
+| **LinkedIn / Twitter-X / Instagram / TikTok organic** | Browse / Computer | Read feeds, publish, native analytics |
+| **Reddit / Hacker News / Bluesky** | Web Search / Browse; Reddit MCP if connected | Social listening + engagement triage |
+| **Agent Memory + Triggers** | native Dust | Brand voice/history; daily listening loop |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Schedule / post** — If a scheduler is connected (**Buffer** MCP) or the platform has a connector → queue and publish through it. Else **Browse / Computer** the platform UI directly.
+- **Measure** — Pull reach/engagement analytics from the scheduler or platform, and **GA4** for link-click and lead attribution. If neither is connected, ask the user to export their platform analytics.
+- **Listen** — Search **Reddit / Hacker News / Bluesky** via **Web Search / Browse** for brand mentions and intent signals, or a **Reddit MCP** if connected (see [references/listening.md](references/listening.md)).
 
 ---
 

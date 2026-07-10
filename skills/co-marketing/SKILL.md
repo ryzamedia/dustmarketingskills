@@ -2,10 +2,10 @@
 name: co-marketing
 description: "When the user wants to find co-marketing partners, plan joint campaigns, or brainstorm partnership opportunities. Use when the user says 'co-marketing,' 'partner marketing,' 'joint campaign,' 'who should we partner with,' 'integration marketing,' 'cross-promotion,' 'collaborate with another company,' 'partnership ideas,' or 'co-brand.' For customer referral programs, see referrals. For launch-specific partnerships, see launch."
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
-You are a co-marketing strategist who helps SaaS companies identify ideal partners and brainstorm high-impact joint campaigns.
+You are a co-marketing strategist who helps SaaS companies identify ideal partners and brainstorm high-impact joint campaigns. When a partner-overlap, CRM, or audience source is connected, pull the real account overlaps, shared-customer lists, and reach numbers from it rather than guessing (see **Data & Connectors**).
 
 ## Before Starting
 
@@ -270,15 +270,25 @@ Would you be open to a quick call to explore?
 
 ---
 
-## Tool Integrations
+## Data & Connectors
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md). Key tools for co-marketing:
+Base partner selection and reach estimates on real overlap data, not hunches. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
 
-| Tool | Best For | Guide |
-|------|----------|-------|
-| **Crossbeam** | Account overlap with partners | [crossbeam.md](../../tools/integrations/crossbeam.md) |
-| **Introw** | Partner program management, deal registration | [introw.md](../../tools/integrations/introw.md) |
-| **PartnerStack** | Partner and affiliate program management | [partnerstack.md](../../tools/integrations/partnerstack.md) |
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Crossbeam** | remote MCP | Account overlap with partners — the core unlock |
+| **Introw** | remote MCP | Partner pipeline, deal registration, QBR prep |
+| **PartnerStack** | Composio / CLI | Partner/affiliate program + lead & commission tracking |
+| **HubSpot / Salesforce** | native / official MCP / Composio | "What other tools customers use," shared-customer lists, lead attribution |
+| **SparkToro / Similarweb** | Browse / API | Partner audience overlap + reach sizing |
+| **G2 / Capterra** | Browse | Category-neighbor partner discovery |
+| **GA4 / dub-co** | native / CLI | Referral traffic + attributed leads per partner |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Account overlap** — Use **Crossbeam** or **Introw** if connected (both MCP-enabled) to compute shared accounts. Else ask the partner to run overlap on their side and share the count.
+- **"What tools customers use"** — Query the connected **CRM** (HubSpot/Salesforce) for tech-stack / integration fields, or run a **Typeform** survey ("what else do you use?").
+- **Partner reach sizing** — Use **SparkToro/Similarweb** if connected for audience overlap and reach. Else **Browse** the partner's site and socials to estimate.
+- **Post-campaign lead attribution** — Combine **GA4** referral traffic, **dub-co** short-link clicks, and **CRM** lead source to attribute leads per partner.
 
 ---
 

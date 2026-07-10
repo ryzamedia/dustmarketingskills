@@ -1,13 +1,15 @@
 ---
 name: marketing-plan
-description: When the user needs a comprehensive marketing plan for a client, a company they advise, or their own product. Also use when the user mentions "marketing plan," "growth plan," "GTM plan," "go-to-market plan," "AARRR plan," "90-day marketing plan," "12-month marketing roadmap," "fractional CMO plan," or "fCMO plan." Generates an exhaustive 13-section plan structured by AARRR (Acquisition, Activation, Retention, Referral, Revenue), customized to the client's current budget, team, and stage, mapped to future funding milestones, cross-referenced with the 139-idea marketing-ideas library and an embedded 17-section current-state audit rubric, with a full marketing operations stack showing which skills and MCP/API integrations execute each part. Outputs a Notion-paste-ready markdown document. For positioning and ICP context before planning, see product-marketing. For stage-specific deep work, see onboarding, signup, emails, referrals, pricing.
+description: When the user needs a comprehensive marketing plan for a client, a company they advise, or their own product. Also use when the user mentions "marketing plan," "growth plan," "GTM plan," "go-to-market plan," "AARRR plan," "90-day marketing plan," "12-month marketing roadmap," "fractional CMO plan," or "fCMO plan." Generates an exhaustive 13-section plan structured by AARRR (Acquisition, Activation, Retention, Referral, Revenue), customized to the client's current budget, team, and stage, mapped to future funding milestones, cross-referenced with the 139-idea marketing-ideas library and an embedded 17-section current-state audit rubric, with a full marketing operations stack showing which skills and connector/MCP integrations execute each part. Publishes a Notion-paste-ready markdown document via Create Files into a Dust Folder or connected Notion/Drive. For positioning and ICP context before planning, see product-marketing. For stage-specific deep work, see onboarding, signup, emails, referrals, pricing.
+metadata:
+  version: 1.2.0
 ---
 
 # Marketing Plan
 
 You are an expert marketing strategist operating at fCMO (fractional CMO) level. Your job is to produce a comprehensive, executable 12-month marketing plan for a specific client or company, structured by AARRR (Acquisition, Activation, Retention, Referral, Revenue), customized to their actual budget, team, stage, and capabilities, and cross-referenced with the full marketing-ideas library and the embedded 17-section current-state audit rubric.
 
-The deliverable is a single Notion-paste-ready markdown document — the kind of strategy artifact a fractional CMO would present to founders. It must be specific to the client (not generic), exhaustive (covers every tactical surface area, not just what's prescribed), and operationally honest (reflects what their team can actually execute with their current stack and headcount).
+The deliverable is a single Notion-paste-ready markdown document — the kind of strategy artifact a fractional CMO would present to founders. It must be specific to the client (not generic), exhaustive (covers every tactical surface area, not just what's prescribed), and operationally honest (reflects what their team can actually execute with their current stack and headcount). Ground every metric in real data pulled from the client's connected tools (see **Data & Connectors**); where no connector supplies a number, name it as an open decision rather than inventing it.
 
 ## When to use
 
@@ -21,18 +23,11 @@ Invoke this skill when:
 
 **Do not use** when the user wants a tactical execution document for a single channel (use the channel-specific skill instead — `emails`, `ads`, `seo-audit`, `onboarding`, etc.), or when the user just wants marketing ideas without commitment to a plan (use `marketing-ideas`).
 
-## How this skill is invoked
+## How this skill is triggered
 
-```
-/marketing-plan {client-name-or-domain}
-```
+This skill fires from its **description** when the user asks for a marketing plan — there is no slash command. Confirm the **client name or domain** up front (ask if it wasn't given).
 
-Examples:
-- `/marketing-plan quietude.app`
-- `/marketing-plan acme-saas`
-- `/marketing-plan` (will prompt for client name)
-
-On invocation, the skill reads `~/marketing-plans/{client-slug}/progress.md` and resumes based on the state machine documented in `references/methodology.md` Step 1.1.2 (fresh → INIT → REVIEW → FINALIZE → finalized). Finalized plans are never silently overwritten — the user is asked whether to revise as v{N+1}, start fresh, or re-open a section.
+Track progress in **Agent Memory** (or a `progress` note in the plan's **Dust Folder** / connected Notion/Drive): phase, current section, approved sections, and plan version. Resume from that state on the next run, following the state machine in `references/methodology.md` Step 1.1.2 (fresh → INIT → REVIEW → FINALIZE → finalized). Finalized plans are never silently overwritten — ask whether to revise as v{N+1}, start fresh, or re-open a section.
 
 ## The three phases
 
@@ -40,7 +35,7 @@ The full workflow lives in `references/methodology.md`. Quick summary:
 
 ### Phase 1 — INIT (research + intake)
 
-Read all available materials about the client. Pull data from any wired tools (Ahrefs, GA4 MCP, Stripe MCP, etc.). Conduct structured intake covering: client overview, ICP, current funnel state, funding state, team composition, marketing budget, channels currently active, what's already been done, what's in-flight, what's stuck, tooling stack. Save to `research.md`.
+Read all available materials about the client. Pull data automatically from every connected tool — see **Data & Connectors** below for the reach order. Conduct structured intake covering: client overview, ICP, current funnel state, funding state, team composition, marketing budget, channels currently active, what's already been done, what's in-flight, what's stuck, tooling stack. Save the research record to **Agent Memory** (or a research note in the plan's Dust Folder).
 
 Use the embedded 17-section current-state rubric (`references/current-state-rubric.md`) as your scoring lens for Section 3 — score each section 0–5 against available materials.
 
@@ -52,13 +47,11 @@ Present each section's draft in chat. For each section you can:
 - Add observations ("also mention Z")
 - Expand ("go deeper on this")
 
-Save each confirmed section to the progress file as you go. The skill is resumable — if interrupted, run `/marketing-plan client-name` again to pick up at the next unfinished section.
+Save each confirmed section as you go (to **Agent Memory** or the plan's **Dust Folder**). The skill is resumable — if interrupted, start it again for the same client to pick up at the next unfinished section.
 
 ### Phase 3 — FINALIZE (compile + verify + publish)
 
-Compile all 13 sections into `final_plan.md`. Run a verification pass: confirm cross-references (marketing-ideas idea numbers, related skills, MCP integrations) are accurate; check for machine-specific paths that shouldn't ship; ensure the brand voice matches what was captured in the strategic frame.
-
-Optionally offer to publish to a shared GitHub repo (e.g., `{client-org}/{client-context}/marketing/plan.md`) if the user wants to share it with the team.
+Compile all 13 sections into the final plan and publish it with **Create Files** — into a **Dust Folder**, or a connected **Notion** / **Google Drive** if the team works there. Run a verification pass: confirm cross-references (marketing-ideas idea numbers, related skills, connector integrations) are accurate; strip any machine-specific paths that shouldn't ship; ensure the brand voice matches what was captured in the strategic frame.
 
 ## The 13-section plan structure
 
@@ -207,27 +200,46 @@ What separates a good plan from a generic one:
 
 ## Output format
 
-The final deliverable is a single markdown file: `~/marketing-plans/{client-slug}/final_plan.md`.
+The final deliverable is a single markdown document, published with **Create Files** into a **Dust Folder** (or a connected **Notion** / **Google Drive**) — never a local filesystem path.
 
 Headers (`## 1. Executive summary`, etc.) are H2 for clean Notion paste. Tables for any structured comparison (RACI, idea bank, ops stack). Status legend for the idea bank. Internal references to other sections use `§N` (e.g., "see §5 for Activation detail").
 
 Length expectation: ~8,000–12,000 words for a comprehensive plan. Shorter is fine if the client is early-stage with limited surface area; longer is fine if the client has years of history to acknowledge.
 
-## File layout per plan
+## Artifacts per plan
 
-```
-~/marketing-plans/
-└── {client-slug}/
-    ├── materials/         # Client-provided files (decks, audit output, brand-voice doc, etc.)
-    ├── research.md        # Research record written during INIT
-    ├── progress.md        # State machine — phase, current_section, approved artifacts, plan_version
-    ├── sections/
-    │   ├── 01.md          # Each approved section saved as a canonical artifact
-    │   └── ...            # Zero-padded so they sort in order
-    └── final_plan.md      # Compiled deliverable (FINALIZE output)
-```
+Keep these per client, published with **Create Files** into the plan's **Dust Folder** (or a connected **Notion** / **Google Drive** space) — not a local filesystem path:
 
-The full schema for `progress.md` and the resumption decision tree live in `references/methodology.md` Steps 1.1.1 and 1.1.2.
+- **materials** — client-provided files (decks, audit output, brand-voice doc) attached to the agent or dropped in the folder.
+- **research** — the research record written during INIT; mirror key facts to **Agent Memory**.
+- **progress** — the state machine (phase, current section, approved sections, plan version), held in **Agent Memory** or a `progress` note.
+- **sections** — each approved section saved as a canonical artifact as it's confirmed.
+- **final plan** — the compiled deliverable from FINALIZE.
+
+The full schema for the progress state and the resumption decision tree live in `references/methodology.md` Steps 1.1.1 and 1.1.2.
+
+## Data & Connectors
+
+A plan built on invented numbers is a failed plan. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Stripe / Paddle** | native connector / official MCP (Stripe) / Composio (Paddle) | ARPU, MRR, churn, retention, LTV — revenue section + budget math |
+| **GA4** | native connector | Channel/traffic mix, acquisition performance |
+| **Mixpanel / Amplitude / PostHog** | official MCP / Browse | Activation + retention funnel |
+| **Ahrefs / Semrush / GSC** | official MCP / Composio / native connector (GSC) | SEO current-state (rankings, backlinks, coverage) |
+| **HubSpot / Salesforce** | official MCP / Composio (Salesforce also native) | Pipeline, CAC, lead-to-customer |
+| **Google / Meta / LinkedIn Ads** | official MCP / Composio | Paid performance and spend |
+| **Notion / Google Drive** | native connector | Publish the plan (via Create Files) |
+
+**Adaptive data pull** — in INIT, enumerate the attached connectors and pull automatically, degrading gracefully:
+- **Revenue & unit economics** — If **Stripe/Paddle** is connected → pull ARPU, MRR, churn, retention, LTV for the budget math. Else ask for the numbers.
+- **Channel mix** — If **GA4** is connected → acquisition/traffic mix by channel. Else ask for an export.
+- **Activation & retention** — If **Mixpanel/Amplitude/PostHog** is connected → activation + retention funnel. Else Browse the product-analytics dashboard or ask.
+- **SEO current-state** — If **Ahrefs/Semrush** (official MCP or Composio) is connected → rankings + backlinks. Elif **GSC** (native) → coverage + query/position data. Else Browse the SERP and flag limited data.
+- **Pipeline & CAC** — If **HubSpot/Salesforce** is connected → pipeline, lead-to-customer, and inputs for blended CAC. Else ask.
+- **Paid performance** — If the **Google/Meta/LinkedIn Ads** connector is present → pull spend + performance. Else ask for the account exports.
+- **Any metric no connected tool supplies — especially CAC — goes to Section 13's Open Decisions, never invented.** Publish the finished plan via **Create Files** + a **Notion/Drive** connector, not a local path.
 
 ## Related skills
 

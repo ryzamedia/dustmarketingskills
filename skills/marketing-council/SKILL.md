@@ -2,7 +2,7 @@
 name: marketing-council
 description: "When the user wants multiple expert perspectives on a marketing question — a simulated board of advisors staffed by legendary marketers (Seth Godin, David Ogilvy, Eugene Schwartz, April Dunford, Rory Sutherland, Alex Hormozi, Byron Sharp, and more). Also use when the user mentions 'marketing council,' 'board of advisors,' 'advisory board,' 'what would Seth Godin say,' 'what would Ogilvy think,' 'channel Hormozi,' 'get multiple perspectives,' 'debate this,' 'have the council review,' 'marketing mentors,' or asks how a famous marketer would approach their problem. The council gives each advisor's take through their documented frameworks, surfaces where they disagree, and synthesizes a recommendation. For executing the winning direction, hand off to positioning, offers, copywriting, ads, or the relevant skill."
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Marketing Council
@@ -148,6 +148,10 @@ Users can extend the bench ("add my own advisor"). Create a dossier following th
 - **Quote soup** — stitching famous one-liners together instead of applying the method behind them.
 - **Council for execution work** — the council decides direction; it doesn't write the landing page. Hand off to the execution skill once direction is set.
 - **Twelve advisors on a headline** — match the bench size to the stakes.
+
+## Data & Connectors
+
+The council is **advisory** — it reasons over the **Product Context** and runs a live research pass (via **deep-research** / **Web Search**, plus **watch-video** if installed) on the seated advisors' documented positions, per the **Live Research Pass** section. Marketing-data connectors (analytics, CRM, ads) don't change the takes. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
 
 ## Related Skills
 

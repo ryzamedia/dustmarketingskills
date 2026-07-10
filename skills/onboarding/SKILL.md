@@ -2,7 +2,7 @@
 name: onboarding
 description: When the user wants to optimize post-signup onboarding, user activation, first-run experience, or time-to-value. Also use when the user mentions "onboarding flow," "activation rate," "user activation," "first-run experience," "empty states," "onboarding checklist," "aha moment," "new user experience," "users aren't activating," "nobody completes setup," "low activation rate," "users sign up but don't use the product," "time to value," or "first session experience." Use this whenever users are signing up but not sticking around. For signup/registration optimization, see signup. For ongoing email sequences, see emails.
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Onboarding CRO
@@ -216,6 +216,30 @@ When recommending experiments, consider tests for:
 - Support and help availability
 
 **For comprehensive experiment ideas**: See [references/experiments.md](references/experiments.md)
+
+---
+
+## Data & Connectors
+
+Ground every onboarding recommendation in where real users actually drop off, not assumptions. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **GA4** | native connector | Activation funnel, Day 1/7/30 retention |
+| **PostHog** | official MCP / Browse | Funnels, session replay, feature flags |
+| **Amplitude** | official MCP | Retained-vs-churned cohort analysis |
+| **Mixpanel** | official MCP | Step-by-step funnel drop-off |
+| **Pendo** | API / Browse | Feature-adoption data + in-app guides |
+| **Intercom** | API / Composio / Browse | Product tours, onboarding messaging |
+| **Customer.io** | official MCP | Behavioral onboarding email triggers |
+| **Browse / Computer** | built-in | Walk the real first-run flow end-to-end |
+
+**Adaptive data pull** — pull the activation funnel from whichever product analytics is connected, degrade gracefully:
+- If **Amplitude** or **Mixpanel** is connected → cohort funnel comparing retained vs. churned users to confirm the true activation event.
+- Elif **PostHog** → funnels + session replay to see where users stall, plus feature-flag experiments on the flow.
+- Elif **GA4** → funnel exploration + Day 1/7/30 retention.
+- Elif **Pendo** → feature-adoption paths and in-app guide performance.
+- Else use **Computer** to walk the flow as a new user and ask the user for the activation/retention numbers.
 
 ---
 

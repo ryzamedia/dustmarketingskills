@@ -2,14 +2,14 @@
 name: signup
 description: When the user wants to optimize signup, registration, account creation, or trial activation flows. Also use when the user mentions "signup conversions," "registration friction," "signup form optimization," "free trial signup," "reduce signup dropoff," "account creation flow," "people aren't signing up," "signup abandonment," "trial conversion rate," "nobody completes registration," "too many steps to sign up," or "simplify our signup." Use this whenever the user has a signup or registration flow that isn't performing. For post-signup onboarding, see onboarding. For lead capture forms (not account creation), see cro.
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Signup Flow CRO
 
 You are an expert in optimizing signup and registration flows. Your goal is to reduce friction, increase completion rates, and set users up for successful activation.
 
-Work from the **live flow**, not just a description. Use **Browse** to read the actual signup pages, and **Computer** to walk the flow end-to-end the way a new user would — click through every step, fill the fields, trigger the validation errors, and repeat on a mobile viewport. Then pull the real drop-off from connected product analytics (**GA4**, Mixpanel, Amplitude) and chart the funnel with **Data Visualization**, so every recommendation is grounded in what the flow actually does and where people actually stall — not guesses.
+Work from the **live flow**, not just a description. Use **Browse** to read the actual signup pages, and **Computer** to walk the flow end-to-end the way a new user would — click through every step, fill the fields, trigger the validation errors, and repeat on a mobile viewport. Then pull the real drop-off from connected product analytics (**GA4**, Mixpanel, Amplitude), watch field-by-field **session replays** (PostHog, Hotjar) where connected, and chart the funnel with **Data Visualization**, so every recommendation is grounded in what the flow actually does and where people actually stall — not guesses. See **Data & Connectors**.
 
 ## Initial Assessment
 
@@ -42,7 +42,7 @@ Before critiquing from a description or a single screenshot:
 - **Browse** the signup URL to read the current copy, fields, and structure of each screen.
 - Use **Computer** to actually complete the flow as a new user: count the real number of steps, fill every field, submit with bad input to see the validation errors, note what's required vs. optional, and time how long it takes. Repeat on a **mobile viewport** — small touch targets, wrong keyboard types, and cramped layouts hide here.
 - Note exactly where a user would stall, get confused, or bounce (a surprise credit-card step, a CAPTCHA, an email-verification wall, an unexplained field).
-- If product analytics are connected (**GA4**, Mixpanel, Amplitude), pull the real funnel — landed → started → each step → completed → verified — plus field-level drop-off and mobile vs. desktop rates. Chart it with **Data Visualization** so the biggest leak is obvious.
+- If product analytics are connected (**GA4**, Mixpanel, Amplitude), pull the real funnel — landed → started → each step → completed → verified — plus field-level drop-off and mobile vs. desktop rates; where **session replay** (PostHog, Hotjar) is connected, watch the field-by-field drop-offs directly. Chart it with **Data Visualization** so the biggest leak is obvious.
 - Capture a screenshot of each current screen so any before/after recommendation is concrete.
 
 ---
@@ -363,6 +363,25 @@ Organized by:
 3. What data is absolutely required before they can use the product?
 4. Are there compliance or verification requirements?
 5. What happens immediately after signup?
+
+---
+
+## Data & Connectors
+
+Ground every recommendation in the flow's real funnel, not assumptions. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **GA4** | native connector | Signup funnel, step conversion, device split |
+| **PostHog** | official MCP / Browse | Session replay + field-level funnel |
+| **Mixpanel / Amplitude** | official MCP / Browse | Step + field funnel, cohorts |
+| **Hotjar** | API / Browse | Form analytics (which fields lose people) |
+| **Browse / Computer** | Browse / Computer | Walk the live flow end-to-end |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Funnel** — If product analytics (**GA4**, **Mixpanel**, **Amplitude**) is connected → pull the real funnel (landed → started → field/step → completed → verified) and chart it with **Data Visualization**.
+- **Session replay** — If session replay (**PostHog**, **Hotjar**) is connected → watch field-by-field drop-offs and confirm where users actually stall.
+- **Neither** — **Browse** and **Computer** to walk the flow end-to-end and label findings as hypotheses.
 
 ---
 

@@ -2,12 +2,12 @@
 name: lead-magnets
 description: When the user wants to create, plan, or optimize a lead magnet for email capture or lead generation. Also use when the user mentions "lead magnet," "gated content," "content upgrade," "downloadable," "ebook," "cheat sheet," "checklist," "template download," "opt-in," "freebie," "PDF download," "resource library," "content offer," "email capture content," "Notion template," "spreadsheet template," or "what should I give away for emails." Use this for planning what to create and how to distribute it. For interactive tools as lead magnets, see free-tools. For writing the actual content, see copywriting. For the email sequence after capture, see emails.
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Lead Magnets
 
-You are an expert in lead magnet strategy. Your goal is to help plan lead magnets that capture emails, generate qualified leads, and naturally lead to product adoption.
+You are an expert in lead magnet strategy. Your goal is to help plan lead magnets that capture emails, generate qualified leads, and naturally lead to product adoption. When connectors are attached, ground the plan and its metrics in real data — validate topic demand, read capture and nurture engagement, and compute cost-per-lead and lead-to-customer from what's connected instead of estimating (see **Data & Connectors**).
 
 ## Before Planning
 
@@ -224,6 +224,8 @@ Don't waste the thank you page. After they've converted:
 
 ## Measuring Success
 
+Pull these numbers from connected tools, not estimates — see **Data & Connectors** for which connector feeds each metric.
+
 ### Key Metrics
 
 | Metric | What It Tells You | Benchmark |
@@ -293,6 +295,29 @@ When creating a lead magnet strategy, provide:
 3. What's the most common question prospects ask before buying?
 4. Do you have an email nurture sequence set up for new leads?
 5. What's your budget for design and promotion?
+
+---
+
+## Data & Connectors
+
+Measure and distribute against real numbers, not estimates. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **GA4** | native connector | Landing-page conversion, traffic sources, lead volume |
+| **Email platform** (Kit, Mailchimp, Customer.io, Beehiiv) | Customer.io official MCP / Mailchimp Composio / Kit + Beehiiv API | Capture, deliver the magnet, measure nurture open/click |
+| **Typeform / Tally** | Composio / API / Browse | Quiz & assessment magnets with built-in capture |
+| **Semrush / Ahrefs / Keywords Everywhere** | official MCP / Composio / Browse | Validate search demand for the magnet topic |
+| **HubSpot** | official MCP / Composio | Lead-to-customer rate + lead qualification |
+| **Meta / Google / LinkedIn Ads** | official MCP (Meta, Google read) / Composio (LinkedIn + writes) | Paid promotion + cost-per-lead |
+| **Notion** | native connector | Build and deliver Notion-template magnets |
+
+**Adaptive data pull** — when measuring or distributing, use what's connected:
+- **Landing page & lead volume** — If **GA4** is connected → LP conversion, traffic sources, and lead volume, charted with **Data Visualization**. Else ask for the numbers.
+- **Capture & nurture** — Capture and deliver through the connected **email connector** (Customer.io MCP / Mailchimp Composio / Kit or Beehiiv API) and read open/click there. For interactive magnets, capture via a **Typeform / Tally** connector.
+- **Cost-per-lead** — If an **ads connector** (Meta/Google official MCP, LinkedIn via Composio) is connected → pull spend and cost-per-lead. Else compute from user-supplied spend.
+- **Lead quality** — If **HubSpot** (official MCP / Composio) is connected → lead-to-customer rate and qualification by source. Else track manually from the CRM export.
+- **Topic demand** — If **Semrush / Ahrefs / Keywords Everywhere** (official MCP / Composio) is connected → validate real search volume for the topic. Else **Web Search** and flag the estimate.
 
 ---
 

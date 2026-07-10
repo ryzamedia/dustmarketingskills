@@ -2,7 +2,7 @@
 name: revops
 description: "When the user wants help with revenue operations, lead lifecycle management, or marketing-to-sales handoff processes. Also use when the user mentions 'RevOps,' 'revenue operations,' 'lead scoring,' 'lead routing,' 'MQL,' 'SQL,' 'pipeline stages,' 'deal desk,' 'CRM automation,' 'marketing-to-sales handoff,' 'data hygiene,' 'leads aren't getting to sales,' 'pipeline management,' 'lead qualification,' or 'when should marketing hand off to sales.' Use this for anything involving the systems and processes that connect marketing to revenue. For cold outreach emails, see cold-email. For email drip campaigns, see emails. For pricing decisions, see pricing."
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # RevOps
@@ -316,22 +316,28 @@ Format each as a standalone document the user can implement directly. Include pl
 
 ---
 
-## Tool Integrations
+## Data & Connectors
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md). Key RevOps tools:
+Scoring models, funnel-leak diagnosis, and pipeline metrics are a function of **live CRM data** — read the connected CRM to build the model and diagnose leaks from real conversion rates, not from assumptions. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
 
-| Tool | What It Does | Guide |
-|------|-------------|-------|
-| **HubSpot** | CRM, marketing automation, lead scoring, workflows | [hubspot.md](../../tools/integrations/hubspot.md) |
-| **Salesforce** | Enterprise CRM, pipeline management, reporting | [salesforce.md](../../tools/integrations/salesforce.md) |
-| **Calendly** | Meeting scheduling, round-robin routing | [calendly.md](../../tools/integrations/calendly.md) |
-| **SavvyCal** | Scheduling with priority-based availability | [savvycal.md](../../tools/integrations/savvycal.md) |
-| **Clearbit** | Real-time lead enrichment and scoring | [clearbit.md](../../tools/integrations/clearbit.md) |
-| **Apollo** | Contact data, enrichment, and outbound sequences | [apollo.md](../../tools/integrations/apollo.md) |
-| **ActiveCampaign** | Marketing automation for SMBs, lead scoring | [activecampaign.md](../../tools/integrations/activecampaign.md) |
-| **Zapier** | Cross-tool automation and workflow glue | [zapier.md](../../tools/integrations/zapier.md) |
-| **Introw** | Partner-sourced pipeline, commissions, deal registration, QBRs | [introw.md](../../tools/integrations/introw.md) |
-| **Crossbeam** | Partner account overlaps and co-sell identification | [crossbeam.md](../../tools/integrations/crossbeam.md) |
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **HubSpot** | official MCP / Composio | Lifecycle stages, deal/pipeline data — build scoring from real closed-won, diagnose stage leaks, configure workflows |
+| **Salesforce** | official MCP / Composio | Enterprise pipeline, stage config, reports/SOQL |
+| **Close** | API / Browse | SMB high-velocity CRM |
+| **Clearbit** | Composio | Real-time fit enrichment |
+| **Apollo** | official MCP | Enrichment to fill firmographic fit fields |
+| **ZoomInfo** | remote MCP | Enterprise enrichment + intent for fit scoring |
+| **Clay** | remote MCP | Waterfall enrichment for data hygiene / dedup |
+| **GA4** | native connector | Source attribution / cost-per-MQL inputs |
+| **Calendly / SavvyCal** | API | Round-robin routing + meeting-booked triggers |
+| **Zapier** | remote MCP | Cross-tool handoff / SLA automation |
+| **Data Visualization** | native Dust | Render the three-view metrics dashboard |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **CRM** — If **HubSpot** is connected → read lifecycle stages, pipeline, and closed-won; build the scoring model against real wins; diagnose the leaking stage from real conversion rates. Elif **Salesforce** → same via reports/SOQL. Elif **Close** → same. Else work from the user's described stack + this skill's templates only.
+- **Enrichment for fit scoring** — If **Clearbit** is connected → enrich fit fields. Elif **Apollo** → same. Elif **ZoomInfo** → enrichment + intent signals. Elif **Clay** → waterfall enrichment. Else fit-score from user-provided firmographics.
+- **Metrics dashboard** — Pull pipeline and lifecycle metrics from the connected CRM + **GA4**, render the marketing/sales/executive views with **Data Visualization**. Else deliver the dashboard spec.
 
 ---
 

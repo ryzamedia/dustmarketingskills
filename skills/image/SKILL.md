@@ -2,7 +2,7 @@
 name: image
 description: "When the user wants to create, generate, edit, or optimize images for marketing — blog heroes, social graphics, product mockups, profile banners, listing visuals, or brand assets. Also use when the user mentions 'AI image generation,' 'generate an image,' 'create a graphic,' 'product mockup,' 'hero image,' 'social media graphic,' 'banner image,' 'cover photo,' 'profile banner,' 'listing screenshot,' 'Flux,' 'Flux Kontext,' 'Midjourney,' 'DALL-E,' 'GPT Image,' 'ChatGPT Images,' 'Ideogram,' 'Gemini image,' 'Nano Banana,' 'Recraft,' 'Stable Diffusion,' 'Canva,' 'Figma,' 'image optimization,' 'compress images,' 'WebP,' or 'OG image.' Use this for general-purpose marketing image creation and optimization. For paid ad image creative and platform-specific ad specs, see ad-creative. For video production, see video."
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Image
@@ -307,6 +307,22 @@ For OG images at scale (many blog posts or profiles), the pattern is a template 
 6. **Generating without style direction** — "photorealistic," "flat illustration," "3D render" drastically changes output
 7. **Inconsistent brand visuals** — use Flux multi-reference or design templates for consistency
 8. **Huge images on landing pages** — compress, resize, lazy load
+
+---
+
+## Data & Connectors
+
+Image work is mostly craft executed with **Create Images**, grounded in the **Product Context**. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Create Images** | Dust native | Primary generation + editing — your default path |
+| **Ideogram / Flux / Recraft / GPT Image / Gemini** | remote MCP / Composio (if connected) | Specialized jobs (dense in-image text, vector, brand consistency) |
+| **Canva / Figma** | connector / MCP (if available) | Templated, brand-consistent assets and Magic Resize |
+| **Browse + Computer** | Dust native | Capture real product UI screenshots (never generate UI) |
+| **Google Drive / Notion + Create Files** | native connector | Deliver finished assets where the team works |
+
+**Adaptive data pull** — generate with **Create Images** by default; when a specialized model is connected as a **remote MCP server** or via **Composio** (e.g. Ideogram for heavy in-image text) → route that job to it; when a **Canva/Figma** connector is available → use it for templated brand assets; else fall back to **Create Images** and deliver via **Create Files**.
 
 ---
 

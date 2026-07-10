@@ -2,7 +2,7 @@
 name: copy-editing
 description: "When the user wants to edit, review, or improve existing marketing copy, or refresh outdated content. Also use when the user mentions 'edit this copy,' 'review my copy,' 'copy feedback,' 'proofread,' 'polish this,' 'make this better,' 'copy sweep,' 'tighten this up,' 'this reads awkwardly,' 'clean up this text,' 'too wordy,' 'sharpen the messaging,' 'refresh this content,' 'update this page,' 'this content is outdated,' or 'content audit.' Use this when the user already has copy and wants it improved or refreshed rather than rewritten from scratch. For writing new copy, see copywriting."
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Copy Editing
@@ -435,6 +435,15 @@ Copy editing isn't just for new content. Existing pages decay over time — outd
 3. Are there specific concerns or known issues?
 4. What proof/evidence do you have available?
 5. Is this new copy or a refresh of existing content?
+
+---
+
+## Data & Connectors
+
+Copy editing is mostly craft — clarity, voice, and rhythm grounded in the brand voice and customer language in the **Product Context** (or **Agent Memory**). Two jobs are data-hungry and reward pulling **real data from whatever's connected** (reach priority: **native connector → MCP → Composio → Browse**):
+
+- **Content refresh** — If **GA4**, **Google Search Console**, or **Plausible** is connected → pull page-level traffic trends to confirm the decline and prioritize decayed pages before editing. If a **CMS** connector (WordPress/Webflow/Sanity/Contentful/Strapi) is connected → read the live page and publish the edit in place; else **Browse** it.
+- **Prove It sweep** — Back every claim with real proof pulled from a connected reviews tool (**G2 / Trustpilot** via Browse) or **CRM** (**HubSpot** via Composio) rather than softening the claim. Label anything you cannot verify.
 
 ---
 

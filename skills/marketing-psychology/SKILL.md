@@ -2,7 +2,7 @@
 name: marketing-psychology
 description: "When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'why people buy,' 'decision-making,' 'consumer behavior,' 'anchoring,' 'social proof,' 'scarcity,' 'loss aversion,' 'framing,' or 'nudge.' Use this whenever someone wants to understand or leverage how people think and make decisions in a marketing context. For applying psychology to specific pages, see cro; for pricing tactics, see pricing; for copy framing, see copywriting."
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Marketing Psychology & Mental Models
@@ -443,6 +443,15 @@ When facing a marketing challenge, consider:
 3. Where in the journey (awareness → consideration → decision) is this?
 4. What's currently preventing the desired action?
 5. Have you tested this with real customers?
+
+---
+
+## Data & Connectors
+
+Picking the right model is **craft grounded in the Product Context** — the real ICP, their objections, and the switching forces acting on them, not a generic bias list. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+- **Diagnose before prescribing** — if an analytics/CRO connector is attached (**GA4** native connector; **Amplitude / PostHog** official MCP; **Hotjar** via Browse) → pull the funnel and drop-off data to see which model actually applies (**Theory of Constraints** at the true bottleneck, **Hick's Law** where choices overwhelm, **Activation Energy** at the first step) before recommending one. Else reason from the Product Context.
+- Execution and its data live in the skills this one hands off to — **cro**, **ab-testing**, **pricing**.
 
 ---
 

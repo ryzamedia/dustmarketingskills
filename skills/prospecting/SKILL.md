@@ -2,7 +2,7 @@
 name: prospecting
 description: When the user wants to find, qualify, and build a list of prospects to reach out to — across B2B SaaS, general B2B, or local small businesses. Also use when the user mentions "prospecting," "build a prospect list," "find prospects," "find leads," "lead gen list," "find SaaS companies that," "find B2B companies," "find local businesses," "ICP-fit accounts," "who should we go after," "outbound list," "target account list," "find clients near me," "businesses without websites," "prospect research," or "qualified leads." Use this for the list-building and qualification phase. For writing the outbound copy after the list is built, see cold-email. For deep competitive research on specific accounts, see competitor-profiling.
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Prospecting
@@ -122,29 +122,6 @@ If missing, ask once, then infer reasonable defaults and continue:
 
 ---
 
-## Tool Selection Quick Picks
-
-Full breakdown in [references/data-sources.md](references/data-sources.md). Quick picks:
-
-| If the user has access to... | Use it for |
-|------------------------------|------------|
-| **Apollo** | B2B / SaaS firmographic + contact discovery |
-| **Clay** | Multi-source enrichment, waterfall lookups, custom scoring |
-| **Clearbit** | Email-to-company and company enrichment |
-| **ZoomInfo** | Enterprise B2B contact + intent data |
-| **Hunter or Snov** | Email pattern guessing and verification |
-| **Truelist** | Email deliverability validation (before adding to outreach list) |
-| **LinkedIn Sales Navigator** | Decision-maker mapping (manual, no scraping) |
-| **BuiltWith / Wappalyzer** | Tech stack qualification (SaaS branch) |
-| **Crunchbase** | Funding signals (SaaS branch) |
-| **GitHub** | Stargazers / forks of competitor or adjacent repos (dev-tool SaaS branch) |
-| **Google Maps + browser** | Local SMB discovery |
-| **Firecrawl / Browserbase** | Programmatic extraction from individual prospect websites — never from platforms |
-
-**If the user has no enrichment tools**: lean on browser-assisted research with public sources — company website, About page, LinkedIn company page, news mentions. Slower but works.
-
----
-
 ## Output Formats
 
 ### Default — chat table
@@ -224,24 +201,28 @@ score,business,category,area,distance_km,website_status,website_url,social_urls,
 
 ---
 
-## Tool Integrations
+## Data & Connectors
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md). Key prospecting tools:
+Build the list from real firmographic and contact data, not guesses. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
 
-| Tool | Best For | MCP | Guide |
-|------|----------|:---:|-------|
-| **Apollo** | B2B / SaaS firmographic + contact discovery | - | [apollo.md](../../tools/integrations/apollo.md) |
-| **Clay** | Multi-source enrichment + waterfall | ✓ | [clay.md](../../tools/integrations/clay.md) |
-| **Clearbit** | Email-to-company enrichment | - | [clearbit.md](../../tools/integrations/clearbit.md) |
-| **ZoomInfo** | Enterprise B2B contact + intent | ✓ | [zoominfo.md](../../tools/integrations/zoominfo.md) |
-| **Hunter** | Email pattern + verification | - | [hunter.md](../../tools/integrations/hunter.md) |
-| **Snov** | Email finder + verifier | - | [snov.md](../../tools/integrations/snov.md) |
-| **Truelist** | Email deliverability validation | - | [truelist.md](../../tools/integrations/truelist.md) |
-| **Outreach** | Sales engagement (post-list) | ✓ | [outreach.md](../../tools/integrations/outreach.md) |
-| **RB2B** | Visitor identification (warm intent) | - | [rb2b.md](../../tools/integrations/rb2b.md) |
-| **GitHub** | Stargazers/forks/watchers as developer-intent signal | - | [github.md](../../tools/integrations/github.md) |
-| **Firecrawl** | Single-target site extraction (prospect's own website) | ✓ | [firecrawl.md](../../tools/integrations/firecrawl.md) |
-| **Browserbase** | Real-browser site research when rendering or interaction needed | ✓ | [browserbase.md](../../tools/integrations/browserbase.md) |
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **Apollo** | official MCP | People + org search, contact + firmographic enrichment |
+| **ZoomInfo** | remote MCP | Enterprise contacts + intent data |
+| **Clay** | remote MCP | Waterfall enrichment + custom scoring |
+| **Truelist** | remote MCP | Email verification before a lead ships |
+| **Firecrawl / Browserbase** | official MCP | Single-target extraction from a prospect's own site (Browserbase renders JS) |
+| **GitHub** | native connector | Stargazers/forks as developer-intent signal |
+| **Clearbit** | Composio | Company + email enrichment |
+| **Hunter / Snov** | API / Browse | Email find + verify fallback |
+| **RB2B** | Browse | Warm intent from de-anonymized visitors |
+| **Google Maps / Yelp / LinkedIn Sales Nav** | Browse / Computer | Local SMB discovery (no API path) |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Discovery & enrichment** — If **Apollo** MCP is connected → people/org search + enrich. Elif **ZoomInfo** → enterprise contacts + intent. Elif **Clay** → waterfall enrichment. Elif **Clearbit** (Composio) → company + email enrichment. Else use **Hunter/Snov** for emails and **Browse** public sources (site, About page, LinkedIn company page) for firmographics.
+- **Dev-tool branch** — If the **GitHub** connector is available → pull stargazers/forks/watchers of adjacent repos as developer-intent, then enrich those handles via **Apollo** or **Hunter**.
+- **Verify** — If **Truelist** is connected → validate every email before it ships. Else flag all emails as unverified and warn the user before outreach.
+- **Local SMB** — Always **Browse/Computer** (Google Maps → Yelp → business site); no API path. Assisted research only — no bulk scraping.
 
 ---
 

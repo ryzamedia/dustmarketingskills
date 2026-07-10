@@ -2,7 +2,7 @@
 name: copywriting
 description: When the user wants to write, rewrite, or improve marketing copy for any page — including homepage, landing pages, pricing pages, feature pages, about pages, or product pages. Also use when the user says "write copy for," "improve this copy," "rewrite this page," "marketing copy," "headline help," "CTA copy," "value proposition," "tagline," "subheadline," "hero section copy," "above the fold," "this copy is weak," "make this more compelling," or "help me describe my product." Use this whenever someone is working on website text that needs to persuade or convert. For email copy, see emails. For popup copy, see popups. For editing existing copy, see copy-editing. For the offer underneath the copy (bonuses, guarantees, value framing), see offers.
 metadata:
-  version: 3.0.0
+  version: 3.1.0
 ---
 
 # Copywriting
@@ -250,6 +250,26 @@ For headlines and CTAs, provide 2-3 options:
 ### Meta Content (if relevant)
 - Page title (for SEO)
 - Meta description
+
+---
+
+## Data & Connectors
+
+Great copy quotes the customer back to themselves, so write from **real customer language**, not invented phrasing. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **HubSpot / Salesforce** | native connector / official MCP / Composio | Closed-won and closed-lost notes — objection language and buying triggers in the customer's words |
+| **Intercom / Zendesk** | Composio / Browse | Support-ticket phrasing — how customers name their pain, unedited |
+| **Gong** | Composio / API / Browse | Sales-call transcripts — verbatim objections and desired outcomes |
+| **G2 / Trustpilot / Reddit** | Browse / Web Search | Review and thread mining for voice-of-customer and competitor gripes |
+| **GA4** | native connector | Which pages and traffic sources feed this page — so the headline matches the message |
+| **CMS** (WordPress/Webflow/Sanity/Contentful/Strapi) | native connector | Read the live page, then publish the rewrite |
+
+**Adaptive data pull** — use whatever is connected, degrade gracefully:
+- **Voice-of-customer** — pull in priority: **CRM** (HubSpot/Salesforce) for won/lost notes → **support** (Intercom/Zendesk) for ticket language → **call intelligence** (Gong) for transcripts → **reviews** (G2/Trustpilot via Browse). If none is connected, **Web Search** review sites and forums and **Browse** the live page. Lift exact phrases into headlines and CTAs; never invent quotes.
+- **Message-match** — If **GA4** is connected → check which pages and traffic sources feed this page so the headline matches what the visitor just clicked. Else **Browse** the ad or referring page directly.
+- **Ship it** — If a **CMS** connector is connected → read the current page and publish the rewrite in place. Else deliver the copy as a structured before/after document with **Create Files**.
 
 ---
 

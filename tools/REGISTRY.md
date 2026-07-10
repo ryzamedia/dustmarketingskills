@@ -7,11 +7,11 @@ Quick reference for reaching marketing platforms from a **Dust agent** — so a 
 In priority order:
 
 1. **Native Dust connector** — many tools (Slack, Notion, Google Drive, GitHub, GA4, Stripe, and more) connect directly in Dust as data sources / tools. Prefer these.
-2. **Remote MCP server** — tools with an **MCP** ✓ below can be added to Dust as a remote MCP server, exposing their actions as agent tools.
+2. **Remote MCP server** — tools with an **MCP** ✓ below can be added to Dust as a remote MCP server, exposing their actions as agent tools. See **[tools/mcp/README.md](mcp/README.md)** for each server's URL, auth, and exposed tools — and for whether it's an *official remote* server (addable in Dust) or a *community/local* one (reach via native connector or Composio).
 3. **Composio** — for OAuth-heavy tools without a native Dust server (HubSpot, Salesforce, Meta Ads, LinkedIn Ads, Google Sheets, Slack, Notion, and more), [Composio](integrations/composio.md) exposes them to Dust through a single MCP server.
 4. **Browse / Computer** — when a tool has no API, connector, or MCP server, the agent can read its pages with **Browse** or operate its UI with **Computer**.
 
-The columns below show what each tool supports. **MCP** ✓ means it can plug into Dust as a remote MCP server. The **CLI** column links to a zero-dependency reference script that documents the tool's API surface — a handy spec when configuring a connector or MCP. The `integrations/{tool}.md` guides cover endpoints, auth, and common operations.
+The columns below show what each tool supports. **MCP** ✓ means an MCP server exists; a **†** marks a community/local-only server a Dust cloud agent can't add directly (reach it via a native connector or Composio). See **[tools/mcp/README.md](mcp/README.md)** for the official / community / Composio breakdown, server URLs, and auth. The **CLI** column links to a zero-dependency reference script that documents the tool's API surface — a handy spec when configuring a connector or MCP. The `integrations/{tool}.md` guides cover endpoints, auth, and common operations.
 
 ---
 
@@ -20,26 +20,26 @@ The columns below show what each tool supports. **MCP** ✓ means it can plug in
 | Tool | Category | API | MCP | CLI | SDK | Guide |
 |------|----------|:---:|:---:|:---:|:---:|-------|
 | ga4 | Analytics | ✓ | ✓ | [✓](clis/ga4.js) | ✓ | [ga4.md](integrations/ga4.md) |
-| mixpanel | Analytics | ✓ | - | [✓](clis/mixpanel.js) | ✓ | [mixpanel.md](integrations/mixpanel.md) |
-| amplitude | Analytics | ✓ | - | [✓](clis/amplitude.js) | ✓ | [amplitude.md](integrations/amplitude.md) |
-| posthog | Analytics | ✓ | - | ✓ | ✓ | [posthog.md](integrations/posthog.md) |
+| mixpanel | Analytics | ✓ | ✓ | [✓](clis/mixpanel.js) | ✓ | [mixpanel.md](integrations/mixpanel.md) |
+| amplitude | Analytics | ✓ | ✓ | [✓](clis/amplitude.js) | ✓ | [amplitude.md](integrations/amplitude.md) |
+| posthog | Analytics | ✓ | ✓ | ✓ | ✓ | [posthog.md](integrations/posthog.md) |
 | segment | Analytics | ✓ | - | [✓](clis/segment.js) | ✓ | [segment.md](integrations/segment.md) |
 | adobe-analytics | Analytics | ✓ | - | [✓](clis/adobe-analytics.js) | ✓ | [adobe-analytics.md](integrations/adobe-analytics.md) |
 | plausible | Analytics | ✓ | - | [✓](clis/plausible.js) | - | [plausible.md](integrations/plausible.md) |
 | google-search-console | SEO | ✓ | - | [✓](clis/google-search-console.js) | ✓ | [google-search-console.md](integrations/google-search-console.md) |
-| semrush | SEO | ✓ | - | [✓](clis/semrush.js) | - | [semrush.md](integrations/semrush.md) |
-| ahrefs | SEO | ✓ | - | [✓](clis/ahrefs.js) | - | [ahrefs.md](integrations/ahrefs.md) |
-| dataforseo | SEO | ✓ | - | [✓](clis/dataforseo.js) | ✓ | [dataforseo.md](integrations/dataforseo.md) |
+| semrush | SEO | ✓ | ✓ | [✓](clis/semrush.js) | - | [semrush.md](integrations/semrush.md) |
+| ahrefs | SEO | ✓ | ✓ | [✓](clis/ahrefs.js) | - | [ahrefs.md](integrations/ahrefs.md) |
+| dataforseo | SEO | ✓ | ✓ | [✓](clis/dataforseo.js) | ✓ | [dataforseo.md](integrations/dataforseo.md) |
 | keywords-everywhere | SEO | ✓ | - | [✓](clis/keywords-everywhere.js) | - | [keywords-everywhere.md](integrations/keywords-everywhere.md) |
 | rankparse | SEO | ✓ | ✓ | [✓](clis/rankparse.js) | - | [rankparse.md](integrations/rankparse.md) |
 | clearbit | Data Enrichment | ✓ | - | [✓](clis/clearbit.js) | ✓ | [clearbit.md](integrations/clearbit.md) |
-| apollo | Data Enrichment | ✓ | - | [✓](clis/apollo.js) | - | [apollo.md](integrations/apollo.md) |
+| apollo | Data Enrichment | ✓ | ✓ | [✓](clis/apollo.js) | - | [apollo.md](integrations/apollo.md) |
 | zoominfo | Data Enrichment | ✓ | ✓ | [✓](clis/zoominfo.js) | - | [zoominfo.md](integrations/zoominfo.md) |
 | clay | Data Enrichment | ✓ | ✓ | [✓](clis/clay.js) | - | [clay.md](integrations/clay.md) |
 | supermetrics | Data Aggregation | ✓ | ✓ | [✓](clis/supermetrics.js) | - | [supermetrics.md](integrations/supermetrics.md) |
 | coupler | Data Aggregation | ✓ | ✓ | [✓](clis/coupler.js) | - | [coupler.md](integrations/coupler.md) |
-| hubspot | CRM | ✓ | - | ✓ | ✓ | [hubspot.md](integrations/hubspot.md) |
-| salesforce | CRM | ✓ | - | ✓ | ✓ | [salesforce.md](integrations/salesforce.md) |
+| hubspot | CRM | ✓ | ✓ | ✓ | ✓ | [hubspot.md](integrations/hubspot.md) |
+| salesforce | CRM | ✓ | ✓ | ✓ | ✓ | [salesforce.md](integrations/salesforce.md) |
 | close | CRM | ✓ | - | [✓](clis/close.js) | - | [close.md](integrations/close.md) |
 | stripe | Payments | ✓ | ✓ | ✓ | ✓ | [stripe.md](integrations/stripe.md) |
 | paddle | Payments | ✓ | - | [✓](clis/paddle.js) | ✓ | [paddle.md](integrations/paddle.md) |
@@ -48,15 +48,15 @@ The columns below show what each tool supports. **MCP** ✓ means it can plug in
 | dub-co | Links | ✓ | - | [✓](clis/dub.js) | ✓ | [dub-co.md](integrations/dub-co.md) |
 | mention-me | Referral | ✓ | - | [✓](clis/mention-me.js) | - | [mention-me.md](integrations/mention-me.md) |
 | partnerstack | Affiliate | ✓ | - | [✓](clis/partnerstack.js) | - | [partnerstack.md](integrations/partnerstack.md) |
-| mailchimp | Email | ✓ | ✓ | [✓](clis/mailchimp.js) | ✓ | [mailchimp.md](integrations/mailchimp.md) |
-| customer-io | Email | ✓ | - | [✓](clis/customer-io.js) | ✓ | [customer-io.md](integrations/customer-io.md) |
+| mailchimp | Email | ✓ | ✓† | [✓](clis/mailchimp.js) | ✓ | [mailchimp.md](integrations/mailchimp.md) |
+| customer-io | Email | ✓ | ✓ | [✓](clis/customer-io.js) | ✓ | [customer-io.md](integrations/customer-io.md) |
 | sendgrid | Email | ✓ | - | [✓](clis/sendgrid.js) | ✓ | [sendgrid.md](integrations/sendgrid.md) |
 | resend | Email | ✓ | ✓ | [✓](clis/resend.js) | ✓ | [resend.md](integrations/resend.md) |
 | sequenzy | Email | ✓ | ✓ | ✓ | - | [sequenzy.md](integrations/sequenzy.md) |
 | nitrosend | Email | ✓ | ✓ | - | - | [nitrosend.md](integrations/nitrosend.md) |
 | kit | Email | ✓ | - | [✓](clis/kit.js) | ✓ | [kit.md](integrations/kit.md) |
 | beehiiv | Newsletter | ✓ | - | [✓](clis/beehiiv.js) | - | [beehiiv.md](integrations/beehiiv.md) |
-| klaviyo | Email/SMS | ✓ | - | [✓](clis/klaviyo.js) | ✓ | [klaviyo.md](integrations/klaviyo.md) |
+| klaviyo | Email/SMS | ✓ | ✓ | [✓](clis/klaviyo.js) | ✓ | [klaviyo.md](integrations/klaviyo.md) |
 | postmark | Email | ✓ | - | [✓](clis/postmark.js) | ✓ | [postmark.md](integrations/postmark.md) |
 | brevo | Email/SMS | ✓ | - | [✓](clis/brevo.js) | ✓ | [brevo.md](integrations/brevo.md) |
 | activecampaign | Email/CRM | ✓ | - | [✓](clis/activecampaign.js) | ✓ | [activecampaign.md](integrations/activecampaign.md) |
@@ -74,7 +74,7 @@ The columns below show what each tool supports. **MCP** ✓ means it can plug in
 | lemlist | Email Outreach | ✓ | - | [✓](clis/lemlist.js) | - | [lemlist.md](integrations/lemlist.md) |
 | instantly | Email Outreach | ✓ | - | [✓](clis/instantly.js) | - | [instantly.md](integrations/instantly.md) |
 | google-ads | Ads | ✓ | ✓ | [✓](clis/google-ads.js) | ✓ | [google-ads.md](integrations/google-ads.md) |
-| meta-ads | Ads | ✓ | - | [✓](clis/meta-ads.js) | ✓ | [meta-ads.md](integrations/meta-ads.md) |
+| meta-ads | Ads | ✓ | ✓ | [✓](clis/meta-ads.js) | ✓ | [meta-ads.md](integrations/meta-ads.md) |
 | linkedin-ads | Ads | ✓ | - | [✓](clis/linkedin-ads.js) | - | [linkedin-ads.md](integrations/linkedin-ads.md) |
 | tiktok-ads | Ads | ✓ | - | [✓](clis/tiktok-ads.js) | ✓ | [tiktok-ads.md](integrations/tiktok-ads.md) |
 | zapier | Automation | ✓ | ✓ | [✓](clis/zapier.js) | ✓ | [zapier.md](integrations/zapier.md) |
@@ -112,6 +112,65 @@ The columns below show what each tool supports. **MCP** ✓ means it can plug in
 | strapi | Headless CMS | ✓ | - | ✓ | ✓ | [strapi.md](integrations/strapi.md) |
 | composio | Integration Layer | ✓ | ✓ | ✓ | ✓ | [composio.md](integrations/composio.md) |
 | cogny | Integration Layer | - | ✓ | - | - | [cogny.md](integrations/cogny.md) |
+| profound | AI Visibility | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| otterly | AI Visibility | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| peec | AI Visibility | - | - | - | - | — |
+| scrunch | AI Visibility | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| rankscale | AI Visibility | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| llmrefs | AI Visibility | ✓ | - | - | - | — |
+| ideogram | Image Generation | ✓ | - | - | ✓ | — |
+| flux | Image Generation | ✓ | - | - | ✓ | — |
+| recraft | Image Generation | ✓ | - | - | ✓ | — |
+| gpt-image | Image Generation | ✓ | - | - | ✓ | — |
+| gemini-image | Image Generation | ✓ | - | - | ✓ | — |
+| midjourney | Image Generation | - | - | - | - | — |
+| canva | Design | ✓ | - | - | ✓ | — |
+| figma | Design | ✓ | - | - | ✓ | — |
+| discord | Community | ✓ | - | - | ✓ | — |
+| circle | Community | ✓ | - | - | - | — |
+| discourse | Community | ✓ | - | - | - | — |
+| reddit | Community | ✓ | - | - | - | — |
+| common-room | Community Analytics | ✓ | - | - | - | — |
+| apptweak | ASO | ✓ | - | - | - | — |
+| sensortower | ASO | ✓ | - | - | - | — |
+| appfollow | ASO | ✓ | - | - | - | — |
+| app-store-connect | ASO | ✓ | - | - | ✓ | — |
+| google-play-console | ASO | ✓ | - | - | ✓ | — |
+| revenuecat | Mobile Paywalls | ✓ | - | - | ✓ | — |
+| superwall | Mobile Paywalls | ✓ | - | - | ✓ | — |
+| optinmonster | Popups | ✓ | - | - | - | — |
+| privy | Popups | ✓ | - | - | - | — |
+| optimonk | Popups | ✓ | - | - | - | — |
+| vwo | A/B Testing | ✓ | - | - | ✓ | — |
+| launchdarkly | Feature Flags | ✓ | - | - | ✓ | — |
+| statsig | Experimentation | ✓ | - | - | ✓ | — |
+| microsoft-clarity | CRO | ✓ | - | - | - | — |
+| zendesk | Support | ✓ | - | - | ✓ | — |
+| capterra | Reviews | - | - | - | - | — |
+| trustradius | Reviews | - | - | - | - | — |
+| muckrack | PR | ✓ | - | - | - | — |
+| prowly | PR | ✓ | - | - | - | — |
+| qwoted | PR | - | - | - | - | — |
+| featured | PR | - | - | - | - | — |
+| crunchbase | Data | ✓ | - | - | ✓ | — |
+| builtwith | Technographics | ✓ | - | - | - | — |
+| wappalyzer | Technographics | ✓ | - | - | - | — |
+| linkedin-sales-navigator | Prospecting | - | - | - | - | — |
+| smartlead | Email Outreach | ✓ | - | - | - | — |
+| profitwell | Subscription Analytics | ✓ | - | - | - | — |
+| baremetrics | Subscription Analytics | ✓ | - | - | - | — |
+| churnkey | Retention | ✓ | - | - | - | — |
+| prosperstack | Retention | ✓ | - | - | - | — |
+| chargebee | Billing | ✓ | - | - | ✓ | — |
+| recurly | Billing | ✓ | - | - | ✓ | — |
+| marketo | Marketing Automation | ✓ | - | - | ✓ | — |
+| pardot | Marketing Automation | ✓ | - | - | ✓ | — |
+| brand24 | Social Listening | ✓ | - | - | - | — |
+| mention | Social Listening | ✓ | - | - | - | — |
+| producthunt | Directories | ✓ | - | - | - | — |
+| twitter-ads | Ads | ✓ | - | - | ✓ | — |
+
+**†** = community/local MCP server only — not addable as a remote MCP in Dust; reach via a native connector or Composio. Rows marked **—** in the Guide column don't have a dedicated integration guide yet; reach them by the priority order above (native connector → MCP → Composio → Browse/Computer). See [tools/mcp/README.md](mcp/README.md) for the full MCP breakdown.
 
 ---
 
@@ -515,6 +574,98 @@ E-commerce platforms and content management systems.
 
 **Agent recommendation**: Shopify for e-commerce. Webflow for marketing sites. WordPress for blogs. For headless CMS: Sanity for developer-flexible content, Contentful for enterprise multi-locale, Strapi for self-hosted/budget-conscious. See [headless CMS guide](../skills/content-strategy/references/headless-cms.md) for selection criteria.
 
+### AI Visibility / GEO
+
+Track whether your brand is cited in AI answers — ChatGPT, Perplexity, Gemini, Claude, Copilot, and Google AI Overviews. Feeds the **ai-seo** skill.
+
+| Tool | Best For | Agent Reach |
+|------|----------|-------------|
+| **profound** | Enterprise; also tracks which AI bots crawl your site | REST API + **official MCP** + SDKs |
+| **otterly** | SMB / agent-native default | **Official MCP** + public API (+ a published Claude Skill) |
+| **scrunch** | AI-search monitoring + optimization | **Official MCP** + API |
+| **rankscale** | Affordable, MCP-first citation tracking | **Official MCP** |
+| **peec** | Popular monitoring UI (the one teams ask for by name) | **Dashboard only** — API is enterprise beta, no MCP; use Browse |
+| **llmrefs** | Broad engine list at low cost | API only, no MCP |
+
+**Agent recommendation**: For a Dust agent that needs to *pull* AI-visibility data, default to **Otterly** (SMB, from ~$29/$189) or **Profound** (enterprise). Both have an official MCP + API. **Peec** has the best-known UI but the weakest agent surface — connect it only for manual dashboard review via Browse. If the team already pays for **Semrush** (AI Toolkit) or **Ahrefs** (Brand Radar), pull AI-visibility data there before buying a point tool. See [tools/mcp/README.md](mcp/README.md).
+
+### Image Generation & Design
+
+AI image models and design tools. In Dust, the primary path is the native **Create Images** capability; reach a specific model when it's connected as a remote MCP or via Composio, otherwise generate with Create Images.
+
+| Tool | Best For | Agent Reach |
+|------|----------|-------------|
+| **ideogram** | Text-in-image, typography, logos | API / Composio |
+| **flux** | Photorealism, brand-consistent generation | API (BFL / Replicate / fal) |
+| **recraft** | Vector/brand asset sets, style control | API / Composio |
+| **gpt-image** | General-purpose, instruction-following edits | OpenAI API |
+| **gemini-image** | Conversational editing ("Nano Banana") | Gemini API |
+| **midjourney** | Highest-aesthetic stills | No official API — Browse/Discord |
+| **canva** | Templated brand assets, Magic Resize | API / Composio |
+| **figma** | Design source of truth, frames → assets | API (Dev Mode MCP is local) |
+
+**Agent recommendation**: Default to Dust **Create Images**. Route by job when a model is connected: text-heavy graphics → **Ideogram**, brand-consistent photography → **Flux**, vector/brand sets → **Recraft**. Use **Canva/Figma** for templated brand assets. Feeds the **image** and **ad-creative** skills.
+
+### Community Platforms
+
+Where communities live and how to measure them. Feeds the **community-marketing** skill.
+
+| Tool | Best For | Agent Reach |
+|------|----------|-------------|
+| **slack** | B2B communities | **Native Dust connector** / official MCP / Composio |
+| **discord** | Product & creator communities | API / Browse + Computer |
+| **circle** | Paid/course communities | API / Browse |
+| **discourse** | Public forums | API / Browse |
+| **reddit** | Public subreddit monitoring + listening | API / Browse / Web Search |
+| **common-room** | Cross-platform community analytics & scoring | API |
+
+**Agent recommendation**: Pull health metrics (active members, post/reply rates, sentiment) from whichever platform is connected — **Slack** via the native connector, **Discord/Circle/Discourse** via API or Browse+Computer, **Reddit** via Web Search/Browse. Use **Common Room** when the community spans multiple platforms and you need unified scoring.
+
+### App Store Optimization (ASO)
+
+Keyword volume, rankings, and listing data for mobile apps. Feeds the **aso** skill.
+
+| Tool | Best For | Agent Reach |
+|------|----------|-------------|
+| **apptweak** | ASO keyword + competitor data | API / Browse |
+| **sensortower** | Market intelligence, download/revenue estimates | API / Browse |
+| **appfollow** | Reviews, rankings, ASO monitoring | API / Browse |
+| **app-store-connect** | First-party iOS impressions/conversion/keywords | Apple API (auth'd) / export |
+| **google-play-console** | First-party Android acquisition data | Google API (auth'd) / export |
+
+**Agent recommendation**: The public listing is reachable with **WebFetch/Browse/Computer** (core to the skill). For keyword *volume* and exact *rank*, connect an ASO tool (**AppTweak / Sensor Tower / AppFollow**) or use a **App Store Connect / Play Console** export; otherwise run the qualitative audit and flag that volume/rank are unavailable.
+
+### Subscription, Retention & Billing
+
+Revenue and churn data beyond Stripe/Paddle. Feeds **pricing**, **churn-prevention**, and **paywalls**.
+
+| Tool | Best For | Agent Reach |
+|------|----------|-------------|
+| **profitwell** | Subscription analytics, price-sensitivity, retention metrics | API |
+| **baremetrics** | SaaS metrics dashboards (MRR, churn, LTV) | API |
+| **churnkey** | Cancel-flow save offers + dunning | API / Browse |
+| **prosperstack** | Cancellation flows + retention offers | API / Browse |
+| **chargebee** | Subscription billing (alt to Stripe/Paddle) | API / SDK |
+| **recurly** | Subscription billing + dunning | API / SDK |
+| **revenuecat** | **Mobile** app subscriptions + paywall analytics | API / SDK |
+| **superwall** | Mobile paywall experimentation | API / SDK |
+
+**Agent recommendation**: For web billing, **Stripe** (native/MCP) or **Paddle** is the primary source; layer **ProfitWell/Baremetrics** for deeper retention/price metrics and **Churnkey/ProsperStack** for cancel-flow tooling. For mobile apps, **RevenueCat** is the default subscription + paywall data source (Stripe/Paddle don't cover in-app purchases).
+
+### More Categories
+
+Additional tools referenced by skills, reached by the priority order above (most are Composio or Browse today):
+
+- **Popups**: optinmonster, privy, optimonk — popup/opt-in builders (API / Browse). Klaviyo covers popups for ecom.
+- **Experimentation / flags**: vwo, launchdarkly, statsig (API/SDK); microsoft-clarity for free heatmaps + rage-click data (Browse).
+- **Support**: zendesk — tickets for VOC and switching pain (Composio).
+- **Reviews**: capterra, trustradius — Browse-only (no public API); complement G2/Trustpilot.
+- **PR / journalist discovery**: muckrack, prowly (journalist databases, API); qwoted, featured (inbound press requests, Browse-only — HARO/Connectively was discontinued in 2024).
+- **Prospecting / firmographics**: crunchbase (funding, API), builtwith / wappalyzer (technographics, API), linkedin-sales-navigator (Browse/Computer only), smartlead (cold-email sending/warmup, API).
+- **Marketing automation**: marketo, pardot — enterprise MAP for RevOps lifecycle (API, Composio).
+- **Social listening**: brand24, mention — brand mention monitoring (API); feeds the social-listening marketing loop.
+- **Directories / launch**: producthunt — GraphQL API for listing data; the launch event itself is Browse/Computer.
+
 ---
 
 ## CLI Tools
@@ -531,24 +682,24 @@ All CLIs follow a consistent pattern:
 
 ## MCP-Enabled Tools
 
-These tools have Model Context Protocol servers available, enabling direct agent interaction:
+See **[tools/mcp/README.md](mcp/README.md)** for server URLs, auth, exposed tools, and the remote-vs-local distinction. The list below is a quick index — MCP moved fast in 2025–2026 and many vendors shipped official servers.
 
-- **ga4** - Google Analytics 4 data access
-- **stripe** - Payment and subscription management
-- **mailchimp** - Email campaign management
-- **google-ads** - Ad campaign management
-- **resend** - Transactional email sending
-- **zapier** - Workflow automation + SDK for 8,000+ app integrations
-- **zoominfo** - B2B contacts and intent data
-- **clay** - Data enrichment and outbound automation
-- **supermetrics** - Cross-platform marketing data
-- **coupler** - Marketing data pipelines
-- **outreach** - Sales engagement sequences
-- **crossbeam** - Partner ecosystem data
-- **introw** - Partner relationship management
-- **exa** - AI-powered web search for LLMs and agents
+**Official remote MCP servers** (add these directly in Dust):
 
-To use MCP tools, ensure the appropriate MCP server is configured in your environment.
+- **SEO**: semrush, ahrefs, dataforseo
+- **Analytics**: ga4 *(local server — use the native connector)*, posthog, mixpanel, amplitude
+- **CRM**: hubspot, salesforce
+- **Payments**: stripe
+- **Ads**: google-ads *(read-only)*, meta-ads *(beta)*
+- **Email/SMS**: klaviyo, customer-io, resend
+- **Prospecting/Enrichment**: apollo, zoominfo, clay
+- **Docs/Messaging**: notion, slack *(both also native Dust connectors)*
+- **AI Visibility**: profound, otterly, scrunch, rankscale
+- **Data/Automation**: supermetrics, coupler, outreach, crossbeam, introw, zapier, exa, firecrawl
+
+**Community / local / Composio-only** (no remote server to add in Dust — reach via native connector or Composio): **mailchimp** (community server only), **google-search-console** (community/local), **linkedin-ads** (third-party only).
+
+To use a remote MCP tool, add its server in the Dust workspace (URL + auth) and attach it to the agent.
 
 ### Composio Integration
 

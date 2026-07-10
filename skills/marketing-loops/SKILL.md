@@ -2,7 +2,7 @@
 name: marketing-loops
 description: "When the user wants to set up a recurring, self-running marketing workflow — a repeatable loop an AI agent runs on a cadence (weekly, daily, on a trigger) rather than a one-off task. Also use when the user mentions 'marketing loop,' 'recurring marketing workflow,' 'automate my marketing,' 'marketing on autopilot,' 'weekly marketing review,' 'ad fatigue check,' 'content refresh loop,' 'churn watch,' 'ranking drop alert,' 'always-on marketing,' 'marketing automation workflow,' or 'run this every week.' Use this to pick, adapt, and schedule an ongoing marketing loop that orchestrates the other marketing skills. For one-off marketing ideas, see marketing-ideas. For the experimentation loop specifically, see ab-testing."
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 ---
 
 # Marketing Loops
@@ -98,6 +98,26 @@ When nothing in the catalog fits, author a new loop from `references/loop-templa
 ## Banned vocabulary
 
 Avoid: "set it and forget it," "fully autonomous marketing," "AI does everything," "10x on autopilot," "growth hacking machine." Loops are disciplined systems with checkpoints, not magic. Describe them honestly.
+
+## Data & Connectors
+
+A loop is only as good as the signal it reads — and **each loop's read-source adapts to whichever signal connector is attached**. Check the **Connected Data Sources** inventory in the **Product Context** (or **Agent Memory**) to see what's wired up, then reach tools in this priority: **native Dust connector → remote MCP server → Composio → Browse / Computer / Web Search**. If a data source isn't connected, use the next option and label the output accordingly — never present a guess as a measurement.
+
+| Tool | Reach from Dust | Use for |
+|------|-----------------|---------|
+| **GA4 / Mixpanel / Amplitude / PostHog** | native connector (GA4) / official MCP / Browse | Activation, funnel, retention, and content-decay loop signals |
+| **Stripe / Paddle** | native connector / official MCP (Stripe) / Composio (Paddle) | Churn, failed-payment, and revenue loops |
+| **Google Search Console / Semrush / Ahrefs** | native connector (GSC) / official MCP / Composio | Ranking-drop, backlink, and content-decay loops |
+| **Google Ads / Meta Ads** | official MCP / Composio | Ad-fatigue and CPA-drift loops |
+| **Brand24 / Mention** | Browse / Composio | The social-listening loop |
+| **Slack / email connector** | native connector / MCP | Where loop alerts and staged drafts land |
+| **Dust Triggers + Agent Memory** | native | Scheduling the cadence + holding state/idempotency between runs |
+
+**Adaptive data pull** — each loop's read-source is connector-dependent; pick the strongest available signal source:
+- **Ranking loop** — If **Google Search Console** is connected → read position/query data there. Elif **Semrush/Ahrefs** (official MCP or Composio) → rankings + backlinks. Else skip the loop and flag the missing connector.
+- **Churn loop** — If **Stripe** (native/MCP) is connected → read failed payments, cancellations, MRR movement. Elif the connected **product-analytics** tool (Mixpanel/Amplitude/PostHog) exposes the churn signal → read it there. Else don't schedule it.
+- **Ad-fatigue loop** — Read from the connected **Google/Meta Ads** connector (official MCP, or Composio for write ops). No ads connector → no ad-fatigue loop.
+- **No signal source** — If no connector can supply a loop's signal, don't schedule it — state the missing connector as the blocker rather than looping on a guess.
 
 ## Related Skills
 
