@@ -7,7 +7,7 @@ Sales engagement platform for managing prospects, sequences, and outbound campai
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | Prospects, Sequences, Mailings, Accounts, Tasks |
-| MCP | ✓ | [Claude connector](https://claude.com/connectors/outreach) |
+| MCP | ✓ | Official remote MCP `api.outreach.io/mcp` (OAuth 2.1; requires Outreach Amplify) — addable in any MCP client, not only Claude |
 | CLI | ✓ | [outreach.js](../clis/outreach.js) |
 | SDK | - | REST API only (JSON:API format) |
 

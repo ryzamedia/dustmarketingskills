@@ -7,7 +7,7 @@ Email marketing platform for campaigns, automation, and audience management.
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | Marketing API for campaigns, audiences, automation |
-| MCP | ✓ | Available via Mailchimp MCP server |
+| MCP | ~ | No official **Marketing** MCP (campaigns/audiences) — community or Composio. The only official Mailchimp MCP is **transactional-only** (Mandrill, `mandrillapp.com/mcp`) — see [tools/mcp/README.md](../mcp/README.md) |
 | CLI | - | Not available |
 | SDK | ✓ | Official SDKs for multiple languages |
 

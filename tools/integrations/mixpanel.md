@@ -7,7 +7,7 @@ Product analytics platform for tracking user behavior and retention.
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | Ingestion API, Query API, Data Export |
-| MCP | - | Not available |
+| MCP | ✓ | Official remote MCP server — see [tools/mcp/README.md](../mcp/README.md) |
 | CLI | - | Not available |
 | SDK | ✓ | JavaScript, iOS, Android, Python, etc. |
 

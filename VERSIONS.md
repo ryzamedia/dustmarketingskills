@@ -8,7 +8,7 @@ Current versions of all skills. Re-import a skill into Dust (or `git pull` your 
 |-------|---------|--------------|
 | ab-testing | 2.1.0 | 2026-07-09 |
 | ad-creative | 3.1.0 | 2026-07-10 |
-| ai-seo | 3.1.0 | 2026-07-10 |
+| ai-seo | 3.1.1 | 2026-07-10 |
 | analytics | 3.1.0 | 2026-07-10 |
 | aso | 2.1.0 | 2026-07-10 |
 | churn-prevention | 2.1.0 | 2026-07-09 |
@@ -55,6 +55,36 @@ Current versions of all skills. Re-import a skill into Dust (or `git pull` your 
 | video | 2.1.0 | 2026-07-10 |
 
 ## Recent Changes
+
+### 3.1.2 (2026-07-10) — Expanded MCP catalog (~160 verified servers)
+
+Fanned out research across every marketing category and added a large, **fact-verified** catalog of official-remote MCP servers to `tools/mcp/README.md` (each confirmed against vendor docs on 2026-07-10, with the official-remote vs local/community/gated distinction). New "Full catalog by marketing function" sections:
+
+- **Analytics & BI**: Contentsquare (Heap/Hotjar), Statsig, Pendo, Fullstory, Snowplow, Matomo, Airtable, BigQuery, Snowflake, Databricks, ClickHouse, MotherDuck, Metabase, Power BI, Looker, Airbyte, Hightouch.
+- **SEO & search**: SISTRIX, SE Ranking, Serpstat, Mangools, SerpApi, Similarweb, Oncrawl, Diffbot, Google Trends; **AI-visibility**: Writesonic.
+- **Ads**: Windsor.ai, Two Minute Reports, Polar Analytics, Optmyzr, Improvado, TikTok Ads, Amazon Ads.
+- **CRM & sales**: Attio, Close, Pipedrive, monday, Zoho, Amplemarket, lemlist, Reply, La Growth Machine, Instantly, Smartlead; **enrichment/intent**: Lusha, FullEnrich, Surfe, Prospeo, Hunter, Warmly, Fireflies.
+- **Email/SMS/lifecycle**: Brevo, MoEngage, Kit, MailerLite, Omnisend, Marketo, ActiveCampaign, beehiiv, Courier, Novu, Knock, Intercom.
+- **Payments/billing**: Paddle, RevenueCat, Polar, Square, PayPal, Ramp, Mercury, Brex.
+- **CMS & commerce**: WordPress.com, Webflow, Wix, Contentful, Sanity, DatoCMS, Storyblok, Hygraph, Builder.io, Shopify Storefront, BigCommerce, Saleor, Cloudinary, Frontify, Optimizely, AEM.
+- **Social & creative**: Buffer, Postiz, Typefully, Blotato, Canva, Runway, fal.ai, Replicate, Ideogram, HeyGen, invideo, Figma.
+- **Marketing ops**: Asana, Linear, Atlassian, ClickUp, Smartsheet, Todoist, Coda, Box, Dropbox, Cal.com, Calendly, Typeform, Tally, Make, Pipedream, Miro, Front, Help Scout.
+- **Reviews/experimentation/events**: VWO, Optimizely Experimentation, LaunchDarkly, Birdeye, Zoom, Livestorm, Press Ranger, G2.
+- **Web scraping/browser**: Tavily, Linkup, Jina, ScrapingBee, ScrapeGraphAI, Scrapeless, Olostep, ZenRows, Browserless, Anchor Browser.
+
+Added 24 of the highest-value new tools to the `tools/REGISTRY.md` Tool Index and refreshed the MCP-Enabled quick-index by function. Access-gated servers flagged with **⚠** (paid tier / waitlist / per-account). Verified-negative results recorded so they aren't re-hunted (no MCP as of 2026-07-10: Trustpilot, Capterra, Google Business Profile, PartnerStack, Refersion, Impact.com, Muck Rack, Prowly, Cision, Demio, AppFollow, Framer, Squarespace, Bynder; Proxycurl defunct; Twilio's remote MCP is docs-only).
+
+### 3.1.1 (2026-07-10) — MCP fact-check corrections
+
+Fact-checked every MCP-server claim against current vendor docs and corrected errors in `tools/mcp/README.md`, `tools/REGISTRY.md`, and the per-tool `tools/integrations/*.md` guides.
+
+- **Google Ads** — was wrongly listed as an addable remote server; it's **stdio/self-host-only, read-only** (Google hosts no remote endpoint). Moved to the "no remote MCP" section.
+- **Peec AI** — was wrongly listed as "no MCP, dashboard-only"; it has an **official remote MCP** (`api.peec.ai/mcp`) on all paid plans. Moved into the AI-visibility MCP table and fixed in `ai-seo` (3.1.0 → 3.1.1).
+- **Apollo** — clarified: `mcp.apollo.io/mcp` is real but **beta + plan/credit-gated** (full search/enrich needs the Organization tier + API access) and flaky on lower plans; recommend the REST API or Composio for reliable Dust use. Reconciled the repo's self-contradiction.
+- **Clay / Introw** — reclassified from official-remote to **connector-directory only** (Claude/ChatGPT) — not confirmed addable by plain URL in Dust.
+- **Endpoint/label fixes**: Semrush `v1`→`v2` (+ AI Visibility Toolkit), Mixpanel/Slack `/mcp` path, Customer.io OAuth + regional URLs, Amplitude/Firecrawl/Exa/Zapier/Salesforce concrete endpoints, Mailchimp (official MCP is transactional-only/Mandrill), Meta Ads (read/write), Profound (`mcp.tryprofound.com/mcp`), Otterly (`data.otterly.ai/mcp`), Goodie auth. Added **Outreach, ZoomInfo, Truelist** (with gating notes) to the official-remote table.
+- **New: LinkedIn / web-data MCP cluster** — **Bright Data** (best default for LinkedIn prospecting: datasets + SERP + Web Unlocker, 5k free credits/mo), **Apify**, **HorizonDataWave**, **PhantomBuster**, **Nimble**, plus a "Web Data & LinkedIn Prospecting" registry category. Added **QuickSEO** (GEO + Search Console MCP). Noted Proxycurl is defunct.
+- Flipped the stale "MCP: Not available" row in 11 integration guides (Semrush, Ahrefs, DataForSEO, PostHog, Mixpanel, Amplitude, HubSpot, Salesforce, Klaviyo, Customer.io, Meta Ads) to match reality.
 
 ### 3.1.0 (2026-07-09) — Connector-aware skills + MCP layer
 

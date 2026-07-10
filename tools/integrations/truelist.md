@@ -9,7 +9,7 @@ Spec source: [Truelist-Labs/truelist-openapi](https://github.com/Truelist-Labs/t
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | REST API, OpenAPI 3.1 spec |
-| MCP | ✓ | Official [truelist-mcp](https://github.com/Truelist-Labs/truelist-mcp) server (Claude, Cursor, VS Code) |
+| MCP | ✓ | Official **hosted remote** MCP `api.truelist.io/mcp` (OAuth) — addable in Dust; also a local `truelist-mcp` server for Claude/Cursor/VS Code |
 | CLI | ✓ | Official Go [truelist-cli](https://github.com/Truelist-Labs/truelist-cli) |
 | SDK | ✓ | Official: Node/TypeScript, Python, Ruby, PHP, Go, Java, C#/.NET. Framework integrations: Django, Laravel, Next.js, Rails, React, Svelte, Vue, WordPress |
 

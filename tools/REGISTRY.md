@@ -35,7 +35,7 @@ The columns below show what each tool supports. **MCP** ✓ means an MCP server 
 | clearbit | Data Enrichment | ✓ | - | [✓](clis/clearbit.js) | ✓ | [clearbit.md](integrations/clearbit.md) |
 | apollo | Data Enrichment | ✓ | ✓ | [✓](clis/apollo.js) | - | [apollo.md](integrations/apollo.md) |
 | zoominfo | Data Enrichment | ✓ | ✓ | [✓](clis/zoominfo.js) | - | [zoominfo.md](integrations/zoominfo.md) |
-| clay | Data Enrichment | ✓ | ✓ | [✓](clis/clay.js) | - | [clay.md](integrations/clay.md) |
+| clay | Data Enrichment | ✓ | ✓† | [✓](clis/clay.js) | - | [clay.md](integrations/clay.md) |
 | supermetrics | Data Aggregation | ✓ | ✓ | [✓](clis/supermetrics.js) | - | [supermetrics.md](integrations/supermetrics.md) |
 | coupler | Data Aggregation | ✓ | ✓ | [✓](clis/coupler.js) | - | [coupler.md](integrations/coupler.md) |
 | hubspot | CRM | ✓ | ✓ | ✓ | ✓ | [hubspot.md](integrations/hubspot.md) |
@@ -73,7 +73,7 @@ The columns below show what each tool supports. **MCP** ✓ means an MCP server 
 | browserbase | Site Scraping | ✓ | ✓ | - | ✓ | [browserbase.md](integrations/browserbase.md) |
 | lemlist | Email Outreach | ✓ | - | [✓](clis/lemlist.js) | - | [lemlist.md](integrations/lemlist.md) |
 | instantly | Email Outreach | ✓ | - | [✓](clis/instantly.js) | - | [instantly.md](integrations/instantly.md) |
-| google-ads | Ads | ✓ | ✓ | [✓](clis/google-ads.js) | ✓ | [google-ads.md](integrations/google-ads.md) |
+| google-ads | Ads | ✓ | ✓† | [✓](clis/google-ads.js) | ✓ | [google-ads.md](integrations/google-ads.md) |
 | meta-ads | Ads | ✓ | ✓ | [✓](clis/meta-ads.js) | ✓ | [meta-ads.md](integrations/meta-ads.md) |
 | linkedin-ads | Ads | ✓ | - | [✓](clis/linkedin-ads.js) | - | [linkedin-ads.md](integrations/linkedin-ads.md) |
 | tiktok-ads | Ads | ✓ | - | [✓](clis/tiktok-ads.js) | ✓ | [tiktok-ads.md](integrations/tiktok-ads.md) |
@@ -86,7 +86,7 @@ The columns below show what each tool supports. **MCP** ✓ means an MCP server 
 | intercom | Messaging | ✓ | - | [✓](clis/intercom.js) | ✓ | [intercom.md](integrations/intercom.md) |
 | outreach | Sales Engagement | ✓ | ✓ | [✓](clis/outreach.js) | - | [outreach.md](integrations/outreach.md) |
 | crossbeam | Partner Ecosystem | ✓ | ✓ | [✓](clis/crossbeam.js) | - | [crossbeam.md](integrations/crossbeam.md) |
-| introw | Partner Ecosystem | - | ✓ | - | - | [introw.md](integrations/introw.md) |
+| introw | Partner Ecosystem | - | ✓† | - | - | [introw.md](integrations/introw.md) |
 | pendo | Product Analytics | ✓ | - | [✓](clis/pendo.js) | - | [pendo.md](integrations/pendo.md) |
 | similarweb | Competitive Intelligence | ✓ | - | [✓](clis/similarweb.js) | - | [similarweb.md](integrations/similarweb.md) |
 | exa | AI Search | ✓ | ✓ | [✓](clis/exa.js) | ✓ | [exa.md](integrations/exa.md) |
@@ -114,7 +114,7 @@ The columns below show what each tool supports. **MCP** ✓ means an MCP server 
 | cogny | Integration Layer | - | ✓ | - | - | [cogny.md](integrations/cogny.md) |
 | profound | AI Visibility | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
 | otterly | AI Visibility | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
-| peec | AI Visibility | - | - | - | - | — |
+| peec | AI Visibility | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
 | scrunch | AI Visibility | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
 | rankscale | AI Visibility | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
 | llmrefs | AI Visibility | ✓ | - | - | - | — |
@@ -169,8 +169,38 @@ The columns below show what each tool supports. **MCP** ✓ means an MCP server 
 | mention | Social Listening | ✓ | - | - | - | — |
 | producthunt | Directories | ✓ | - | - | - | — |
 | twitter-ads | Ads | ✓ | - | - | ✓ | — |
+| bright-data | Web Data / LinkedIn | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| apify | Web Scraping | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| horizondatawave | LinkedIn Data | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| phantombuster | LinkedIn Automation | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| nimble | Web Data | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| quickseo | AI Visibility | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| tavily | Web Research | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| sistrix | SEO | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| se-ranking | SEO | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| contentsquare | Analytics | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| windsor-ai | Ads | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| optmyzr | Ads | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| two-minute-reports | Ads | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| attio | CRM | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| lusha | Data Enrichment | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| warmly | Visitor Identification | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| amplemarket | Sales Engagement | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| fireflies | Revenue Intelligence | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| mailerlite | Email | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| omnisend | Email/SMS | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| cloudinary | DAM | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| runway | Video | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| fal-ai | Image/Video/Audio | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| birdeye | Reviews | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| airtable | Marketing Ops | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| cal-com | Scheduling | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| make | Automation | ✓ | ✓ | - | - | [mcp](mcp/README.md) |
+| wix | CMS | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| linear | Marketing Ops | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
+| asana | Marketing Ops | ✓ | ✓ | - | ✓ | [mcp](mcp/README.md) |
 
-**†** = community/local MCP server only — not addable as a remote MCP in Dust; reach via a native connector or Composio. Rows marked **—** in the Guide column don't have a dedicated integration guide yet; reach them by the priority order above (native connector → MCP → Composio → Browse/Computer). See [tools/mcp/README.md](mcp/README.md) for the full MCP breakdown.
+**†** = an MCP server exists but is **not a plain remote server you can add in Dust** — it's local/stdio, self-host-only, or marketplace/connector-directory-only (e.g. **Google Ads** = stdio/self-host, read-only; **Clay** and **Introw** = Claude connector-directory). Reach these via a native connector or Composio. Rows marked **—** in the Guide column don't have a dedicated integration guide yet; reach them by the priority order above (native connector → MCP → Composio → Browse/Computer). See [tools/mcp/README.md](mcp/README.md) for the full MCP breakdown — including whether each server is official-remote (addable) vs. local/marketplace-only.
 
 ---
 
@@ -410,7 +440,21 @@ Programmatic page extraction for **individual public business sites** — not fo
 | **firecrawl** | Page → clean markdown / structured extraction | API + MCP; lower overhead for "just give me the content" |
 | **browserbase** | Real Chromium when rendering, interaction, or session state is required | API + MCP (Stagehand); use when Firecrawl can't handle the page |
 
-**Agent recommendation**: Default to Firecrawl for static-ish pages and structured extraction. Use Browserbase when the site requires JS rendering, form interaction, cookie consent, or auth — and when you want session recordings for debugging. **For both: discovery happens on platforms (manual browser); extraction happens on the prospect's own website URL.** Don't point either tool at LinkedIn, Google Maps, Yelp, or similar.
+**Agent recommendation**: Default to Firecrawl for static-ish pages and structured extraction. Use Browserbase when the site requires JS rendering, form interaction, cookie consent, or auth — and when you want session recordings for debugging. **For both: discovery happens on platforms (manual browser); extraction happens on the prospect's own website URL.** For platform data like LinkedIn, use the purpose-built providers below instead.
+
+### Web Data & LinkedIn Prospecting
+
+Structured web, SERP, and LinkedIn data at scale, via official MCP servers with managed proxies — the right tools for platform data that Firecrawl/Browserbase shouldn't touch. **LinkedIn itself ships no official MCP; these are third-party providers — respect each platform's ToS and local scraping law.**
+
+| Tool | Best For | Agent Reach |
+|------|----------|-------------|
+| **bright-data** | LinkedIn people/company/jobs datasets, SERP, page unlocking at scale | **Official MCP** + API; 5k free credits/mo |
+| **apify** | LinkedIn + thousands of scraper actors through one MCP | **Official MCP** + API |
+| **horizondatawave** | LinkedIn search + profile + email lookup | **Official MCP** + API |
+| **phantombuster** | LinkedIn automation + lead-list building (action, not just data) | **Official MCP**; paid plan |
+| **nimble** | General multi-engine web search / extract / crawl | **Official MCP** + API |
+
+**Agent recommendation**: For LinkedIn prospecting from a Dust agent, default to **Bright Data** (scale + generous free tier), then **HorizonDataWave** (richest LinkedIn search + email), **Apify** (actor flexibility), or **PhantomBuster** (to *act* on LinkedIn). Validate emails with **Truelist** before outreach. **Proxycurl is dead** (LinkedIn injunction, 2025) — don't use it. See [tools/mcp/README.md](mcp/README.md).
 
 ### Reviews
 
@@ -582,12 +626,13 @@ Track whether your brand is cited in AI answers — ChatGPT, Perplexity, Gemini,
 |------|----------|-------------|
 | **profound** | Enterprise; also tracks which AI bots crawl your site | REST API + **official MCP** + SDKs |
 | **otterly** | SMB / agent-native default | **Official MCP** + public API (+ a published Claude Skill) |
+| **peec** | Popular monitoring UI (the one teams ask for by name) | **Official MCP** `api.peec.ai/mcp` + API, all paid plans |
+| **quickseo** | GEO + Google Search Console in one MCP | **Official MCP** + API; from $99/mo |
 | **scrunch** | AI-search monitoring + optimization | **Official MCP** + API |
 | **rankscale** | Affordable, MCP-first citation tracking | **Official MCP** |
-| **peec** | Popular monitoring UI (the one teams ask for by name) | **Dashboard only** — API is enterprise beta, no MCP; use Browse |
 | **llmrefs** | Broad engine list at low cost | API only, no MCP |
 
-**Agent recommendation**: For a Dust agent that needs to *pull* AI-visibility data, default to **Otterly** (SMB, from ~$29/$189) or **Profound** (enterprise). Both have an official MCP + API. **Peec** has the best-known UI but the weakest agent surface — connect it only for manual dashboard review via Browse. If the team already pays for **Semrush** (AI Toolkit) or **Ahrefs** (Brand Radar), pull AI-visibility data there before buying a point tool. See [tools/mcp/README.md](mcp/README.md).
+**Agent recommendation**: For a Dust agent that needs to *pull* AI-visibility data, default to **Otterly** (SMB, from ~$29/$189) or **Profound** (enterprise) — both official MCP + API. **Peec** (the best-known UI) also has an official MCP (`api.peec.ai/mcp`) on all paid plans, and **QuickSEO** bundles GEO + Google Search Console in one MCP. If the team already pays for **Semrush** (its MCP now serves the AI Visibility Toolkit) or **Ahrefs** (Brand Radar), pull AI-visibility data there first. See [tools/mcp/README.md](mcp/README.md).
 
 ### Image Generation & Design
 
@@ -682,22 +727,26 @@ All CLIs follow a consistent pattern:
 
 ## MCP-Enabled Tools
 
-See **[tools/mcp/README.md](mcp/README.md)** for server URLs, auth, exposed tools, and the remote-vs-local distinction. The list below is a quick index — MCP moved fast in 2025–2026 and many vendors shipped official servers.
+The **full categorized catalog (~160 verified servers)** lives in **[tools/mcp/README.md](mcp/README.md)** — server URLs, auth, exposed tools, and the remote-vs-local distinction. Quick index of official-remote servers (addable directly in Dust) by function:
 
-**Official remote MCP servers** (add these directly in Dust):
+- **SEO & search**: semrush, ahrefs, dataforseo, sistrix, se-ranking, serpstat, mangools, serpapi, similarweb, oncrawl, diffbot, tavily, linkup, jina
+- **AI visibility / GEO**: profound, otterly, peec, quickseo, scrunch, rankscale, writesonic
+- **Analytics & BI**: ga4 *(local — use the native connector)*, posthog, mixpanel, amplitude, contentsquare *(Heap/Hotjar)*, statsig, pendo, fullstory, snowplow, matomo, airtable, bigquery, snowflake, databricks, clickhouse, motherduck, metabase, power-bi, looker, airbyte, hightouch
+- **Ads**: meta-ads, windsor-ai, two-minute-reports, polar-analytics, optmyzr, improvado, tiktok-ads ⚠, amazon-ads ⚠
+- **CRM & sales**: hubspot, salesforce, attio, close, pipedrive ⚠, monday, outreach *(Amplify)*, apollo ⚠, zoominfo, amplemarket, lemlist, reply, instantly, smartlead
+- **Enrichment / intent**: lusha, fullenrich, surfe, prospeo, hunter, warmly, truelist; **LinkedIn/web data**: bright-data, apify, horizondatawave, phantombuster, nimble
+- **Email / SMS / lifecycle**: klaviyo, customer-io, resend, brevo, moengage, kit, mailerlite, omnisend, marketo, activecampaign, beehiiv, courier, novu, knock, intercom
+- **Payments / billing**: stripe, paddle, revenuecat, polar, square, paypal, ramp, mercury, brex
+- **CMS & commerce**: wordpress-com, webflow, wix, contentful, sanity, datocms, storyblok, hygraph, builder-io, shopify-storefront, bigcommerce, saleor, cloudinary, frontify, optimizely-cms, aem
+- **Social & creative**: buffer, postiz, typefully, blotato, canva, runway, fal-ai, replicate, ideogram, heygen, invideo, figma
+- **Marketing ops**: asana, linear, atlassian, clickup, smartsheet, todoist, coda, box, dropbox, cal-com, calendly, typeform, tally, make, pipedream, miro, front; notion + slack + google-drive *(native Dust connectors)*
+- **Reviews / experimentation / events**: vwo, optimizely-experimentation, launchdarkly, birdeye, zoom, livestorm, press-ranger ⚠, g2 ⚠
+- **Web scraping / browser**: firecrawl, exa, scrapingbee, scrapegraphai, scrapeless, olostep, zenrows, browserless, anchor-browser
+- **Data / automation glue**: supermetrics, coupler, outreach *(Amplify)*, crossbeam *(Limited Availability)*, zapier, fireflies
 
-- **SEO**: semrush, ahrefs, dataforseo
-- **Analytics**: ga4 *(local server — use the native connector)*, posthog, mixpanel, amplitude
-- **CRM**: hubspot, salesforce
-- **Payments**: stripe
-- **Ads**: google-ads *(read-only)*, meta-ads *(beta)*
-- **Email/SMS**: klaviyo, customer-io, resend
-- **Prospecting/Enrichment**: apollo, zoominfo, clay
-- **Docs/Messaging**: notion, slack *(both also native Dust connectors)*
-- **AI Visibility**: profound, otterly, scrunch, rankscale
-- **Data/Automation**: supermetrics, coupler, outreach, crossbeam, introw, zapier, exa, firecrawl
+**⚠** = official but access-gated (paid tier, waitlist, or per-account provisioning) — see the catalog for details.
 
-**Community / local / Composio-only** (no remote server to add in Dust — reach via native connector or Composio): **mailchimp** (community server only), **google-search-console** (community/local), **linkedin-ads** (third-party only).
+**Community / local / marketplace-only** (no plain remote server to add in Dust — reach via native connector or Composio): **google-ads** (stdio/self-host, read-only), **clay** (Claude connector-directory), **introw** (Claude connector-directory), **mailchimp** (Marketing API community-only; the official MCP is transactional/Mandrill), **google-search-console** (community/local), **linkedin-ads** (third-party only).
 
 To use a remote MCP tool, add its server in the Dust workspace (URL + auth) and attach it to the agent.
 

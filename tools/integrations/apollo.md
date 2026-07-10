@@ -7,7 +7,7 @@ B2B prospecting and data enrichment platform with 210M+ contacts and 35M+ compan
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | People Search, Company Search, Enrichment, Sequences |
-| MCP | - | Not available |
+| MCP | ~ | Official `mcp.apollo.io/mcp` exists but is **beta + plan/credit-gated** (full search/enrich needs the Organization tier + API access); flaky on lower plans. Prefer the REST API or Composio — see [tools/mcp/README.md](../mcp/README.md) |
 | CLI | ✓ | [apollo.js](../clis/apollo.js) |
 | SDK | - | REST API only |
 

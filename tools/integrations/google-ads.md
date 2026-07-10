@@ -7,7 +7,7 @@ Pay-per-click advertising platform for search, display, and video campaigns.
 | Integration | Available | Notes |
 |-------------|-----------|-------|
 | API | ✓ | Google Ads API for campaign management |
-| MCP | ✓ | Available via Google Ads MCP server |
+| MCP | ~ | Official server is **stdio/self-host-only, read-only** — Google hosts no remote endpoint, so a Dust cloud agent can't add it directly. Self-host + expose a URL, or use Composio — see [tools/mcp/README.md](../mcp/README.md) |
 | CLI | - | Use gcloud or API scripts |
 | SDK | ✓ | Client libraries for multiple languages |
 
